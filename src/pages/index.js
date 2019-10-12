@@ -2,6 +2,7 @@
 import { graphql } from "gatsby"
 import Header from "../components/Header"
 import Gallery from "../components/Gallery"
+import StoryCard from '../components/StoryCard'
 import { jsx, ThemeProvider } from 'theme-ui'
 import theme from "../components/theme"
 
@@ -10,17 +11,11 @@ const IndexPage = ({ data }) => (
         <Header />
         <Gallery>
           {data.allAirtable.edges.map((edge, i) => (
-              <div>
-                  <h2
-                      sx={{
-                          color: 'text',
-                          fontFamily: 'heading',
-                      }}>
-                      {edge.node.data.Story_Name}
-                  </h2>
-                  <p>By {edge.node.data.Author}</p>
-                  <img alt={edge.node.data.Author} src={edge.node.data.Photo[0].url} />
-              </div>
+              <StoryCard
+                photoUrl={edge.node.data.Photo[0].url}
+                title={edge.node.data.Story_Name}
+                author={edge.node.data.Author}
+              />
           ))}
         </Gallery>
     </ThemeProvider>

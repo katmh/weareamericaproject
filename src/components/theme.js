@@ -4,6 +4,9 @@ export default {
         heading: 'Staatliches, sans-serif'
     },
     colors: {
-        text: 'purple'
+        text: '#111',
+        background: '#eee',
+        muted: '#444',
+        accent: '#633'
     }
 }
