@@ -4,6 +4,7 @@ import { jsx } from 'theme-ui'
 
 const header = css`
     text-align: center;
+    margin: 2rem 0;
 `
 
 const nav = css`
