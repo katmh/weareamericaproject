@@ -28,22 +28,35 @@ export default IndexPage
 
 export const query = graphql`
 {
-    allAirtable {
-      edges {
-        node {
-          data {
-            Audio {
-              url
-            }
-            Author
-            Photo {
-              url
-            }
-            School_Class
-            Story_Name
+  allAirtable {
+    edges {
+      node {
+        data {
+          Audio {
+            url
           }
+          Author
+          Photo {
+            url
+            thumbnails {
+              small {
+                url
+              }
+            }
+          }
+          School
+          Story_Name
+          State
+          Status
+          Tags
+          Transcript
+          Grade
         }
       }
     }
   }
+  sitePlugin {
+    id
+  }
+}
 `
