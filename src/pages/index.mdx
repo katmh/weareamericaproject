@@ -1,0 +1,65 @@
+---
+title: Home
+---
+
+import { graphql } from "gatsby"
+import Header from "../components/Header"
+import Gallery from "../components/Gallery"
+import StoryCard from '../components/StoryCard'
+import PageContainer from "../components/PageContainer"
+import { jsx, ThemeProvider } from 'theme-ui'
+import theme from "../components/theme"
+
+<ThemeProvider theme={theme}>
+<Header/>
+<PageContainer>
+
+## The *We Are America Project* is working with teachers and young people across the country to define what it means to be American — and to spark a new national conversation about American identity today led by the next generation. 
+
+<Gallery>
+{props.data.allAirtable.edges.map((edge, i) => (
+    <StoryCard
+        photoUrl={edge.node.data.Photo[0].url}
+        title={edge.node.data.Story_Name}
+        author={edge.node.data.Author}
+    />
+))}
+</Gallery>
+</PageContainer>
+</ThemeProvider>
+
+
+export const pageQuery = graphql`
+{
+  allAirtable {
+    edges {
+      node {
+        data {
+          Audio {
+            url
+          }
+          Author
+          Photo {
+            url
+            thumbnails {
+              small {
+                url
+              }
+            }
+          }
+          School
+          Story_Name
+          State
+          Status
+          Tags
+          Transcript
+          Grade
+        }
+      }
+    }
+  }
+  sitePlugin {
+    id
+  }
+}
+`

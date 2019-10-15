@@ -18,7 +18,7 @@ const nav = css`
     }
 `
 
-const Header = () => (
+const Header = ({ children }) => (
     <header css={header} sx={{ fontFamily: 'heading' }}>
         <a href="https://lhsweareamerica.com">
             <h1>We Are America</h1>
@@ -31,6 +31,8 @@ const Header = () => (
             <li><a href="contact">Contact</a></li>
             <li><a href="https://instagram.com/lhsweareamerica">Instagram</a></li>
         </nav>
+
+        { children }
     </header>
 )
 
