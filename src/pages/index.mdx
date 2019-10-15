@@ -19,7 +19,7 @@ import theme from "../components/theme"
 <Gallery>
 {props.data.allAirtable.edges.map((edge, i) => (
     <StoryCard
-        photoUrl={edge.node.data.Photo[0].url}
+        photoUrl={edge.node.data.Photo[0].thumbnails.large.url}
         title={edge.node.data.Story_Name}
         author={edge.node.data.Author}
     />
@@ -29,37 +29,32 @@ import theme from "../components/theme"
 </ThemeProvider>
 
 
-export const pageQuery = graphql`
+export const allStoriesQuery = graphql`
 {
-  allAirtable {
+  allAirtable(filter: {table: {eq: "Stories"}}) {
     edges {
       node {
         data {
-          Audio {
-            url
-          }
           Author
+          Status
+          Story_Name
           Photo {
-            url
             thumbnails {
-              small {
+              large {
                 url
               }
             }
           }
+          Audio {
+            url
+          }
           School
-          Story_Name
-          State
-          Status
           Tags
-          Transcript
           Grade
+          Transcript
         }
       }
     }
-  }
-  sitePlugin {
-    id
   }
 }
 `

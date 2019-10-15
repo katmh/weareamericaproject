@@ -9,9 +9,16 @@ module.exports = {
           {
             baseId: process.env.AIRTABLE_BASE_ID,
             tableName: `Stories`
-          }
+          },
+          {
+            baseId: process.env.AIRTABLE_PEOPLE_BASE_ID,
+            tableName: `Teachers`
+          },
+          {
+            baseId: process.env.AIRTABLE_PEOPLE_BASE_ID,
+            tableName: `Founders`
+          },
         ]
-        
       }
     },
     {

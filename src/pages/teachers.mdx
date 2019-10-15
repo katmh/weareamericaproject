@@ -4,11 +4,38 @@ title: Teachers
 
 import Header from "../components/Header"
 import PageContainer from "../components/PageContainer"
+import { graphql } from "gatsby"
+import { jsx } from 'theme-ui'
 
 <Header />
 
 <PageContainer>
-
-Here are our teachers!!
-
+teachers
 </PageContainer>
+
+export const allTeachersQuery = graphql`
+{
+  allAirtable(filter: {table: {eq: "Teachers"}}) {
+    edges {
+      node {
+        data {
+          Name
+          School_Name
+          City
+          State
+          Grades
+          Bio
+          Type_of_School
+          Picture {
+            thumbnails {
+              large {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`
