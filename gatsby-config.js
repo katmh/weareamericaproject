@@ -7,7 +7,7 @@ module.exports = {
         apiKey: process.env.AIRTABLE_API_KEY,
         tables: [
           {
-            baseId: process.env.AIRTABLE_BASE_ID,
+            baseId: process.env.AIRTABLE_STORIES_BASE_ID,
             tableName: `Stories`
           },
           {
@@ -31,6 +31,13 @@ module.exports = {
           }
         ]
       }
-    }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `src`,
+        path: `${__dirname}/src/`,
+      },
+    },
   ],
 }
