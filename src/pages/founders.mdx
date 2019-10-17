@@ -1,5 +1,5 @@
 ---
-title: Teachers
+title: Founders
 ---
 
 import Header from "../components/Header"
@@ -15,11 +15,6 @@ import { jsx } from 'theme-ui'
     <PersonCard
         photoUrl={edge.node.data.Picture[0].thumbnails.large.url}
         name={edge.node.data.Name}
-        school={edge.node.data.School_Name}
-        schoolType={edge.node.data.Type_of_School}
-        city={edge.node.data.City}
-        state={edge.node.data.State}
-        grades={edge.node.data.Grades}
         bio={edge.node.data.Bio}
     />
 ))}
@@ -27,18 +22,13 @@ import { jsx } from 'theme-ui'
 </PageContainer>
 
 export const pageQuery = graphql`
-query TeachersPageQuery {
-  allAirtable(filter: {table: {eq: "Teachers"}}) {
+query FoundersPageQuery {
+  allAirtable(filter: {table: {eq: "Founders"}}) {
     edges {
       node {
         data {
           Name
-          School_Name
-          City
-          State
-          Grades
           Bio
-          Type_of_School
           Picture {
             thumbnails {
               large {

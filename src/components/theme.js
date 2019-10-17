@@ -7,6 +7,6 @@ export default {
         text: '#111',
         background: '#eee',
         muted: '#444',
-        accent: '#633'
+        accent: '#633',
     }
 }
