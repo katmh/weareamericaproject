@@ -14,13 +14,10 @@ const gallery = css`
         padding-left: 30px; /* gutter size */
         background-clip: padding-box;
     }
-
-    .gallery-column img {
-        max-width: 100%;
-    }
 `
 const breakpointColumnsObj = {
-    default: 3,
+    default: 4,
+    1000: 3,
     700: 2,
     500: 1
 }

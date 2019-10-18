@@ -1,13 +1,14 @@
 /** @jsx jsx */
 import React from 'react'
-import { jsx } from 'theme-ui'
+import { jsx, ThemeProvider } from 'theme-ui'
 import { Global } from '@emotion/core'
 import Header from './Header'
 import Container from './Container'
 import Footer from './Footer'
+import theme from './theme'
 
 const Layout = ({children}) => (
-    <>
+    <ThemeProvider theme={theme}>
         <Global
             styles={{
                 body: {
@@ -25,7 +26,7 @@ const Layout = ({children}) => (
             {children}
         </Container>
         <Footer />
-    </>
+    </ThemeProvider>
 )
 
 export default Layout

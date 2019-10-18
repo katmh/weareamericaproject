@@ -4,7 +4,7 @@ import { jsx } from 'theme-ui'
 const Container = ({children}) => (
     <section
         sx={{
-            width: '95%',
+            width: '90%',
             maxWidth: '1100px',
             m: '0 auto'
         }}

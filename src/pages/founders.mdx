@@ -2,23 +2,22 @@
 title: Founders
 ---
 
-import Header from "../components/Header"
 import Layout from "../components/Layout"
 import PersonCard from "../components/PersonCard"
+import Gallery from '../components/Gallery'
 import { graphql } from "gatsby"
 import { jsx } from 'theme-ui'
 
-<Header />
-
 <Layout>
-{props.data.allAirtable.edges.map((edge, i) => (
-    <PersonCard
-        photoUrl={edge.node.data.Picture[0].thumbnails.large.url}
-        name={edge.node.data.Name}
-        bio={edge.node.data.Bio}
-    />
-))}
-
+    <Gallery>
+        {props.data.allAirtable.edges.map((edge, i) => (
+        <PersonCard
+            photoUrl={edge.node.data.Picture[0].thumbnails.large.url}
+            name={edge.node.data.Name}
+            bio={edge.node.data.Bio}
+        />
+    ))}
+    </Gallery>
 </Layout>
 
 export const pageQuery = graphql`

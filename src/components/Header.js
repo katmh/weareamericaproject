@@ -18,7 +18,8 @@ const Header = ({ children }) => (
             color: 'background',
             background: 'url("https://lhsweareamerica.com/img/header-darker-min.jpg") center/cover fixed no-repeat',
             pt: [5],
-            pb: [2, 4]
+            pb: [2, 4],
+            mb: [4, 5]
         }}
     >
         <a
@@ -73,9 +74,11 @@ const Header = ({ children }) => (
                 }
             }}
         >
+            <li><a href="stories">Library of Stories</a></li>
             <li><a href="about">About</a></li>
+            <li><a href="founders">Founders</a></li>
+            <li><a href="teachers">Teachers</a></li>
             <li><a href="contact">Contact</a></li>
-            <li><a href="https://instagram.com/lhsweareamerica">Instagram</a></li>
         </nav>
 
         { children }

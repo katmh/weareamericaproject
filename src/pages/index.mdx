@@ -5,56 +5,14 @@ title: Home
 import { graphql } from "gatsby"
 import Header from "../components/Header"
 import Gallery from "../components/Gallery"
-import StoryCard from '../components/StoryCard'
+import FeaturedStories from '../components/FeaturedStories'
 import Layout from "../components/Layout"
-import { jsx, ThemeProvider } from 'theme-ui'
-import theme from "../components/theme"
+import { jsx } from 'theme-ui'
 
-<ThemeProvider theme={theme}>
 <Layout>
 
 ### The *We Are America Project* is working with teachers and young people across the country to define what it means to be American — and to spark a new national conversation about American identity today led by the next generation. 
 
-<Gallery>
-{props.data.allAirtable.edges.map((edge, i) => (
-    <StoryCard
-        photoUrl={edge.node.data.Photo[0].thumbnails.large.url}
-        title={edge.node.data.Story_Name}
-        author={edge.node.data.Author}
-        audio={edge.node.data.Audio ? (edge.node.data.Audio[0].url) : ''}
-    />
-))}
-</Gallery>
+<FeaturedStories n={3} />
+
 </Layout>
-</ThemeProvider>
-
-
-export const allStoriesQuery = graphql`
-{
-  allAirtable(filter: {table: {eq: "Stories"}}) {
-    edges {
-      node {
-        data {
-          Author
-          Status
-          Story_Name
-          Photo {
-            thumbnails {
-              large {
-                url
-              }
-            }
-          }
-          Audio {
-            url
-          }
-          School
-          Tags
-          Grade
-          Transcript
-        }
-      }
-    }
-  }
-}
-`

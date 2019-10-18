@@ -4,12 +4,14 @@ import { jsx } from 'theme-ui'
 const Footer = () => (
     <footer
         sx={{
-            background: 'accent',
+            background: 'mahogany',
             width: '100%',
-            height: '10px'
+            mt: [4, 5],
+            py: [2, 3],
+            textAlign: 'center'
         }}
     >
-        hellowo
+        <p>footer</p>
     </footer>
 )
 

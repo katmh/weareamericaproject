@@ -2,24 +2,52 @@
 import { css } from '@emotion/core'
 import { jsx } from 'theme-ui'
 
-const personCard = css`
-    img {
-        max-width: 100%;
-    }
-`
-
 const PersonCard = (props) => (
-    <article css={personCard}>
+    <article
+        sx={{
+            mb: 4,
+            overflow: 'auto',
+            'p': {
+                fontFamily: 'body',
+                fontSize: 0,
+                lineHeight: '140%',
+                mt: 1,
+                mb: 2
+            }
+        }}
+    >
         <img
             src={props.photoUrl}
-            alt={"Photo of " + props.name + ", teacher at " + props.school}
+            alt={"Photo of " + props.name}
+            sx={{
+                maxWidth: ['35%', '100%'],
+                float: ['left', 'none'],
+                mr: [3, 0],
+                mb: [2, 0]
+            }}
         />
         <div>
-            <h3 sx={{ fontFamily: 'heading', color: 'text' }}>{props.name}</h3>
-            <p>{props.school}{props.schoolType ? (' (' + props.schoolType + ')') : ''}</p>
-            <p>{props.city}{props.state ? (', ' + props.state) : ''}</p>
-            <p>{props.grades}</p>
-            <p>{props.bio}</p>
+            <h4
+                sx={{
+                    fontFamily: 'heading',
+                    fontSize: 3,
+                    fontWeight: 44,
+                    color: 'text',
+                    mt: [0, 3],
+                    mb: 0
+                }}
+            >
+                {props.name}
+            </h4>
+            <div className="caption">
+                <p>
+                    {props.grades ? ('Teaches ' + props.grades + ' grade(s) at ') : ''}
+                    {props.school ? props.school : ''}
+                    {props.city ? (' in ' + props.city) : ''}
+                    {props.state ? (', ' + props.state): ''}
+                </p>
+                <p>{props.bio}</p>
+            </div>
         </div>
     </article>
 )

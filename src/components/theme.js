@@ -5,9 +5,9 @@
 }*/
 
 const text = {
-    lineHeight: '130%',
+    lineHeight: '135%',
     color: 'text',
-    fontFamily: 'body'
+    fontFamily: 'body',
 }
 
 export default {
@@ -21,7 +21,7 @@ export default {
         accent: '#633',
         muted: '#444',
     },
-    fontSizes: [12, 16, 24, 28, 36, 48, 80],
+    fontSizes: [16, 20, 24, 28, 36, 48, 80],
     fontWeights: {
         heading: 400, // Staatliches only has 400 weight
         body: 400,
@@ -35,5 +35,12 @@ export default {
             my: [4, 4, 5],
             mx: [4, 4, 6]
         },
+        p: {
+            ...text,
+            fontSize: [0, 1],
+            fontWeight: 300,
+            lineHeight: ['135%', '145%'],
+            my: [2, 3]
+        }
     }
 }
