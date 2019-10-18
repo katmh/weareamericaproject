@@ -19,10 +19,15 @@ const gallery = css`
         max-width: 100%;
     }
 `
+const breakpointColumnsObj = {
+    default: 3,
+    700: 2,
+    500: 1
+}
 
 const Gallery = ({ children }) => (
     <Masonry
-        breakpointCols={3}
+        breakpointCols={breakpointColumnsObj}
         css={gallery}
         className="gallery"
         columnClassName="gallery-column"

@@ -3,14 +3,14 @@ title: Founders
 ---
 
 import Header from "../components/Header"
-import PageContainer from "../components/PageContainer"
+import Layout from "../components/Layout"
 import PersonCard from "../components/PersonCard"
 import { graphql } from "gatsby"
 import { jsx } from 'theme-ui'
 
 <Header />
 
-<PageContainer>
+<Layout>
 {props.data.allAirtable.edges.map((edge, i) => (
     <PersonCard
         photoUrl={edge.node.data.Picture[0].thumbnails.large.url}
@@ -19,7 +19,7 @@ import { jsx } from 'theme-ui'
     />
 ))}
 
-</PageContainer>
+</Layout>
 
 export const pageQuery = graphql`
 query FoundersPageQuery {

@@ -28,6 +28,10 @@ module.exports = {
           {
             family: `Staatliches`,
             variants: [`400`]
+          },
+          {
+            family: `Lato`,
+            variants: [`300`, `400`, `400i`]
           }
         ]
       }

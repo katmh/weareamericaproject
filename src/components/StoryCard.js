@@ -30,13 +30,25 @@ const storyCard = css`
 const StoryCard = (props) => (
     <article css={storyCard}>
         <img
-					src={props.photoUrl}
-					alt={"Photo of " + props.author + ", author of " + props.title}
-				/>
-				<div sx={{ bg: 'background' }} className="caption">
-					<h3 sx={{ fontFamily: 'heading', color: 'text' }}>{props.title}</h3>
-					<h4 sx={{ fontFamily: 'heading', color: 'muted' }}>{props.author}</h4>
-				</div>
+			src={props.photoUrl}
+			alt={"Photo of " + props.author + ", author of " + props.title}
+		/>
+		<div sx={{ bg: 'background' }} className="caption">
+			<h3 sx={{ fontFamily: 'heading', color: 'text' }}>{props.title}</h3>
+			<h4 sx={{ fontFamily: 'heading', color: 'muted' }}>{props.author}</h4>
+		</div>
+		{props.audio ? (
+			<div
+				sx={{
+					background: '#633',
+					color: 'background',
+					py: 2,
+					px: 3
+				}}
+			>
+				Click to listen
+			</div>
+		) : ''}
     </article>
 )
 
