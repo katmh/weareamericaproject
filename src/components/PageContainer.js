@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { css } from '@emotion/core'
+import { css, Global } from '@emotion/core'
 import { jsx } from 'theme-ui'
 
 const pageContainer = css`
@@ -10,6 +10,16 @@ const pageContainer = css`
 
 const PageContainer = ({children}) => (
     <div css={pageContainer}>
+        <Global
+            styles={{
+                body: {
+                    margin: 0
+                },
+                '*': {
+                    boxSizing: 'border-box'
+                }
+            }}
+        />
         {children}
     </div>
 )
