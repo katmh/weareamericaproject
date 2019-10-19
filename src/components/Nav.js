@@ -1,15 +1,46 @@
+import { Link } from 'gatsby'
+import { StaticQuery, graphql } from 'gatsby'
+
 const Nav = () => (
-    <nav> 
-        <ul>
-            <li><a href="stories">Library of Stories</a></li>
-            <li><a href="about">About</a></li>
-            <li><a href="founders">Founders</a></li>
-            <li><a href="teachers">Teachers</a></li>
-            <li><a href="contact">Contact</a></li>
-        </ul>
-    </nav>
+    <StaticQuery
+        query={graphql`
+            {
+                site {
+                    siteMetadata {
+                        navLinks {
+                            name
+                            path
+                        }
+                    }
+                }
+            }          
+        `}
+        render={data => (
+            <ul>
+                {data.site.siteMetadata.navLinks.map(link => (
+                    <li>
+                        <Link to={link.url}>{link.name}</Link>
+                    </li>
+                ))}
+            </ul>  
+        )}
+    />
 )
 
 export default Nav
 
 //need to make these be relative to home URL
+
+/*
+
+    <nav> 
+        <ul>
+            <li><Link to="/stories">Library of Stories</Link></li>
+            <li><Link to="/about">About</Link></li>
+            <li><Link to="/founders">Founders</Link></li>
+            <li><Link to="/teachers">Teachers</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
+        </ul>
+    </nav>
+
+*/

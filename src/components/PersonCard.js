@@ -1,5 +1,4 @@
 /** @jsx jsx */
-import { css } from '@emotion/core'
 import { jsx } from 'theme-ui'
 
 const PersonCard = (props) => (

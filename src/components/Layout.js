@@ -1,5 +1,4 @@
 /** @jsx jsx */
-import React from 'react'
 import { jsx, ThemeProvider } from 'theme-ui'
 import { Global } from '@emotion/core'
 import Header from './Header'

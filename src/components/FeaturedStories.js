@@ -36,7 +36,7 @@ const FeaturedStories = (props) => (
         `}
         render={data => (
             <Gallery n={props.n}>
-                {data.allAirtable.edges.map((edge, i) => (
+                {data.allAirtable.edges.map(edge => (
                     <StoryCard
                         photoUrl={edge.node.data.Photo[0].thumbnails.large.url}
                         title={edge.node.data.Story_Name}

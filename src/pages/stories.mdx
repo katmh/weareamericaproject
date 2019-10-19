@@ -14,17 +14,15 @@ import { jsx } from 'theme-ui'
 
 <br/>
 
-<Gallery>
-    
+<Gallery n={3}>
 {props.data.allAirtable.edges.map((edge, i) => (
-    <StoryCard
-        //photoUrl={edge.node.data.Photo[0].thumbnails.large.url}
-        title={edge.node.data.Story_Name}
-        author={edge.node.data.Author}
-        audio={edge.node.data.Audio ? (edge.node.data.Audio[0].url) : ''}
-    />
+	<StoryCard
+		photoUrl={edge.node.data.Photo[0].thumbnails.large.url}
+		title={edge.node.data.Story_Name}
+		author={edge.node.data.Author}
+		audio={edge.node.data.Audio ? (edge.node.data.Audio[0].url) : ''}
+	/>
 ))}
-
 </Gallery>
 </Layout>
 
@@ -34,25 +32,25 @@ query allStoriesQuery {
         edges {
         node {
             data {
-            Author
-            Status
-            Story_Name
-            Photo {
-                thumbnails {
-                large {
+                Author
+                Status
+                Story_Name
+                Photo {
+                    thumbnails {
+                    large {
+                        url
+                    }
+                    }
+                }
+                Audio {
                     url
                 }
+                School
+                Tags
+                Grade
+                Transcript
                 }
             }
-            Audio {
-                url
-            }
-            School
-            Tags
-            Grade
-            Transcript
-            }
-        }
         }
     }
 }

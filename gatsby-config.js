@@ -1,7 +1,29 @@
 module.exports = {
   siteMetadata: {
     title: `The We Are America Project`,
-    siteUrl: `https://weareamericaproject.com`,
+    url: `https://weareamericaproject.com`,
+    navLinks: [
+      {
+        name: 'Library of Stories',
+        path: '/stories'
+      },
+      {
+        name: 'About',
+        path: '/about'
+      },
+      {
+        name: 'Founders',
+        path: '/founders'
+      },
+      {
+        name: 'Teachers',
+        path: '/teachers'
+      },
+      {
+        name: 'Contact',
+        path: '/contact'
+      }
+    ]
   },
   plugins: [
     `gatsby-plugin-mdx`,
