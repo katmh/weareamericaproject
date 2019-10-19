@@ -35,22 +35,19 @@ const FeaturedStories = (props) => (
           }
         `}
         render={data => {
-            const allFeaturedStories = data.allAirtable.edges
-            const randomNStories = allFeaturedStories.sort( function() { return 0.5 - Math.random() } ).slice(0, props.nStories)
-            console.log(randomNStories)
             return (
                 <Gallery n={props.nCols}>
-                {randomNStories.map(story => {
-                    console.log(story.node.data.Photo[0].thumbnails.large.url)
-                    console.log(story.node.data.Story_Name)
-                    return (
-                        <StoryCard
-                            photoUrl={story.node.data.Photo[0].thumbnails.large.url}
-                            title={story.node.data.Story_Name}
-                            author={story.node.data.Author}
-                            audio={story.node.data.Audio ? (story.node.data.Audio[0].url) : ''}
-                        />
-                    )
+                {data.allAirtable.edges.map((story, i) => {
+                    while (i < props.nStories) {
+                        return (
+                            <StoryCard
+                                title={story.node.data.Story_Name}
+                                photoUrl={story.node.data.Photo[0].thumbnails.large.url}
+                                author={story.node.data.Author}
+                                audio={story.node.data.Audio ? (story.node.data.Audio[0].url) : ''}
+                            />
+                        )
+                    }
                 })}
                 </Gallery>
             )
@@ -58,10 +55,7 @@ const FeaturedStories = (props) => (
     />
 )
 
-/*
-(
-    
-)}
-*/
+
+
 
 export default FeaturedStories

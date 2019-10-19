@@ -1,3 +1,5 @@
+const path = require(`path`)
+
 function slugify(string) {
     const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
     const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnooooooooprrsssssttuuuuuuuuuwxyyzzz------'
@@ -16,7 +18,7 @@ function slugify(string) {
 exports.onCreateNode = ({ node, actions }) => {
     if (node.table === `Stories`) {
         const { createNodeField } = actions
-        console.log(slugify(node.data.Author))
+        //console.log(slugify(node.data.Author))
         createNodeField({
             node,
             name: `slug`,
@@ -26,16 +28,30 @@ exports.onCreateNode = ({ node, actions }) => {
   }
 
 exports.createPages = async ({ graphql, actions }) => {
+    const { createPage } = actions
     const result = await graphql(`
-        query {
-            allAirtable {
-                nodes {
-                    fields {
-                        slug
-                    }
-                }
+    {
+        allAirtable(filter: {table: {eq: "Stories"}}) {
+          nodes {
+            fields {
+              slug
             }
+          }
         }
+      }
     `)
+
+    console.log(result.data.allAirtable.nodes)
+    /*
+    result.data.allAirtable.nodes.forEach(({ nodes }) => {
+        createPage({
+            path: nodes.fields.slug,
+            component: path.resolve(`./src/templates/stories.js`),
+            context: {
+                slug: nodes.fields.slug,
+            },
+        })
+    })
+*/
     //console.log(JSON.stringify(result, null, 4))
 }
