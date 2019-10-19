@@ -1,4 +1,8 @@
 module.exports = {
+  siteMetadata: {
+    title: `The We Are America Project`,
+    siteUrl: `https://weareamericaproject.com`,
+  },
   plugins: [
     `gatsby-plugin-mdx`,
     {

@@ -27,12 +27,19 @@ export default {
         body: 400,
     },
     styles: { // for elements rendered in MDX only
+        h1: {
+            fontSize: [4, 5],
+            fontFamily: 'heading',
+            fontWeight: '400',
+            my: 0,
+            color: 'accent'
+        },
         h3: {
             ...text,
             fontSize: [2, 3],
             fontWeight: 300,
             lineHeight: '130%',
-            my: [4, 4, 5],
+            mb: [4, 5],
             mx: [4, 4, 6]
         },
         p: {
@@ -41,6 +48,9 @@ export default {
             fontWeight: 300,
             lineHeight: ['135%', '145%'],
             my: [2, 3]
+        },
+        a: {
+            color: 'accent'
         }
     }
 }

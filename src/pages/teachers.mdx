@@ -9,7 +9,12 @@ import { jsx } from 'theme-ui'
 import Gallery from '../components/Gallery'
 
 <Layout>
-<Gallery>
+
+# Teachers
+
+<br/>
+
+<Gallery n={4}>
 {props.data.allAirtable.edges.map((edge, i) => (
     <PersonCard
         photoUrl={edge.node.data.Picture[0].thumbnails.large.url}

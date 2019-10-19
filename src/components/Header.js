@@ -27,7 +27,7 @@ const Header = ({ children }) => (
                 textDecoration: 'none',
                 color: 'background',
             }}
-            href="https://lhsweareamerica.com"
+            href="/"
         >
             <h1
                 sx={{

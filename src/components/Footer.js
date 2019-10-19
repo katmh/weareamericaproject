@@ -11,7 +11,7 @@ const Footer = () => (
             textAlign: 'center'
         }}
     >
-        <p>footer</p>
+
     </footer>
 )
 

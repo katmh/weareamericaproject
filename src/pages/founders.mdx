@@ -9,15 +9,22 @@ import { graphql } from "gatsby"
 import { jsx } from 'theme-ui'
 
 <Layout>
-    <Gallery>
-        {props.data.allAirtable.edges.map((edge, i) => (
-        <PersonCard
-            photoUrl={edge.node.data.Picture[0].thumbnails.large.url}
-            name={edge.node.data.Name}
-            bio={edge.node.data.Bio}
-        />
-    ))}
-    </Gallery>
+
+# Founders
+
+<br/>
+
+<Gallery n={4}>
+    
+{props.data.allAirtable.edges.map((edge, i) => (
+	<PersonCard
+		photoUrl={edge.node.data.Picture[0].thumbnails.large.url}
+		name={edge.node.data.Name}
+		bio={edge.node.data.Bio}
+	/>
+))}
+
+</Gallery>
 </Layout>
 
 export const pageQuery = graphql`

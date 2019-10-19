@@ -7,6 +7,7 @@ const storyCard = css`
 	img {
 		margin-bottom: 0;
 		display: block;
+		max-width: 100%;
 	}
 
 	.caption {
@@ -45,8 +46,7 @@ const StoryCard = (props) => (
 					py: 2,
 					px: 3
 				}}
-			>
-				Click to listen
+			>	
 			</div>
 		) : ''}
     </article>

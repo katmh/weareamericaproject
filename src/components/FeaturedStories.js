@@ -3,7 +3,7 @@ import StoryCard from '../components/StoryCard'
 import { StaticQuery, graphql } from 'gatsby'
 import React from 'react'
 
-const FeaturedStories = ({props}) => (
+const FeaturedStories = (props) => (
     <StaticQuery
         query={graphql`
         {
@@ -35,7 +35,7 @@ const FeaturedStories = ({props}) => (
           }
         `}
         render={data => (
-            <Gallery>
+            <Gallery n={props.n}>
                 {data.allAirtable.edges.map((edge, i) => (
                     <StoryCard
                         photoUrl={edge.node.data.Photo[0].thumbnails.large.url}

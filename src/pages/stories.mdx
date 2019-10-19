@@ -1,0 +1,59 @@
+---
+title: Stories
+---
+
+import Layout from "../components/Layout"
+import StoryCard from "../components/StoryCard"
+import Gallery from '../components/Gallery'
+import { graphql } from "gatsby"
+import { jsx } from 'theme-ui'
+
+<Layout>
+
+# Stories
+
+<br/>
+
+<Gallery>
+    
+{props.data.allAirtable.edges.map((edge, i) => (
+    <StoryCard
+        //photoUrl={edge.node.data.Photo[0].thumbnails.large.url}
+        title={edge.node.data.Story_Name}
+        author={edge.node.data.Author}
+        audio={edge.node.data.Audio ? (edge.node.data.Audio[0].url) : ''}
+    />
+))}
+
+</Gallery>
+</Layout>
+
+export const pageQuery = graphql`
+query allStoriesQuery {
+    allAirtable(filter: {table: {eq: "Stories"}}) {
+        edges {
+        node {
+            data {
+            Author
+            Status
+            Story_Name
+            Photo {
+                thumbnails {
+                large {
+                    url
+                }
+                }
+            }
+            Audio {
+                url
+            }
+            School
+            Tags
+            Grade
+            Transcript
+            }
+        }
+        }
+    }
+}
+`

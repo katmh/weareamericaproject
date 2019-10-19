@@ -15,21 +15,20 @@ const gallery = css`
         background-clip: padding-box;
     }
 `
-const breakpointColumnsObj = {
-    default: 4,
-    1000: 3,
-    700: 2,
-    500: 1
-}
 
-const Gallery = ({ children }) => (
+const Gallery = (props) => (
     <Masonry
-        breakpointCols={breakpointColumnsObj}
+        breakpointCols={{
+            default: props.n,
+            1000: 3,
+            800: 2,
+            600: 1
+        }}
         css={gallery}
         className="gallery"
         columnClassName="gallery-column"
     >
-        { children }
+        {props.children}
     </Masonry>
 )
 
