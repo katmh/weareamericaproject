@@ -1,13 +1,6 @@
 /** @jsx jsx */
-import { css } from '@emotion/core'
 import { jsx } from 'theme-ui'
-
-const nav = css`
-    li {
-        list-style: none;
-        display: inline-block;
-    }
-`
+import Nav from './Nav'
 
 const Header = ({ children }) => (
     <header
@@ -52,34 +45,7 @@ const Header = ({ children }) => (
             Voices of the Nation's Future
         </h2>
 
-        <nav
-            sx={{
-                mt: 4,
-                'li': {
-                    listStyle: 'none',
-                    display: 'inline-block',
-                },
-                'a': {
-                    display: 'block',
-                    textDecoration: 'none',
-                    fontSize: [2, 3],
-                    fontWeight: 'heading',
-                    color: 'background',
-                    mx: [2, 3],
-                    borderBottom: '2px solid transparent',
-                    transition: '.1s'
-                },
-                'a:hover': {
-                    borderBottomColor: 'background'
-                }
-            }}
-        >
-            <li><a href="stories">Library of Stories</a></li>
-            <li><a href="about">About</a></li>
-            <li><a href="founders">Founders</a></li>
-            <li><a href="teachers">Teachers</a></li>
-            <li><a href="contact">Contact</a></li>
-        </nav>
+        <Nav />
 
         { children }
     </header>

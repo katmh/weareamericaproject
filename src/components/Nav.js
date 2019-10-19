@@ -1,5 +1,7 @@
+/** @jsx jsx */
 import { Link } from 'gatsby'
 import { StaticQuery, graphql } from 'gatsby'
+import { jsx } from 'theme-ui'
 
 const Nav = () => (
     <StaticQuery
@@ -16,31 +18,46 @@ const Nav = () => (
             }          
         `}
         render={data => (
-            <ul>
-                {data.site.siteMetadata.navLinks.map(link => (
-                    <li>
-                        <Link to={link.url}>{link.name}</Link>
-                    </li>
-                ))}
-            </ul>  
+            <nav
+                sx={{
+                    mt: 4
+                }}
+            >
+                <ul>
+                    {data.site.siteMetadata.navLinks.map(link => (
+                        <li
+                            sx={{
+                                listStyle: 'none',
+                                display: 'inline-block'
+                            }}
+                        >
+                            <Link
+                                to={link.path}
+                                sx={{
+                                    display: 'block',
+                                    textDecoration: 'none',
+                                    fontSize: [2, 3],
+                                    fontWeight: 'heading',
+                                    color: 'background',
+                                    mx: [2, 3],
+                                    borderBottom: '2px solid transparent',
+                                    transition: '.1s',
+                                    ':hover': {
+                                        borderBottomColor: 'background'
+                                    }
+                                }}
+                                activeStyle={{
+                                    borderBottomColor: '#eee'
+                                }}
+                            >
+                                {link.name}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>  
+            </nav>
         )}
     />
 )
 
 export default Nav
-
-//need to make these be relative to home URL
-
-/*
-
-    <nav> 
-        <ul>
-            <li><Link to="/stories">Library of Stories</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/founders">Founders</Link></li>
-            <li><Link to="/teachers">Teachers</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
-        </ul>
-    </nav>
-
-*/
