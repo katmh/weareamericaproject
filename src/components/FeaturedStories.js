@@ -37,7 +37,7 @@ const FeaturedStories = (props) => (
         render={data => {
             const allFeaturedStories = data.allAirtable.edges
             const randomNStories = allFeaturedStories.sort( function() { return 0.5 - Math.random() } ).slice(0, props.nStories)
-
+            console.log(randomNStories)
             return (
                 <Gallery n={props.nCols}>
                 {randomNStories.map(edge => (

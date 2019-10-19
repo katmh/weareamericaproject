@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import ButtonInput from './ButtonInput'
 
 const ContactForm = () => (
     <form 
@@ -14,8 +15,7 @@ const ContactForm = () => (
                 mb: 2,
                 display: 'block'
             }, 
-            'input, textarea': {
-                display: 'block',
+            'input[type="text"], input[type="email"], textarea': {
                 mb: 4,
                 padding: 2,
                 fontSize: 1,
@@ -28,6 +28,7 @@ const ContactForm = () => (
             },
             'input[type="text"], input[type="email"]': {
                 width: '20rem',
+                display: 'block'
             }
         }}
     >
@@ -41,7 +42,7 @@ const ContactForm = () => (
     <label for="message">Message: </label>
     <textarea name="message" id="message"></textarea>
 
-    <input class="button" type="submit" value="Send" />
+    <ButtonInput type="submit" value="Submit" />
     </form>
 )
 

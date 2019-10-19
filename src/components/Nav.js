@@ -23,7 +23,11 @@ const Nav = () => (
                     mt: 4
                 }}
             >
-                <ul>
+                <ul
+                    sx={{
+                        p: 0
+                    }}
+                >
                     {data.site.siteMetadata.navLinks.map(link => (
                         <li
                             sx={{
@@ -40,6 +44,7 @@ const Nav = () => (
                                     fontWeight: 'heading',
                                     color: 'background',
                                     mx: [2, 3],
+                                    mb: [2, 0],
                                     borderBottom: '2px solid transparent',
                                     transition: '.1s',
                                     ':hover': {
