@@ -34,9 +34,13 @@ const FeaturedStories = (props) => (
             }
           }
         `}
-        render={data => (
-            <Gallery n={props.n}>
-                {data.allAirtable.edges.map(edge => (
+        render={data => {
+            const allFeaturedStories = data.allAirtable.edges
+            const randomThreeStories = allFeaturedStories.sort( function() { return 0.5 - Math.random() } ).slice(0, 6)
+
+            return (
+                <Gallery n={props.n}>
+                {randomThreeStories.map(edge => (
                     <StoryCard
                         photoUrl={edge.node.data.Photo[0].thumbnails.large.url}
                         title={edge.node.data.Story_Name}
@@ -44,9 +48,16 @@ const FeaturedStories = (props) => (
                         audio={edge.node.data.Audio ? (edge.node.data.Audio[0].url) : ''}
                     />
                 ))}
-            </Gallery>
-        )}
+                </Gallery>
+            )
+        }}
     />
 )
+
+/*
+(
+    
+)}
+*/
 
 export default FeaturedStories
