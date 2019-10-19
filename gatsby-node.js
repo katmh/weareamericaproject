@@ -27,6 +27,13 @@ exports.onCreateNode = ({ node, actions }) => {
     }
   }
 
+exports.createResolvers = ({ createResolvers }) => {
+    const resolvers = {
+
+    }
+    createResolvers(resolvers)
+}
+
 exports.createPages = async ({ graphql, actions }) => {
     const { createPage } = actions
     const result = await graphql(`
@@ -41,7 +48,7 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     `)
 
-    console.log(result.data.allAirtable.nodes)
+    //console.log(result.data.allAirtable.nodes)
     /*
     result.data.allAirtable.nodes.forEach(({ nodes }) => {
         createPage({

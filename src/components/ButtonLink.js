@@ -17,6 +17,7 @@ const ButtonLink = (props) => (
             lineHeight: '100%',
             transition: '.2s',
             borderRadius: '10px',
+            appearance: 'none',
             ':hover': {
                 bg: '#422'
             }
