@@ -36,11 +36,11 @@ const FeaturedStories = (props) => (
         `}
         render={data => {
             const allFeaturedStories = data.allAirtable.edges
-            const randomThreeStories = allFeaturedStories.sort( function() { return 0.5 - Math.random() } ).slice(0, 6)
+            const randomNStories = allFeaturedStories.sort( function() { return 0.5 - Math.random() } ).slice(0, props.nStories)
 
             return (
-                <Gallery n={props.n}>
-                {randomThreeStories.map(edge => (
+                <Gallery n={props.nCols}>
+                {randomNStories.map(edge => (
                     <StoryCard
                         photoUrl={edge.node.data.Photo[0].thumbnails.large.url}
                         title={edge.node.data.Story_Name}

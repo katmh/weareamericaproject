@@ -40,7 +40,7 @@ export default {
             fontWeight: 300,
             lineHeight: '130%',
             mb: [4, 5],
-            mx: [4, 4, 6]
+            mx: [3, 6]
         },
         p: {
             ...text,

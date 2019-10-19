@@ -38,17 +38,6 @@ const StoryCard = (props) => (
 			<h3 sx={{ fontFamily: 'heading', color: 'text' }}>{props.title}</h3>
 			<h4 sx={{ fontFamily: 'heading', color: 'muted' }}>{props.author}</h4>
 		</div>
-		{props.audio ? (
-			<div
-				sx={{
-					background: '#633',
-					color: 'background',
-					py: 2,
-					px: 3
-				}}
-			>	
-			</div>
-		) : ''}
     </article>
 )
 
