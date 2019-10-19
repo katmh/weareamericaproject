@@ -40,14 +40,18 @@ const FeaturedStories = (props) => (
             console.log(randomNStories)
             return (
                 <Gallery n={props.nCols}>
-                {randomNStories.map(edge => (
-                    <StoryCard
-                        photoUrl={edge.node.data.Photo[0].thumbnails.large.url}
-                        title={edge.node.data.Story_Name}
-                        author={edge.node.data.Author}
-                        audio={edge.node.data.Audio ? (edge.node.data.Audio[0].url) : ''}
-                    />
-                ))}
+                {randomNStories.map(story => {
+                    console.log(story.node.data.Photo[0].thumbnails.large.url)
+                    console.log(story.node.data.Story_Name)
+                    return (
+                        <StoryCard
+                            photoUrl={story.node.data.Photo[0].thumbnails.large.url}
+                            title={story.node.data.Story_Name}
+                            author={story.node.data.Author}
+                            audio={story.node.data.Audio ? (story.node.data.Audio[0].url) : ''}
+                        />
+                    )
+                })}
                 </Gallery>
             )
         }}
