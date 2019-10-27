@@ -19,6 +19,7 @@ Story recordings and search coming soon!
 <Gallery n={3}>
 {props.data.allAirtable.edges.map((edge, i) => (
 	<StoryCard
+    id={edge.node.id}
 		photoUrl={edge.node.data.Photo[0].thumbnails.large.url}
 		title={edge.node.data.Story_Name}
 		author={edge.node.data.Author}
@@ -33,6 +34,7 @@ query allStoriesQuery {
     allAirtable(filter: {table: {eq: "Stories"}}) {
         edges {
         node {
+            id
             data {
                 Author
                 Status

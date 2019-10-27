@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { css } from '@emotion/core'
 import { jsx } from 'theme-ui'
+import { Link } from 'gatsby'
 
 const storyCard = css`
 	margin-bottom: 30px;
@@ -29,11 +30,13 @@ const storyCard = css`
 `
 
 const StoryCard = (props) => (
-    <article css={storyCard}>
-        <img
-			src={props.photoUrl}
-			alt={"Photo of " + props.author + ", author of " + props.title}
-		/>
+		<article css={storyCard}>
+		<Link to={`/story/${props.id}`}>
+			<img
+				src={props.photoUrl}
+				alt={"Photo of " + props.author + ", author of " + props.title}
+			/>
+		</Link>
 		<div sx={{ bg: 'background' }} className="caption">
 			<h3 sx={{ fontFamily: 'heading', color: 'text' }}>{props.title}</h3>
 			<h4 sx={{ fontFamily: 'heading', color: 'muted' }}>{props.author}</h4>
