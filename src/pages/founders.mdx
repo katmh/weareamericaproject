@@ -21,6 +21,7 @@ import { jsx } from 'theme-ui'
 		photoUrl={edge.node.data.Picture[0].thumbnails.large.url}
 		name={edge.node.data.Name}
 		bio={edge.node.data.Bio}
+    title={edge.node.data.Title}
 	/>
 ))}
 
@@ -35,6 +36,7 @@ query FoundersPageQuery {
         data {
           Name
           Bio
+          Title
           Picture {
             thumbnails {
               large {

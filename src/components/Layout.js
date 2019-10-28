@@ -15,8 +15,8 @@ const Layout = ({children}) => (
                 },
                 '*': {
                     boxSizing: 'border-box',
-                    m: 0,
-                    p: 0
+                    margin: 0,
+                    padding: 0
                 }
             }}
         />
