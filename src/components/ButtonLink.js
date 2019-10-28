@@ -18,6 +18,7 @@ const ButtonLink = (props) => (
             transition: '.2s',
             borderRadius: '10px',
             appearance: 'none',
+            cursor: 'pointer',
             ':hover': {
                 bg: '#422'
             }
