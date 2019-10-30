@@ -1,8 +1,8 @@
 import React from 'react'
 import Layout from '../components/Layout'
 
-export default () => (
+export default ({pageContext: {data}}) => (
     <Layout>
-        <div>hello story page</div>
+        <h1>{data.Story_Name}</h1>
     </Layout>
 )

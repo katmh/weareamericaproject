@@ -45,7 +45,8 @@ const PersonCard = (props) => {
                             transition: '.15s',
                             position: 'relative',
                             zIndex: '-1',
-                            display: 'block'
+                            display: 'block',
+                            pointer: 'cursor',
                         }}
                     />
                 </div> 
@@ -64,7 +65,8 @@ const PersonCard = (props) => {
                             color: 'text',
                             pt: '.85rem',
                             mb: '.25rem',
-                            lineHeight: '100%'
+                            lineHeight: '100%',
+                            pointer: 'cursor',
                         }}
                     >
                         {props.name}
