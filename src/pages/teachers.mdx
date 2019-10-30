@@ -17,7 +17,7 @@ import Gallery from '../components/Gallery'
 <Gallery n={4}>
 {props.data.allAirtable.edges.map((edge, i) => (
     <PersonCard
-        photoUrl={edge.node.data.Picture[0].thumbnails.large.url}
+        photoUrl={edge.node.data.Picture ? edge.node.data.Picture[0].thumbnails.large.url : ''}
         name={edge.node.data.Name}
         school={edge.node.data.School_Name}
         schoolType={edge.node.data.Type_of_School}

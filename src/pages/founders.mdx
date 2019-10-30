@@ -18,7 +18,7 @@ import { jsx } from 'theme-ui'
     
 {props.data.allAirtable.edges.map((edge, i) => (
 	<PersonCard
-		photoUrl={edge.node.data.Picture[0].thumbnails.large.url}
+		photoUrl={edge.node.data.Picture ? edge.node.data.Picture[0].thumbnails.large.url : ''}
 		name={edge.node.data.Name}
 		bio={edge.node.data.Bio}
     title={edge.node.data.Title}
