@@ -27,9 +27,9 @@ exports.createPages = async ({ graphql, actions }) => {
                       Story_Name
                       Photo {
                           thumbnails {
-                          large {
-                              url
-                          }
+                            large {
+                                url
+                            }
                           }
                       }
                       Audio {
