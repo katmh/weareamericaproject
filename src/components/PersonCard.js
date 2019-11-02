@@ -16,6 +16,7 @@ const PersonCard = (props) => {
                 sx={{
                     mb: 4,
                     overflow: 'auto',
+                    cursor: 'pointer',
                     'p': {
                         fontFamily: 'body',
                         fontSize: 0,
@@ -46,7 +47,6 @@ const PersonCard = (props) => {
                             position: 'relative',
                             zIndex: '-1',
                             display: 'block',
-                            pointer: 'cursor',
                         }}
                     />
                 </div> 
@@ -67,9 +67,18 @@ const PersonCard = (props) => {
                             mb: '.25rem',
                             lineHeight: '100%',
                             pointer: 'cursor',
+                            clear: 'both',
                         }}
                     >
                         {props.name}
+                        <span
+                            sx={{
+                                float: 'right',
+                                color: '#555'
+                            }}
+                        >
+                            +
+                        </span>
                     </h4>
                     <p
                         sx={{

@@ -21,13 +21,20 @@ const StoryCard = (props) => (
 		<article
 			sx={{
 				mb: '30px',
+				boxShadow: '0 0 6px #bbb',
 				':hover img': {
 					transform: 'scale(1.15)'
+				},
+				':hover': {
+					boxShadow: '0 0 6px #999',
 				}
 			}}
 		>
 		<Link
 			to={`/story/${slugify(props.author)}`}
+			sx={{
+				textDecoration: 'none'
+			}}
 		>
 			<div
 				className="image-wrapper"
@@ -48,7 +55,7 @@ const StoryCard = (props) => (
 					}}
 				/>
 			</div>
-		</Link>
+		
 			<div
 				sx={{
 					bg: 'background',
@@ -56,22 +63,18 @@ const StoryCard = (props) => (
 					p: '.75rem 1rem'
 				}}
 			>
-				<Link
-					to={`/story/${slugify(props.author)}`}
+				<h3
+					sx={{
+						fontFamily: 'heading',
+						color: 'text',
+						m: '0',
+						fontSize: '2rem',
+						display: 'inline-block'
+					}}
 				>
-					<h3
-						sx={{
-							fontFamily: 'heading',
-							color: 'text',
-							m: '0',
-							fontSize: '2rem',
-							display: 'inline-block',
-							textDecoration: 'none'
-						}}
-					>
-						{props.title}
-					</h3>
-				</Link>
+					{props.title}
+				</h3>
+
 				<h4
 					sx={{
 						fontFamily: 'heading',
@@ -83,6 +86,7 @@ const StoryCard = (props) => (
 					{props.author}
 				</h4>
 			</div>
+		</Link>
     </article>
 )
 
