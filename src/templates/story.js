@@ -1,29 +1,27 @@
 /** @jsx jsx */
 import Layout from '../components/Layout'
 import { jsx } from 'theme-ui'
+import BackToAll from '../components/BackToAll'
 import { Link } from 'gatsby'
+
+function slugify(string) {
+    const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
+    const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnooooooooprrsssssttuuuuuuuuuwxyyzzz------'
+    const p = new RegExp(a.split('').join('|'), 'g')
+  
+    return string.toString().toLowerCase()
+      .replace(/\s+/g, '-') // Replace spaces with -
+      .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
+      .replace(/&/g, '-and-') // Replace & with 'and'
+      .replace(/[^\w\-]+/g, '') // Remove all non-word characters
+      .replace(/\-\-+/g, '-') // Replace multiple - with single -
+      .replace(/^-+/, '') // Trim - from start of text
+      .replace(/-+$/, '') // Trim - from end of text
+  }
 
 export default ({pageContext: {data}}) => (
     <Layout>
-        <Link
-            to="/stories"
-            sx={{
-                display: 'inline-block',
-                fontFamily: 'body',
-                fontSize: 1,
-                mb: 4,
-                color: '#444',
-                textDecoration: 'none',
-                pb: '1px',
-                borderBottom: '1px solid #999',
-                transition: '.15s',
-                ':hover': {
-                    borderBottom: '1px solid #666',
-                }
-            }}
-        >
-            ← Back to all stories
-        </Link>
+        <BackToAll />
         <h1
             sx={{
                 fontFamily: 'heading',
@@ -70,18 +68,31 @@ export default ({pageContext: {data}}) => (
                             sx={{
                                 listStyle: 'none',
                                 display: 'inline-block',
-                                fontFamily: 'body',
-                                lineHeight: '100%',
                                 mr: 1,
-                                bg: 'accent',
-                                color: 'background',
-                                p: '.4rem .5rem',
-                                borderRadius: '.4rem',
-                                fontSize: 0,
-                                fontWeight: '700'
+                                my: '.1rem',
                             }}
                         >
-                            {tag}
+                            <Link
+                                to={'/tag/' + slugify(tag)}
+                                sx={{
+                                    fontFamily: 'body',
+                                    lineHeight: '100%',
+                                    textDecoration: 'none',
+                                    bg: 'accent',
+                                    color: 'background',
+                                    p: '.3rem .6rem .4rem',
+                                    borderRadius: '.3rem',
+                                    fontSize: 0,
+                                    fontWeight: '700',
+                                    transition: '.1s',
+                                    ':hover': {
+                                        color: '#fff',
+                                        background: '#844'
+                                    }
+                                }}
+                            >
+                                {tag}
+                            </Link>
                         </li>
                     ))}
                 </ul>

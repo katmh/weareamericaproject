@@ -15,7 +15,7 @@ function slugify(string) {
 
 exports.createPages = async ({ graphql, actions }) => {
     const { createPage } = actions
-    const result = await graphql(`
+    const stories = await graphql(`
       query allStoriesQuery {
           allAirtable(filter: {table: {eq: "Stories"}}) {
               edges {
@@ -39,18 +39,59 @@ exports.createPages = async ({ graphql, actions }) => {
                       Tags
                       Grade
                       Transcript
-                      }
+                    }
                   }
               }
           }
       }
     `)
+    const tags = await graphql(`
+      query allStoriesQuery {
+        allAirtable(filter: {table: {eq: "Stories"}}) {
+          group(field: data___Tags) {
+            edges {
+              node {
+                id
+                data {
+                  Author
+                  Status
+                  Story_Name
+                  Photo {
+                    thumbnails {
+                      large {
+                        url
+                      }
+                    }
+                  }
+                  Audio {
+                    url
+                  }
+                  School
+                  Tags
+                  Grade
+                  Transcript
+                }
+              }
+            }
+            fieldValue
+          }
+        }
+      }
+    `)
 
-    result.data.allAirtable.edges.forEach(({node: {id, data}}) => {
-      createPage({
-        path: `/story/${slugify(data.Author ? data.Author : id)}/`,
-        component: require.resolve('./src/templates/story.js'),
-        context: {data},
-      })
+    stories.data.allAirtable.edges.forEach(({node: {id, data}}) => {
+        createPage({
+            path: `/story/${slugify(data.Author ? data.Author : id)}/`,
+            component: require.resolve('./src/templates/story.js'),
+            context: {data},
+        })
+    })
+
+    tags.data.allAirtable.group.forEach(({fieldValue, edges}) => {
+        createPage({
+            path: `/tag/${slugify(fieldValue ? fieldValue : '')}/`,
+            component: require.resolve('./src/templates/tag.js'),
+            context: {edges, fieldValue},
+        })
     })
 }

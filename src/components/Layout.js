@@ -4,6 +4,7 @@ import { Global } from '@emotion/core'
 import Header from './Header'
 import Container from './Container'
 import Footer from './Footer'
+import SEO from './SEO'
 import theme from './theme'
 
 const Layout = ({children}) => (
@@ -20,6 +21,7 @@ const Layout = ({children}) => (
                 }
             }}
         />
+        <SEO />
         <Header />
         <Container>
             {children}
