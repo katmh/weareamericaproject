@@ -46,9 +46,75 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     `)
     const tags = await graphql(`
-      query allStoriesQuery {
+      query storiesByTagsQuery {
         allAirtable(filter: {table: {eq: "Stories"}}) {
           group(field: data___Tags) {
+            edges {
+              node {
+                id
+                data {
+                  Author
+                  Status
+                  Story_Name
+                  Photo {
+                    thumbnails {
+                      large {
+                        url
+                      }
+                    }
+                  }
+                  Audio {
+                    url
+                  }
+                  School
+                  Tags
+                  Grade
+                  Transcript
+                }
+              }
+            }
+            fieldValue
+          }
+        }
+      }
+    `)
+    const schools = await graphql(`
+      query storiesByTagsQuery {
+        allAirtable(filter: {table: {eq: "Stories"}}) {
+          group(field: data___School) {
+            edges {
+              node {
+                id
+                data {
+                  Author
+                  Status
+                  Story_Name
+                  Photo {
+                    thumbnails {
+                      large {
+                        url
+                      }
+                    }
+                  }
+                  Audio {
+                    url
+                  }
+                  School
+                  Tags
+                  Grade
+                  Transcript
+                }
+              }
+            }
+            fieldValue
+          }
+        }
+      }
+    `)
+    const states = await graphql(`
+      query storiesByTagsQuery {
+        allAirtable(filter: {table: {eq: "Stories"}}) {
+          group(field: data___State) {
             edges {
               node {
                 id
@@ -93,5 +159,21 @@ exports.createPages = async ({ graphql, actions }) => {
             component: require.resolve('./src/templates/tag.js'),
             context: {edges, fieldValue},
         })
+    })
+
+    schools.data.allAirtable.group.forEach(({fieldValue, edges}) => {
+      createPage({
+          path: `/school/${slugify(fieldValue ? fieldValue : '')}/`,
+          component: require.resolve('./src/templates/tag.js'),
+          context: {edges, fieldValue},
+      })
+    })
+
+    states.data.allAirtable.group.forEach(({fieldValue, edges}) => {
+      createPage({
+          path: `/state/${slugify(fieldValue ? fieldValue : '')}/`,
+          component: require.resolve('./src/templates/tag.js'),
+          context: {edges, fieldValue},
+      })
     })
 }
