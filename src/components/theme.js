@@ -34,6 +34,13 @@ export default {
             my: 0,
             color: 'accent'
         },
+        h2: {
+            fontSize: [3, 4],
+            fontFamily: 'heading',
+            fontWeight: '400',
+            color: 'text',
+            mt: 3,
+        },
         h3: {
             ...text,
             fontSize: [2, 3],
