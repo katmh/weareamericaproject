@@ -1,6 +1,6 @@
 import Gallery from './Gallery'
 import StoryCard from '../components/StoryCard'
-import { StaticQuery, graphql } from 'gatsby'
+import {StaticQuery, graphql} from 'gatsby'
 import React from 'react'
 
 const FeaturedStories = (props) => (
@@ -35,27 +35,25 @@ const FeaturedStories = (props) => (
           }
         `}
         render={data => {
+            var shuffled = data.allAirtable.edges.sort(() => Math.random() - 0.5)
             return (
                 <Gallery n={props.nCols}>
-                {data.allAirtable.edges.map((story, i) => {
-                    while (i < props.nStories) {
-                        return (
-                            <StoryCard
-                                title={story.node.data.Story_Name}
-                                photoUrl={story.node.data.Photo[0].thumbnails.large.url}
-                                author={story.node.data.Author}
-                                audio={story.node.data.Audio ? (story.node.data.Audio[0].url) : ''}
-                            />
-                        )
-                    }
-                })}
+                    {shuffled.map((story, i) => {
+                        while (i < props.nStories) {
+                            return (
+                                <StoryCard
+                                    title={story.node.data.Story_Name}
+                                    photoUrl={story.node.data.Photo[0].thumbnails.large.url}
+                                    author={story.node.data.Author}
+                                    audio={story.node.data.Audio ? (story.node.data.Audio[0].url) : ''}
+                                />
+                            )
+                        }
+                    })}
                 </Gallery>
             )
         }}
     />
 )
-
-
-
 
 export default FeaturedStories
