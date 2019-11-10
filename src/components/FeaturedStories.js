@@ -42,6 +42,8 @@ const FeaturedStories = (props) => (
                 <Gallery n={props.nCols}>
                     {shuffled.map((story, i) => {
                         while (i < props.nStories) {
+                            console.log(story.node.data.Story_Name)
+                            console.log(story.node.data.Photo[0].thumbnails.large.url)
                             return (
                                 <StoryCard
                                     key={story.node.id}
