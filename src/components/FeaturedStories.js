@@ -36,10 +36,11 @@ const FeaturedStories = (props) => (
           }
         `}
         render={data => {
-            //var shuffled = data.allAirtable.edges.sort(() => Math.random() - 0.5)
+            var shuffled = data.allAirtable.edges.sort(() => Math.random() - 0.5)
+            console.log(shuffled)
             return (
                 <Gallery n={props.nCols}>
-                    {data.allAirtable.edges.reverse().map((story, i) => {
+                    {shuffled.map((story, i) => {
                         while (i < props.nStories) {
                             return (
                                 <StoryCard
