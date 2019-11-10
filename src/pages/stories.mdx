@@ -8,12 +8,31 @@ import Gallery from '../components/Gallery'
 import { graphql, Link } from "gatsby"
 import { jsx } from 'theme-ui'
 import Dropdown from '../components/Dropdown'
+import SearchText from '../components/SearchText'
 
 <Layout>
 
 # All Stories
 
-<Dropdown props={props} />
+<SearchText />
+
+<Dropdown
+    content={props.data.tags}
+    contentName='Topic'
+    contentSlug='tag'
+/>
+
+<Dropdown
+    content={props.data.states}
+    contentName='State'
+    contentSlug='state'
+/>
+
+<Dropdown
+    content={props.data.schools}
+    contentName='School'
+    contentSlug='school'
+/>
 
 <br />
 <br />
@@ -24,7 +43,7 @@ Click to listen to the stories!
 <Gallery n={3}>
 {props.data.stories.edges.map((edge, i) => (
 	<StoryCard
-    id={edge.node.id}
+        id={edge.node.id}
 		photoUrl={edge.node.data.Photo ? edge.node.data.Photo[0].thumbnails.large.url : ''}
 		title={edge.node.data.Story_Name}
 		author={edge.node.data.Author}

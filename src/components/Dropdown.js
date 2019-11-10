@@ -16,26 +16,15 @@ function slugify(string) {
       .replace(/\-\-+/g, '-') // Replace multiple - with single -
       .replace(/^-+/, '') // Trim - from start of text
       .replace(/-+$/, '') // Trim - from end of text
-  }
+}
 
-const Dropdown = ({ props }) => (
+const Dropdown = (props) => (
     <>
-        <p
-            sx={{
-                fontFamily: 'body',
-                fontSize: [0,1],
-                fontWeight: 300,
-                color: 'text',
-                fontFamily: 'body',
-                my: 2,
-                mr: '.5rem'
-            }}
-        >
-            View stories by
-        </p>
         <div
             sx={{
                 display: 'inline-block',
+                mt: 2,
+                mr: 2,
                 ':hover ul': {
                     display: 'block',
                     maxHeight: '30vh',
@@ -56,7 +45,7 @@ const Dropdown = ({ props }) => (
                     color: 'text',
                 }}
             >
-                Topic
+                {props.contentName}
             </button>
             <ul
                 sx={{
@@ -69,7 +58,7 @@ const Dropdown = ({ props }) => (
                     border: '1px solid #bbb'
                 }}
             >
-                {props.data.tags.group.map((group) => (
+                {props.content.group.map((group) => (
                 <li
                     sx={{
                         listStyle: 'none',
@@ -78,7 +67,7 @@ const Dropdown = ({ props }) => (
                     }}
                 >
                     <Link
-                        to={'/tag/' + slugify(group.fieldValue)}
+                        to={'/' + props.contentSlug + '/' + slugify(group.fieldValue)}
                         sx={{
                             textDecoration: 'none',
                             fontFamily: 'heading',
