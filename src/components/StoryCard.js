@@ -44,7 +44,7 @@ const StoryCard = (props) => (
 			>
 				<img
 					src={props.photoUrl}
-					alt={"Photo of " + props.name}
+					alt={"Photo of " + props.author}
 					sx={{
 						maxWidth: '100%',
 						m: '0',

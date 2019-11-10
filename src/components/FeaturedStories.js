@@ -10,6 +10,7 @@ const FeaturedStories = (props) => (
             allAirtable(filter: {data: {Featured: {eq: true}}}) {
               edges {
                 node {
+                  id
                   data {
                     Author
                     Status
@@ -42,6 +43,7 @@ const FeaturedStories = (props) => (
                         while (i < props.nStories) {
                             return (
                                 <StoryCard
+                                    key={story.node.id}
                                     title={story.node.data.Story_Name}
                                     photoUrl={story.node.data.Photo[0].thumbnails.large.url}
                                     author={story.node.data.Author}
