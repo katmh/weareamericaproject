@@ -9,7 +9,7 @@ const Header = ({ children }) => (
             fontFamily: 'heading',
             textAlign: 'center',
             color: 'background',
-            backgroundImage: 'url("https://lhsweareamerica.com/img/header-darker-min.jpg")',
+            backgroundImage: 'url("header.jpg")',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
