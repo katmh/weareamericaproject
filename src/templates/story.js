@@ -69,7 +69,6 @@ export default ({pageContext: {data}}) => (
                                 listStyle: 'none',
                                 display: 'inline-block',
                                 mr: 1,
-                                my: '.1rem',
                             }}
                         >
                             <Link
@@ -80,11 +79,13 @@ export default ({pageContext: {data}}) => (
                                     textDecoration: 'none',
                                     bg: 'accent',
                                     color: 'background',
-                                    p: '.3rem .6rem .4rem',
+                                    p: '.4rem .6rem',
                                     borderRadius: '.3rem',
                                     fontSize: 0,
                                     fontWeight: '700',
                                     transition: '.1s',
+                                    display: 'inline-block',
+                                    my: '.15rem',
                                     ':hover': {
                                         color: '#fff',
                                         background: '#844'
