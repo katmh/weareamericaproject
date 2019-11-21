@@ -144,6 +144,22 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     `)
+    const blogPosts = await graphql(`
+      query allBlogPosts {
+        allMarkdownRemark {
+          edges {
+            node {
+              frontmatter {
+                path
+                title
+                date(formatString: "MMMM DD, YYYY")
+              }
+              html
+            }
+          }
+        }
+      }
+    `)
 
     stories.data.allAirtable.edges.forEach(({node: {id, data}}) => {
         createPage({
@@ -174,6 +190,14 @@ exports.createPages = async ({ graphql, actions }) => {
           path: `/state/${slugify(fieldValue ? fieldValue : '')}/`,
           component: require.resolve('./src/templates/tag.js'),
           context: {edges, fieldValue},
+      })
+    })
+    
+    blogPosts.data.allMarkdownRemark.edges.forEach(({ node }) => {
+      createPage({
+        path: `/news/${slugify(node.frontmatter.path ? node.frontmatter.path : '')}/`,
+        component: require.resolve('./src/templates/blog-post.js'),
+        context: {node},
       })
     })
 }

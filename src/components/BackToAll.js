@@ -2,9 +2,9 @@
 import { jsx } from 'theme-ui'
 import { Link } from 'gatsby'
 
-const BackToAll = () => (
+const BackToAll = ({name, path}) => (
     <Link
-        to="/stories"
+        to={path}
         sx={{
             display: 'inline-block',
             fontFamily: 'body',
@@ -20,7 +20,7 @@ const BackToAll = () => (
             }
         }}
     >
-        ← Back to all stories
+        ← Back to all {name}
     </Link>
 )
 

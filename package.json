@@ -25,6 +25,7 @@
     "gatsby-plugin-react-helmet": "^3.1.13",
     "gatsby-source-airtable": "^2.0.9",
     "gatsby-source-filesystem": "^2.1.38",
+    "gatsby-transformer-remark": "^2.6.37",
     "netlify-cms-app": "^2.9.7",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",

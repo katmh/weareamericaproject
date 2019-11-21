@@ -7,7 +7,7 @@ import BackToAll from '../components/BackToAll'
 
 export default ({pageContext: {edges, fieldValue}}) => (
     <Layout>
-        <BackToAll />
+        <BackToAll name="stories" path="/stories" />
         <h1
             sx={{
                 fontFamily: 'heading',

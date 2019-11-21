@@ -21,6 +21,10 @@ module.exports = {
         path: '/teachers'
       },
       {
+        name: 'News',
+        path: '/news'
+      },
+      {
         name: 'Contact',
         path: '/contact'
       }
@@ -68,9 +72,17 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `src`,
-        path: `${__dirname}/src/`,
+        name: `pages`,
+        path: `${__dirname}/src/pages/`,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `blog`,
+        path: `${__dirname}/src/blog/`,
+      },
+    },
+    `gatsby-transformer-remark`,
   ],
 }
