@@ -29,6 +29,7 @@ module.exports = {
   plugins: [
     `gatsby-plugin-mdx`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-netlify-cms`,
     {
       resolve: `gatsby-source-airtable`,
       options: {
