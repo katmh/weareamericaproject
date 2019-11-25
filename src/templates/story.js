@@ -21,7 +21,7 @@ function slugify(string) {
 
 export default ({pageContext: {data}}) => (
     <Layout>
-        <BackToAll />
+        <BackToAll name="stories" path="/stories" />
         <h1
             sx={{
                 fontFamily: 'heading',
