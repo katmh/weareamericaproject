@@ -11,7 +11,7 @@ const BlogPost = ({data}) => (
                     fontFamily: 'heading',
                     fontWeight: '400',
                     color: '#422',
-                    mt: 1,
+                    mt: 4,
                     display: 'inline-block',
                     textDecoration: 'none',
                     transition: '.1s',
@@ -32,8 +32,7 @@ const BlogPost = ({data}) => (
                     fontWeight: 300,
                     fontStyle: 'italic',
                     lineHeight: ['135%', '145%'],
-                    mt: 1,
-                    mb: 3
+                    my: 1
             }}
         >
             {data.frontmatter.date}
@@ -41,6 +40,7 @@ const BlogPost = ({data}) => (
         <div
             dangerouslySetInnerHTML={{__html: data.html }}
             sx={{
+                overflow: 'auto',
                 'p': {
                     lineHeight: '135%',
                     color: 'text',
@@ -48,7 +48,13 @@ const BlogPost = ({data}) => (
                     fontSize: [0, 1],
                     fontWeight: 300,
                     lineHeight: ['135%', '145%'],
-                    my: [2, 3]
+                    my: 1
+                },
+                'img': {
+                    float: 'left',
+                    maxWidth: ['50%', '25%'],
+                    mr: [3, 3],
+                    mb: [3, 3],
                 }
             }}	
         />
