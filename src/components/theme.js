@@ -58,6 +58,9 @@ export default {
         },
         a: {
             color: 'accent'
+        },
+        img: {
+            maxWidth: '100%'
         }
     }
 }
