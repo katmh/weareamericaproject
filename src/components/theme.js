@@ -26,7 +26,21 @@ export default {
         heading: 400, // Staatliches only has 400 weight
         body: 400,
     },
-    styles: { // for elements rendered in MDX only
+    body: {
+        ...text,
+        fontSize: 0,
+    },
+    h3: {
+        ...text,
+        fontSize: [2, 3],
+        fontWeight: 300,
+        mb: [4, 5],
+        mx: [3, 6],
+    },
+    styles: {
+        root: {
+
+        },
         h1: {
             fontSize: [4, 5],
             fontFamily: 'heading',
