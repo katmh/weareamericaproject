@@ -55,7 +55,7 @@ Click to listen to the stories!
 
 export const pageQuery = graphql`
 query {
-    stories: allAirtable(filter: {table: {eq: "Stories"}}) {
+    stories: allAirtable(filter: {table: {eq: "Stories"}, data: {Status: {eq: "Published"}}}) {
         edges {
             node {
                 id
@@ -81,17 +81,17 @@ query {
             }
         }
     }
-    tags: allAirtable(filter: {table: {eq: "Stories"}}) {
+    tags: allAirtable(filter: {table: {eq: "Stories"}, data: {Status: {eq: "Published"}}}) {
         group(field: data___Tags) {
             fieldValue
         }
     }
-    states: allAirtable(filter: {table: {eq: "Stories"}}) {
+    states: allAirtable(filter: {table: {eq: "Stories"}, data: {Status: {eq: "Published"}}}) {
         group(field: data___State) {
             fieldValue
         }
     }
-    schools: allAirtable(filter: {table: {eq: "Stories"}}) {
+    schools: allAirtable(filter: {table: {eq: "Stories"}, data: {Status: {eq: "Published"}}}) {
         group(field: data___School) {
             fieldValue
         }
