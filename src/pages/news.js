@@ -25,7 +25,7 @@ const News = ({ data }) => (
 
 export const query = graphql`
   query allBlogPosts {
-    allMarkdownRemark {
+    allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}) {
       edges {
         node {
           frontmatter {
