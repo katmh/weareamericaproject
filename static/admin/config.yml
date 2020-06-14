@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  repo: katavie/weareamericaproject
+  repo: katmh/weareamericaproject
 
 media_folder: static/assets
 public_folder: assets
