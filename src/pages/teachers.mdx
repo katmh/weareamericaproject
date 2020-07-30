@@ -5,52 +5,53 @@ title: Teachers
 import Layout from "../components/Layout"
 import PersonCard from "../components/PersonCard"
 import { graphql } from "gatsby"
-import { jsx } from 'theme-ui'
-import Gallery from '../components/Gallery'
+import { jsx } from "theme-ui"
+import Gallery from "../components/Gallery"
 
 <Layout>
 
 # Teachers
 
-<br/>
+<br />
 
 Learn more about our 40 teachers and classrooms across 25 states.
 
-![Map of the USA; states with a We Are America class are highlighted in purple](/map.png)
+![Map of the USA; states with We Are America class(es) are highlighted in purple](/map.png)
 
 <Gallery n={4}>
-{props.data.allAirtable.edges.map((edge, i) => (
+{props.data.allAirtable.edges.map((edge, i) => {
+  const person = edge.node.data
+  return (
+    person.Picture &&
     <PersonCard
-        photoUrl={edge.node.data.Picture ? edge.node.data.Picture[0].thumbnails.large.url : ''}
-        name={edge.node.data.Name}
-        school={edge.node.data.School_Name}
-        schoolType={edge.node.data.Type_of_School}
-        city={edge.node.data.City}
-        state={edge.node.data.State}
-        grades={edge.node.data.Grades}
-        bio={edge.node.data.Bio}
+      photoUrl={person.Picture[0].thumbnails.large.url}
+      name={person.Name}
+      school={person.School_Name}
+      city={person.City}
+      state={person.State}
+      bio={person.Bio}
     />
-))}
+)
+})}
 </Gallery>
 </Layout>
 
 export const pageQuery = graphql`
-query TeachersPageQuery {
-  allAirtable(filter: {table: {eq: "Teachers"}}) {
-    edges {
-      node {
-        data {
-          Name
-          School_Name
-          City
-          State
-          Grades
-          Bio
-          Type_of_School
-          Picture {
-            thumbnails {
-              large {
-                url
+  query TeachersPageQuery {
+    allAirtable(filter: { table: { eq: "Teachers" } }) {
+      edges {
+        node {
+          data {
+            Name
+            School_Name
+            City
+            State
+            Bio
+            Picture {
+              thumbnails {
+                large {
+                  url
+                }
               }
             }
           }
@@ -58,5 +59,4 @@ query TeachersPageQuery {
       }
     }
   }
-}
 `
