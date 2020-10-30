@@ -4,11 +4,11 @@ title: Stories
 
 import Layout from "../components/Layout"
 import StoryCard from "../components/StoryCard"
-import Gallery from '../components/Gallery'
+import Gallery from "../components/Gallery"
 import { graphql, Link } from "gatsby"
-import { jsx } from 'theme-ui'
-import Dropdown from '../components/Dropdown'
-import SearchText from '../components/SearchText'
+import { jsx } from "theme-ui"
+import Dropdown from "../components/Dropdown"
+import SearchText from "../components/SearchText"
 
 <Layout>
 
@@ -16,28 +16,18 @@ import SearchText from '../components/SearchText'
 
 <SearchText />
 
-<Dropdown
-    content={props.data.tags}
-    contentName='Topic'
-    contentSlug='tag'
-/>
+<Dropdown content={props.data.tags} contentName="Topic" contentSlug="tag" />
+
+<Dropdown content={props.data.states} contentName="State" contentSlug="state" />
 
 <Dropdown
-    content={props.data.states}
-    contentName='State'
-    contentSlug='state'
-/>
-
-<Dropdown
-    content={props.data.schools}
-    contentName='School'
-    contentSlug='school'
+  content={props.data.schools}
+  contentName="School"
+  contentSlug="school"
 />
 
 <br />
 <br />
-
-Click to listen to the stories!
 
 <br/>
 <Gallery n={3}>
@@ -54,47 +44,67 @@ Click to listen to the stories!
 </Layout>
 
 export const pageQuery = graphql`
-query {
-    stories: allAirtable(filter: {table: {eq: "Stories"}, data: {Status: {eq: "Published"}}}) {
-        edges {
-            node {
-                id
-                data {
-                    Author
-                    Status
-                    Story_Name
-                    Photo {
-                        thumbnails {
-                            large {
-                                url
-                            }
-                        }
-                    }
-                    Audio {
-                        url
-                    }
-                    School
-                    Tags
-                    Grade
-                    Transcript
+  query {
+    stories: allAirtable(
+      filter: {
+        table: { eq: "Stories" }
+        data: { Status: { eq: "Published" } }
+      }
+    ) {
+      edges {
+        node {
+          id
+          data {
+            Author
+            Status
+            Story_Name
+            Photo {
+              thumbnails {
+                large {
+                  url
                 }
+              }
             }
+            Audio {
+              url
+            }
+            School
+            Tags
+            Grade
+            Transcript
+          }
         }
+      }
     }
-    tags: allAirtable(filter: {table: {eq: "Stories"}, data: {Status: {eq: "Published"}}}) {
-        group(field: data___Tags) {
-            fieldValue
-        }
+    tags: allAirtable(
+      filter: {
+        table: { eq: "Stories" }
+        data: { Status: { eq: "Published" } }
+      }
+    ) {
+      group(field: data___Tags) {
+        fieldValue
+      }
     }
-    states: allAirtable(filter: {table: {eq: "Stories"}, data: {Status: {eq: "Published"}}}) {
-        group(field: data___State) {
-            fieldValue
-        }
+    states: allAirtable(
+      filter: {
+        table: { eq: "Stories" }
+        data: { Status: { eq: "Published" } }
+      }
+    ) {
+      group(field: data___State) {
+        fieldValue
+      }
     }
-    schools: allAirtable(filter: {table: {eq: "Stories"}, data: {Status: {eq: "Published"}}}) {
-        group(field: data___School) {
-            fieldValue
-        }
+    schools: allAirtable(
+      filter: {
+        table: { eq: "Stories" }
+        data: { Status: { eq: "Published" } }
+      }
+    ) {
+      group(field: data___School) {
+        fieldValue
+      }
     }
-}
+  }
 `

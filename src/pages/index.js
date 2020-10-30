@@ -2,6 +2,7 @@
 import React from 'react';
 import FeaturedStories from '../components/FeaturedStories'
 import ButtonLink from '../components/ButtonLink'
+import ButtonInput from '../components/ButtonInput'
 import Layout from "../components/Layout"
 import addToMailchimp from 'gatsby-plugin-mailchimp';
 import { jsx } from 'theme-ui'
@@ -33,8 +34,6 @@ export default class IndexPage extends React.Component {
 
     _handleSubmit = (e) => {
         e.preventDefault();
-
-        console.log('submit', this.state);
 
         addToMailchimp(this.state.email, this.state)
             .then(({ msg, result }) => {
@@ -75,21 +74,15 @@ export default class IndexPage extends React.Component {
                       sx={{
                         variant: "body",
                         padding: 1,
-
+                        ml: 1,
+                        mr: 2,
                       }}
                       type="email"
                       onChange={this._handleChange}
-                      placeholder="email"
+                      placeholder="name@email.com"
                       name="email"
                     />
-                    <input
-                      sx={{
-                        variant: "body",
-                        py: 3,
-                        ml: 1,
-                      }}
-                      type="submit"
-                    />
+                    <ButtonInput type="submit" value="Submit" />
                   </form>
                 </h3>
 

@@ -3,6 +3,7 @@ import { jsx } from 'theme-ui'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import BlogPost from '../components/BlogPost'
+import Gallery from '../components/Gallery'
 
 const News = ({ data }) => (
   <Layout>
@@ -17,9 +18,11 @@ const News = ({ data }) => (
     >
       News
     </h1>
+    <Gallery n={2}>
     {data.allMarkdownRemark.edges.map((edge) => (
       <BlogPost data={edge.node} />
     ))}
+    </Gallery>
   </Layout>
 )
 

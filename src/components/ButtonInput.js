@@ -4,15 +4,19 @@ import { jsx } from 'theme-ui'
 const ButtonInput = (props) => (
     <input
         sx={{
+            appearance: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            verticalAlign: 'bottom',
             bg: 'accent',
             color: 'background',
             display: 'inline-block',
             mx: 'auto',
-            p: '13px 16px 10px',
+            padding: '8px 12.5px 7px',
             textDecoration: 'none',
             fontFamily: 'heading',
             fontWeight: 'heading',
-            fontSize: 3,
+            fontSize: 2,
             lineHeight: '100%',
             transition: '.2s',
             borderRadius: '10px',
