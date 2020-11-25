@@ -5,30 +5,30 @@ module.exports = {
     description: `The We Are America Project is working with teachers and young people across the country to define what it means to be American — and to spark a new national conversation about American identity today led by the next generation.`,
     navLinks: [
       {
-        name: 'Library of Stories',
-        path: '/stories'
+        name: "Library of Stories",
+        path: "/stories",
       },
       {
-        name: 'About',
-        path: '/about'
+        name: "About",
+        path: "/about",
       },
       {
-        name: 'Founders',
-        path: '/founders'
+        name: "Founders",
+        path: "/founders",
       },
       {
-        name: 'Teachers',
-        path: '/teachers'
+        name: "Teachers",
+        path: "/teachers",
       },
       {
-        name: 'News',
-        path: '/news'
+        name: "News",
+        path: "/news",
       },
       {
-        name: 'Contact',
-        path: '/contact'
-      }
-    ]
+        name: "Contact",
+        path: "/contact",
+      },
+    ],
   },
   plugins: [
     `gatsby-plugin-mdx`,
@@ -37,8 +37,9 @@ module.exports = {
     {
       resolve: `gatsby-plugin-mailchimp`,
       options: {
-        endpoint: 'https://weareamericaproject.us4.list-manage.com/subscribe/post?u=466aceffe785790da648587fc&amp;id=3a60133af9',
-      }
+        endpoint:
+          "https://weareamericaproject.us4.list-manage.com/subscribe/post?u=466aceffe785790da648587fc&amp;id=3a60133af9",
+      },
     },
     {
       resolve: `gatsby-source-airtable`,
@@ -47,33 +48,35 @@ module.exports = {
         tables: [
           {
             baseId: process.env.AIRTABLE_STORIES_BASE_ID,
-            tableName: `Stories`
+            tableName: `Stories`,
           },
           {
             baseId: process.env.AIRTABLE_PEOPLE_BASE_ID,
-            tableName: `Teachers`
+            tableName: `Teachers`,
           },
           {
             baseId: process.env.AIRTABLE_PEOPLE_BASE_ID,
-            tableName: `Founders`
+            tableName: `Founders`,
           },
-        ]
-      }
+        ],
+      },
     },
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      resolve: `gatsby-plugin-webfonts`,
       options: {
-        fonts: [
-          {
-            family: `Staatliches`,
-            variants: [`400`]
-          },
-          {
-            family: `Lato`,
-            variants: [`300`, `300i`, `700`, `700i`]
-          }
-        ]
-      }
+        fonts: {
+          google: [
+            {
+              family: `Staatliches`,
+              variants: [`400`],
+            },
+            {
+              family: `Lato`,
+              variants: [`300`, `300i`, `700`, `700i`],
+            },
+          ],
+        },
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
