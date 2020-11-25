@@ -5,7 +5,7 @@ module.exports = {
     description: `The We Are America Project is working with teachers and young people across the country to define what it means to be American — and to spark a new national conversation about American identity today led by the next generation.`,
     navLinks: [
       {
-        name: "Library of Stories",
+        name: "Stories",
         path: "/stories",
       },
       {
@@ -67,12 +67,12 @@ module.exports = {
         fonts: {
           google: [
             {
-              family: `Staatliches`,
-              variants: [`400`],
+              family: `Fira Sans Condensed`,
+              variants: [`700`],
             },
             {
-              family: `Lato`,
-              variants: [`300`, `300i`, `700`, `700i`],
+              family: `Fira Sans`,
+              variants: [`400`, `400i`],
             },
           ],
         },

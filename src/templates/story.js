@@ -26,131 +26,135 @@ function slugify(string) {
 export default ({ pageContext: { data } }) => (
   <Layout>
     <BackToAll name="stories" path="/stories" />
-    <h1
+    <div
       sx={{
-        fontFamily: "heading",
-        fontSize: 5,
-        color: "accent",
+        display: "grid",
+        gridTemplateColumns: ["1fr", "1fr 2fr"],
+        gridGap: "1rem",
       }}
     >
-      {data.Story_Name}
-    </h1>
-    <h2
-      sx={{
-        fontFamily: "heading",
-        fontSize: 3,
-        textTransform: "uppercase",
-        color: "text",
-      }}
-    >
-      By {data.Author}
-    </h2>
-    <h3
-      sx={{
-        fontFamily: "heading",
-        my: 3,
-        fontSize: 2,
-        color: "muted",
-      }}
-    >
-      {data.School}
-    </h3>
-    <p>
-      {data.Tags ? (
-        <ul>
+      <div className="story-info">
+        <h1
+          sx={{
+            fontFamily: "heading",
+            fontSize: 4,
+            color: "accent",
+            lineHeight: 1.1,
+            mb: 2,
+          }}
+        >
+          {data.Story_Name}
+        </h1>
+        <h2
+          sx={{
+            fontFamily: "heading",
+            fontSize: 2,
+            lineHeight: 1.25,
+            color: "muted",
+            mb: 3,
+          }}
+        >
+          {data.Author} ({data.School})
+        </h2>
+        <p>
+          {data.Tags ? (
+            <ul>
+              <span
+                sx={{
+                  fontFamily: "body",
+                  fontWeight: "700",
+                  mr: 1,
+                }}
+              >
+                Tags:
+              </span>
+              {data.Tags.map(tag => (
+                <li
+                  sx={{
+                    listStyle: "none",
+                    display: "inline-block",
+                    mr: 1,
+                  }}
+                >
+                  <Link
+                    to={"/tag/" + slugify(tag)}
+                    sx={{
+                      fontFamily: "body",
+                      lineHeight: "100%",
+                      textDecoration: "none",
+                      bg: "accent",
+                      color: "background",
+                      p: ".4rem .6rem",
+                      borderRadius: ".3rem",
+                      fontSize: 0,
+                      fontWeight: "700",
+                      transition: ".1s",
+                      display: "inline-block",
+                      my: ".15rem",
+                      ":hover": {
+                        color: "#fff",
+                        background: "#844",
+                      },
+                    }}
+                  >
+                    {tag}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            ""
+          )}
+        </p>
+
+        <audio
+          controls
+          src={data.Audio ? data.Audio[0].url : ""}
+          sx={{
+            display: "block",
+            my: 4,
+          }}
+        >
+          Your browser does not support the <code>audio</code> element. :(
+        </audio>
+
+        {data.Second_Language ? (
           <span
             sx={{
               fontFamily: "body",
               fontWeight: "700",
               mr: 1,
+              verticalAlign: "top",
             }}
           >
-            Tags:
+            Listen in {data.Second_Language}
           </span>
-          {data.Tags.map(tag => (
-            <li
-              sx={{
-                listStyle: "none",
-                display: "inline-block",
-                mr: 1,
-              }}
-            >
-              <Link
-                to={"/tag/" + slugify(tag)}
-                sx={{
-                  fontFamily: "body",
-                  lineHeight: "100%",
-                  textDecoration: "none",
-                  bg: "accent",
-                  color: "background",
-                  p: ".4rem .6rem",
-                  borderRadius: ".3rem",
-                  fontSize: 0,
-                  fontWeight: "700",
-                  transition: ".1s",
-                  display: "inline-block",
-                  my: ".15rem",
-                  ":hover": {
-                    color: "#fff",
-                    background: "#844",
-                  },
-                }}
-              >
-                {tag}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        ""
-      )}
-    </p>
-
-    <audio
-      controls
-      src={data.Audio ? data.Audio[0].url : ""}
-      sx={{
-        display: "block",
-        my: 4,
-      }}
-    >
-      Your browser does not support the <code>audio</code> element. :(
-    </audio>
-
-    {data.Second_Language ? (
-      <span
+        ) : null}
+        {data.Second_Language ? (
+          <audio
+            controls
+            src={
+              data.Second_Language_Audio
+                ? data.Second_Language_Audio[0].url
+                : ""
+            }
+            sx={{
+              display: "block",
+              mt: 2,
+              mb: 4,
+            }}
+          >
+            Your browser does not support the <code>audio</code> element. :(
+          </audio>
+        ) : null}
+      </div>
+      <img
+        src={data.Photo ? data.Photo[0].thumbnails.large.url : ""}
+        alt={"Photo of" + data.Author}
         sx={{
-          fontFamily: "body",
-          fontWeight: "700",
-          mr: 1,
-          verticalAlign: "top",
+          maxWidth: "100%",
         }}
-      >
-        Listen in {data.Second_Language}
-      </span>
-    ) : null}
-    {data.Second_Language ? (
-      <audio
-        controls
-        src={
-          data.Second_Language_Audio ? data.Second_Language_Audio[0].url : ""
-        }
-        sx={{
-          display: "block",
-          mt: 2,
-          mb: 4,
-        }}
-      >
-        Your browser does not support the <code>audio</code> element. :(
-      </audio>
-    ) : null}
-
-    <img
-      src={data.Photo ? data.Photo[0].thumbnails.large.url : ""}
-      alt={"Photo of" + data.Author}
-      sx={{
-        maxWidth: "100%",
-      }}
-    />
+      />
+    </div>
   </Layout>
 )
