@@ -1,9 +1,8 @@
 {
-  "name": "gatsby-starter-hello-world",
+  "name": "weareamericaproject",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
+  "description": "The We Are America Project is working with teachers and young people across the country to spark a national conversation about American identity, led by the next generation.",
   "version": "0.1.0",
-  "license": "MIT",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
@@ -40,9 +39,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
+    "url": "https://github.com/katmh/weareamericaproject"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/katmh/weareamericaproject/issues"
   }
 }
