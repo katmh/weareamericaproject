@@ -24,10 +24,6 @@ module.exports = {
         name: "News",
         path: "/news",
       },
-      {
-        name: "Contact",
-        path: "/contact",
-      },
     ],
   },
   plugins: [
