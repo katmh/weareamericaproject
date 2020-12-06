@@ -9,6 +9,10 @@ module.exports = {
         path: "/stories",
       },
       {
+        name: "Books",
+        path: "/books",
+      },
+      {
         name: "About",
         path: "/about",
       },

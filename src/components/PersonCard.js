@@ -25,7 +25,7 @@ const PersonCard = props => {
             mb: 2,
           },
           ":hover img": {
-            transform: "scale(1.15)",
+            transform: "scale(1.1)",
           },
         }}
       >
