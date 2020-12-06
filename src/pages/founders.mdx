@@ -32,7 +32,10 @@ import { jsx } from "theme-ui"
 
 export const pageQuery = graphql`
   query FoundersPageQuery {
-    allAirtable(filter: { table: { eq: "Founders" } }) {
+    allAirtable(
+      filter: { table: { eq: "Founders" } }
+      sort: { order: ASC, fields: data___Website_Order }
+    ) {
       edges {
         node {
           data {
