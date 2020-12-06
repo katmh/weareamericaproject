@@ -5,8 +5,11 @@ import ButtonLink from "../components/ButtonLink"
 import ButtonInput from "../components/ButtonInput"
 import Layout from "../components/Layout"
 import Container from "../components/Container"
+import Gallery from "../components/Gallery"
 import addToMailchimp from "gatsby-plugin-mailchimp"
 import { jsx } from "theme-ui"
+import { Timeline } from "react-twitter-widgets"
+
 export default class IndexPage extends React.Component {
   state = {
     email: null,
@@ -65,42 +68,59 @@ export default class IndexPage extends React.Component {
         <center>
           <ButtonLink destination="/stories">See All Stories</ButtonLink>
         </center>
+        <br />
+        <br />
 
         <Container width="medium">
-          <p
-            sx={{
-              fontFamily: "body",
-              fontSize: 2,
-              lineHeight: 1.5,
-              color: "text",
-              display: "inline-block",
-              mt: 5,
-            }}
-          >
-            Subscribe to our newsletter for updates:
-          </p>
+          <Gallery n={2}>
+            <div>
+              <p
+                sx={{
+                  fontFamily: "body",
+                  fontSize: 2,
+                  lineHeight: 1.5,
+                  color: "text",
+                  display: "inline-block",
+                }}
+              >
+                Subscribe for updates:
+              </p>
 
-          <form
-            sx={{
-              display: "inline-block",
-              ml: 2,
-            }}
-            onSubmit={this._handleSubmit}
-          >
-            <input
-              sx={{
-                variant: "body",
-                padding: 1,
-                ml: 1,
-                mr: 2,
+              <form
+                sx={{
+                  display: "inline-block",
+                  mt: 2,
+                }}
+                onSubmit={this._handleSubmit}
+              >
+                <input
+                  sx={{
+                    variant: "body",
+                    padding: 1,
+                    fontSize: 1,
+                    mr: 2,
+                    display: "inline-block",
+                  }}
+                  type="email"
+                  onChange={this._handleChange}
+                  placeholder="name@email.com"
+                  name="email"
+                />
+                <ButtonInput type="submit" value="Submit" />
+              </form>
+            </div>
+
+            <Timeline
+              dataSource={{
+                sourceType: "profile",
+                screenName: "weareamericapr1",
               }}
-              type="email"
-              onChange={this._handleChange}
-              placeholder="name@email.com"
-              name="email"
+              options={{
+                height: "400",
+                width: "400",
+              }}
             />
-            <ButtonInput type="submit" value="Submit" />
-          </form>
+          </Gallery>
         </Container>
       </Layout>
     )
