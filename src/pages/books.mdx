@@ -3,7 +3,7 @@ title: Books
 ---
 
 import Layout from "../components/Layout"
-import ButtonLink from "../components/ButtonLink"
+import Book from "../components/Book"
 import Gallery from "../components/Gallery"
 import Container from "../components/Container"
 
@@ -17,25 +17,22 @@ In the winter and spring of 2019, our classes wrote two books: _We Are America_,
 
 Here you can purchase the two books that started the project. We hope you find these stories powerful and we encourage you to listen to the whole library of stories on our website. Proceeds will fund the continued support of teachers and students participating in the We Are America Project nationally.
 
+If you are interested in the books being created by our collaborating teachers across the country, each of whom is publishing with their students their own book of stories this year, please feel free to reach out to them directly or to us and we can connect you.
+
 <br />
 
 <Container width="thin">
   <Gallery n={2}>
-    <div>
-      <img src="/assets/cover-waa.jpg" alt="Cover of We Are America book" />
-      <ButtonLink destination="TBD">
-        Buy <i>We Are America</i>
-      </ButtonLink>
-    </div>
-    <div>
-      <img
-        src="/assets/cover-waatoo.png"
-        alt="Cover of We Are America Too book"
-      />
-      <ButtonLink destination="TBD">
-        Buy <i>We Are America Too</i>
-      </ButtonLink>
-    </div>
+    <Book
+      title="We Are America"
+      image="/assets/cover-waa.jpg"
+      url="https://glcf.fcsuite.com/erp/donate/list/event?event_date_id=1660"
+    />
+    <Book
+      title="We Are America Too"
+      image="/assets/cover-waatoo.jpg"
+      url="https://glcf.fcsuite.com/erp/donate/list/event?event_date_id=1660"
+    />
   </Gallery>
 </Container>
 

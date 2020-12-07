@@ -11,7 +11,7 @@ const SearchText = () => (
       color: "text",
     }}
   >
-    Browse by
+    Listen to stories. Browse by
   </span>
 )
 
