@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
-import { Link } from "gatsby"
 
 const FONT_SIZES = {
   small: 1,
@@ -9,7 +8,7 @@ const FONT_SIZES = {
 }
 
 const ButtonLink = props => (
-  <Link
+  <a
     sx={{
       bg: "accent",
       color: "background",
@@ -29,10 +28,10 @@ const ButtonLink = props => (
         bg: "#422",
       },
     }}
-    to={props.destination}
+    href={props.destination}
   >
     {props.children}
-  </Link>
+  </a>
 )
 
 export default ButtonLink
