@@ -7,7 +7,10 @@ const FeaturedStories = props => (
   <StaticQuery
     query={graphql`
       {
-        allAirtable(filter: { data: { Featured: { eq: true } } }) {
+        allAirtable(
+          filter: { data: { Featured: { eq: true } } }
+          sort: { order: DESC, fields: id }
+        ) {
           edges {
             node {
               id
@@ -35,19 +38,21 @@ const FeaturedStories = props => (
         }
       }
     `}
-    render={data => (
-      <Gallery n={props.nCols}>
-        {data.allAirtable.edges.slice(0, 6).map(story => (
-          <StoryCard
-            key={story.node.id}
-            title={story.node.data.Story_Name}
-            photoUrl={story.node.data.Photo[0].thumbnails.large.url}
-            author={story.node.data.Author}
-            audio={story.node.data.Audio ? story.node.data.Audio[0].url : ""}
-          />
-        ))}
-      </Gallery>
-    )}
+    render={data => {
+      return (
+        <Gallery n={props.nCols}>
+          {data.allAirtable.edges.slice(0, 6).map(story => (
+            <StoryCard
+              key={story.node.id}
+              title={story.node.data.Story_Name}
+              photoUrl={story.node.data.Photo[0].thumbnails.large.url}
+              author={story.node.data.Author}
+              audio={story.node.data.Audio ? story.node.data.Audio[0].url : ""}
+            />
+          ))}
+        </Gallery>
+      )
+    }}
   />
 )
 
