@@ -16,9 +16,6 @@ export default class IndexPage extends React.Component {
   }
 
   _handleChange = e => {
-    console.log({
-      [`${e.target.name}`]: e.target.value,
-    })
     this.setState({
       [`${e.target.name}`]: e.target.value,
     })
