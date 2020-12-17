@@ -2,6 +2,7 @@
 import { jsx } from "theme-ui"
 import Nav from "./Nav"
 import Container from "./Container"
+import { Link } from "gatsby"
 
 const styles = {
   header: {
@@ -40,9 +41,9 @@ const styles = {
 const Header = () => (
   <header sx={styles.header}>
     <Container width="medium">
-      <a sx={styles.a} href="/">
+      <Link sx={styles.a} to="/">
         <h1 sx={styles.h1}>We Are America</h1>
-      </a>
+      </Link>
       <h2 sx={styles.h2}>Voices of the Nation's Future</h2>
       <Nav />
     </Container>
