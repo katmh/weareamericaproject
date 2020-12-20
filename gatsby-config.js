@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `We Are America Project`,
-    url: `https://weareamericaproject.com`,
+    url: `https://www.weareamericaproject.com`,
     description: `The We Are America Project is working with teachers and young people across the country to define what it means to be American — and to spark a new national conversation about American identity today led by the next generation.`,
     navLinks: [
       {
