@@ -9,7 +9,10 @@ const SEO = ({ title, description, image }) => (
       {
         site {
           siteMetadata {
+            title
+            url
             description
+            image
           }
         }
       }
@@ -33,10 +36,12 @@ const SEO = ({ title, description, image }) => (
 
           <meta property="og:title" content={site.title} />
           <meta property="og:description" content={site.description} />
-          <meta property="og:image" content="/header.jpg" />
+          <meta property="og:image" content={site.image} />
           <meta property="og:url" content={site.url} />
-
           <meta property="og:site_name" content={site.title} />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta property="twitter:title" content={site.title} />
+          <meta name="twitter:image" content={site.image} />
           <meta
             name="twitter:image:alt"
             content="Collage of students' eyes, with semi-transparent red and white stripes of the American flag overlaid"
