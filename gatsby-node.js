@@ -10,7 +10,6 @@ exports.createPages = async ({ graphql, actions }) => {
             id
             data {
               Author
-              Status
               Story_Name
               Photo {
                 thumbnails {
@@ -29,7 +28,7 @@ exports.createPages = async ({ graphql, actions }) => {
               School
               Tags
               Grade
-              Transcript
+              Text
             }
           }
         }
@@ -45,7 +44,6 @@ exports.createPages = async ({ graphql, actions }) => {
               id
               data {
                 Author
-                Status
                 Story_Name
                 Photo {
                   thumbnails {
@@ -57,14 +55,9 @@ exports.createPages = async ({ graphql, actions }) => {
                 Audio {
                   url
                 }
-                School
-                Tags
-                Grade
-                Transcript
               }
             }
           }
-          fieldValue
         }
       }
     }
@@ -78,7 +71,6 @@ exports.createPages = async ({ graphql, actions }) => {
               id
               data {
                 Author
-                Status
                 Story_Name
                 Photo {
                   thumbnails {
@@ -90,14 +82,9 @@ exports.createPages = async ({ graphql, actions }) => {
                 Audio {
                   url
                 }
-                School
-                Tags
-                Grade
-                Transcript
               }
             }
           }
-          fieldValue
         }
       }
     }
@@ -111,7 +98,6 @@ exports.createPages = async ({ graphql, actions }) => {
               id
               data {
                 Author
-                Status
                 Story_Name
                 Photo {
                   thumbnails {
@@ -123,14 +109,9 @@ exports.createPages = async ({ graphql, actions }) => {
                 Audio {
                   url
                 }
-                School
-                Tags
-                Grade
-                Transcript
               }
             }
           }
-          fieldValue
         }
       }
     }

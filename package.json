@@ -30,6 +30,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-helmet": "^5.2.1",
+    "react-markdown": "^5.0.3",
     "react-masonry-css": "^1.0.13",
     "react-twitter-widgets": "^1.9.5",
     "theme-ui": "^0.2.43",

@@ -33,11 +33,10 @@ import SearchText from "../components/SearchText"
 <Gallery n={3}>
 {props.data.stories.edges.map((edge, i) => (
 	<StoryCard
-        id={edge.node.id}
+    id={edge.node.id}
 		photoUrl={edge.node.data.Photo ? edge.node.data.Photo[0].thumbnails.large.url : ''}
 		title={edge.node.data.Story_Name}
 		author={edge.node.data.Author}
-		audio={edge.node.data.Audio ? (edge.node.data.Audio[0].url) : ''}
 	/>
 ))}
 </Gallery>
@@ -56,7 +55,6 @@ export const pageQuery = graphql`
           id
           data {
             Author
-            Status
             Story_Name
             Photo {
               thumbnails {
@@ -65,13 +63,6 @@ export const pageQuery = graphql`
                 }
               }
             }
-            Audio {
-              url
-            }
-            School
-            Tags
-            Grade
-            Transcript
           }
         }
       }
