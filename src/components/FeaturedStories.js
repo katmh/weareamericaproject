@@ -31,7 +31,6 @@ const FeaturedStories = props => (
                 School
                 Tags
                 Grade
-                Transcript
               }
             }
           }
