@@ -1,4 +1,4 @@
-const slugify = string => {
+module.exports = function(string) {
   const a =
     "àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;"
   const b =
@@ -16,5 +16,3 @@ const slugify = string => {
     .replace(/^-+/, "") // Trim - from start of text
     .replace(/-+$/, "") // Trim - from end of text
 }
-
-module.exports = slugify

@@ -4,7 +4,12 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const stories = await graphql(`
     query allStoriesQuery {
-      allAirtable(filter: { table: { eq: "Stories" } }) {
+      allAirtable(
+        filter: {
+          table: { eq: "Stories" }
+          data: { Status: { eq: "Published" } }
+        }
+      ) {
         edges {
           node {
             id
@@ -37,8 +42,14 @@ exports.createPages = async ({ graphql, actions }) => {
   `)
   const tags = await graphql(`
     query storiesByTagsQuery {
-      allAirtable(filter: { table: { eq: "Stories" } }) {
+      allAirtable(
+        filter: {
+          table: { eq: "Stories" }
+          data: { Status: { eq: "Published" } }
+        }
+      ) {
         group(field: data___Tags) {
+          fieldValue
           edges {
             node {
               id
@@ -51,9 +62,6 @@ exports.createPages = async ({ graphql, actions }) => {
                       url
                     }
                   }
-                }
-                Audio {
-                  url
                 }
               }
             }
@@ -64,8 +72,14 @@ exports.createPages = async ({ graphql, actions }) => {
   `)
   const schools = await graphql(`
     query storiesByTagsQuery {
-      allAirtable(filter: { table: { eq: "Stories" } }) {
+      allAirtable(
+        filter: {
+          table: { eq: "Stories" }
+          data: { Status: { eq: "Published" } }
+        }
+      ) {
         group(field: data___School) {
+          fieldValue
           edges {
             node {
               id
@@ -78,9 +92,6 @@ exports.createPages = async ({ graphql, actions }) => {
                       url
                     }
                   }
-                }
-                Audio {
-                  url
                 }
               }
             }
@@ -91,8 +102,14 @@ exports.createPages = async ({ graphql, actions }) => {
   `)
   const states = await graphql(`
     query storiesByTagsQuery {
-      allAirtable(filter: { table: { eq: "Stories" } }) {
+      allAirtable(
+        filter: {
+          table: { eq: "Stories" }
+          data: { Status: { eq: "Published" } }
+        }
+      ) {
         group(field: data___State) {
+          fieldValue
           edges {
             node {
               id
@@ -105,9 +122,6 @@ exports.createPages = async ({ graphql, actions }) => {
                       url
                     }
                   }
-                }
-                Audio {
-                  url
                 }
               }
             }

@@ -30,7 +30,6 @@ export default ({ pageContext: { edges, fieldValue } }) => (
           photoUrl={edge.node.data.Photo[0].thumbnails.large.url}
           title={edge.node.data.Story_Name}
           author={edge.node.data.Author}
-          audio={edge.node.data.Audio ? edge.node.data.Audio[0].url : ""}
         />
       ))}
     </Gallery>
