@@ -152,6 +152,11 @@ export default ({ pageContext: { data } }) => {
         }}
       >
         <ReactMarkdown>{data.Text}</ReactMarkdown>
+        <p>
+          © {data.Author}. All rights reserved. If you are interested in quoting
+          this story, contact the national team through this website and we can
+          put you in touch with the young person's teacher.
+        </p>
       </div>
     </Layout>
   )
