@@ -9,6 +9,7 @@ import Gallery from "../components/Gallery"
 import addToMailchimp from "gatsby-plugin-mailchimp"
 import { jsx } from "theme-ui"
 import { Timeline } from "react-twitter-widgets"
+import { Link } from "gatsby"
 
 export default class IndexPage extends React.Component {
   state = {
@@ -105,6 +106,21 @@ export default class IndexPage extends React.Component {
                 />
                 <ButtonInput type="submit" value="Submit" />
               </form>
+
+              <p
+                sx={{
+                  fontFamily: "body",
+                  fontSize: 2,
+                  lineHeight: 1.5,
+
+                  display: "block",
+                  my: 3,
+                }}
+              >
+                <Link sx={{ color: "text" }} to="/about#contact">
+                  Contact us
+                </Link>
+              </p>
             </div>
 
             <Timeline
