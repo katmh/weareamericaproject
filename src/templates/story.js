@@ -5,6 +5,7 @@ import BackToAll from "../components/BackToAll"
 import { Link } from "gatsby"
 import slugify from "../../utils/slugify"
 import ReactMarkdown from "react-markdown"
+import ShareBtns from "../components/ShareBtns"
 
 export default ({ pageContext: { data } }) => {
   return (
@@ -131,6 +132,8 @@ export default ({ pageContext: { data } }) => {
               Your browser does not support the <code>audio</code> element. :(
             </audio>
           ) : null}
+
+          <ShareBtns url={window.location.href} title={data.Story_Name} />
         </div>
         <img
           src={data.Photo ? data.Photo[0].thumbnails.large.url : ""}
