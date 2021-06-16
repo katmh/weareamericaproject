@@ -6,14 +6,8 @@ import { Link } from "gatsby"
 import slugify from "../../utils/slugify"
 import ReactMarkdown from "react-markdown"
 import ShareBtns from "../components/ShareBtns"
-import { useEffect } from "react"
 
 export default ({ pageContext: { data } }) => {
-  let currentUrl = "https://weareamericaproject.com"
-  useEffect(() => {
-    currentUrl = window.location.href
-  }, [])
-
   return (
     <Layout>
       <BackToAll name="stories" path="/stories" />
@@ -139,7 +133,7 @@ export default ({ pageContext: { data } }) => {
             </audio>
           ) : null}
 
-          <ShareBtns url={currentUrl} title={data.Story_Name} />
+          <ShareBtns title={data.Story_Name} />
         </div>
         <img
           src={data.Photo ? data.Photo[0].thumbnails.large.url : ""}
