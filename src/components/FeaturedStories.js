@@ -1,7 +1,7 @@
 import Gallery from "./Gallery"
 import StoryCard from "../components/StoryCard"
 import { useStaticQuery, graphql } from "gatsby"
-import React, { useMemo, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 
 /** Randomly shuffle an array with Fisher-Yates, see https://stackoverflow.com/a/12646864. */
 function shuffleArray(array) {
@@ -47,11 +47,15 @@ const FeaturedStories = ({ nCols, nStories }) => {
     }
   `)
 
-  const stories = useMemo(() => {
-    const stories = data.allAirtable.edges.slice()
-    shuffleArray(stories)
-    return stories.slice(0, nStories)
-  }, [data, nStories])
+  const [stories, updateStories] = useState([])
+
+  useEffect(() => {
+    const stories = data.allAirtable.edges
+    const randomN = stories
+      .sort(() => Math.random() - Math.random())
+      .slice(0, nStories)
+    updateStories(randomN)
+  }, [])
 
   return (
     <Gallery n={nCols}>
