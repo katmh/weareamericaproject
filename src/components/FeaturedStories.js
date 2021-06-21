@@ -50,10 +50,9 @@ const FeaturedStories = ({ nCols, nStories }) => {
   const [stories, updateStories] = useState([])
 
   useEffect(() => {
-    const stories = data.allAirtable.edges
-    const randomN = stories
-      .sort(() => Math.random() - Math.random())
-      .slice(0, nStories)
+    let stories = data.allAirtable.edges
+    shuffleArray(stories)
+    const randomN = stories.slice(0, nStories)
     updateStories(randomN)
   }, [])
 
