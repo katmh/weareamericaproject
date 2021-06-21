@@ -3,6 +3,16 @@ import StoryCard from "../components/StoryCard"
 import { useStaticQuery, graphql } from "gatsby"
 import React, { useState, useEffect } from "react"
 
+/** Randomly shuffle an array with Fisher-Yates, see https://stackoverflow.com/a/12646864. */
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    const temp = array[i]
+    array[i] = array[j]
+    array[j] = temp
+  }
+}
+
 const FeaturedStories = ({ nCols, nStories }) => {
   const data = useStaticQuery(graphql`
     {
@@ -40,10 +50,9 @@ const FeaturedStories = ({ nCols, nStories }) => {
   const [stories, updateStories] = useState([])
 
   useEffect(() => {
-    const stories = data.allAirtable.edges
-    const randomN = stories
-      .sort(() => Math.random() - Math.random())
-      .slice(0, nStories)
+    let stories = data.allAirtable.edges
+    shuffleArray(stories)
+    const randomN = stories.slice(0, nStories)
     updateStories(randomN)
   }, [])
 
