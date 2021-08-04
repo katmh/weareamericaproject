@@ -1,3 +1,12 @@
+// Load variables from `.env` as soon as possible
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV || "development"}`,
+});
+
+const clientConfig = require("./client-config");
+
+const isProd = process.env.NODE_ENV === "production";
+
 module.exports = {
   siteMetadata: {
     title: `We Are America Project`,
@@ -95,5 +104,14 @@ module.exports = {
       },
     },
     `gatsby-transformer-remark`,
+    {
+      resolve: "gatsby-source-sanity",
+      options: {
+        ...clientConfig.sanity,
+        token: process.env.SANITY_READ_TOKEN,
+        watchMode: !isProd,
+        overlayDrafts: !isProd,
+      },
+    },
   ],
 }
