@@ -43,8 +43,19 @@ export default () =>
   S.list()
     .title("Content")
     .items([
+      S.divider(),
       S.listItem()
-        .title("Settings")
+        .title("Pages")
+        .icon(MdDescription)
+        .schemaType("page")
+        .child(S.documentTypeList("page").title("Pages")),
+      S.listItem()
+        .title("News Updates")
+        .icon(MdDescription)
+        .schemaType("post")
+        .child(S.documentTypeList("post").title("News Updates")),
+      S.listItem()
+        .title("Site Settings")
         .icon(MdSettings)
         .child(
           S.editor()
@@ -52,17 +63,6 @@ export default () =>
             .schemaType("siteSettings")
             .documentId("siteSettings")
         ),
-      S.divider(),
-      S.listItem()
-        .title("News")
-        .icon(MdDescription)
-        .schemaType("post")
-        .child(S.documentTypeList("post").title("News")),
-      S.listItem()
-        .title("Pages")
-        .icon(MdDescription)
-        .schemaType("page")
-        .child(S.documentTypeList("page").title("Pages")),
       // `S.documentTypeListItems()` returns an array of all the document types
       // defined in schema.js. We filter out those that we have
       // defined the structure above.

@@ -12,23 +12,16 @@ export default {
         width: "full",
       },
       options: {
+        title: "Republish the website",
         sites: [
-          // TODO: use correct build hook IDs, Netlify site names, and API IDs
           {
-            buildHookId: "6109a6fe7fe03d00b3ca57b9",
-            title: "Content Management System ",
-            name: "sanity-gatsby-blog-studio-d48352sg",
-            apiId: "6fdca64d-8908-44cd-96de-15527630fd62",
-          },
-          {
-            buildHookId: "6109a6fe0b2c3700c247e0a0",
             title: "weareamericaproject.com ",
-            name: "sanity-gatsby-blog-web-qq95ktt1",
-            apiId: "a035bc43-5b9f-4b1d-99b0-47a80007b84f",
+            name: "weareamerica",
+            buildHookId: "610b6435e6c8ab72564f8425",
+            apiId: "9b7a3a08-a2a5-4535-b715-b101cf4d2086",
           },
         ],
       },
     },
-    
   ],
-};
+}
