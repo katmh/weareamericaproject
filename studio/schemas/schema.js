@@ -10,6 +10,9 @@ import siteSettings from "./documents/siteSettings"
 import page from "./documents/page"
 
 // Object types
+import textSection from "./objects/textSection"
+import partnersSection from "./objects/partnersSection"
+import contactSection from "./objects/contactSection"
 import bodyPortableText from "./objects/bodyPortableText"
 import bioPortableText from "./objects/bioPortableText"
 import excerptPortableText from "./objects/excerptPortableText"
@@ -31,6 +34,9 @@ export default createSchema({
     bodyPortableText,
     bioPortableText,
     excerptPortableText,
+    textSection,
+    partnersSection,
+    contactSection,
 
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
