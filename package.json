@@ -1,49 +1,27 @@
 {
-  "name": "weareamericaproject",
   "private": true,
-  "description": "The We Are America Project is working with teachers and young people across the country to spark a national conversation about American identity, led by the next generation.",
-  "version": "0.1.0",
+  "name": "sanity-gatsby-blog",
+  "version": "1.0.17",
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "start": "npm run develop",
-    "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \""
-  },
-  "dependencies": {
-    "@emotion/core": "^10.1.1",
-    "@mdx-js/mdx": "^1.6.22",
-    "@mdx-js/react": "^1.6.22",
-    "@reach/dialog": "^0.4.0",
-    "eslint-plugin-flowtype": "^4.7.0",
-    "gatsby": "^3.10.2",
-    "gatsby-plugin-mailchimp": "^5.2.2",
-    "gatsby-plugin-mdx": "^2.10.1",
-    "gatsby-plugin-netlify-cms": "^5.10.0",
-    "gatsby-plugin-react-helmet": "^4.10.0",
-    "gatsby-plugin-webfonts": "^2.1.1",
-    "gatsby-source-airtable": "^2.2.1",
-    "gatsby-source-filesystem": "^3.10.0",
-    "gatsby-transformer-remark": "^4.7.0",
-    "netlify-cms-app": "^2.14.12",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-helmet": "^5.2.1",
-    "react-markdown": "^5.0.3",
-    "react-masonry-css": "^1.0.14",
-    "react-twitter-widgets": "^1.9.5",
-    "theme-ui": "^0.2.52",
-    "typescript": "^3.9.7"
+    "build": "lerna run build --parallel",
+    "dev": "lerna run dev --parallel",
+    "format": "lerna run format",
+    "build-studio": "lerna bootstrap && cd studio && npm run build",
+    "build-web": "lerna bootstrap && (cd studio && SANITY_AUTH_TOKEN=$SANITY_DEPLOY_STUDIO_TOKEN npm run graphql-deploy) && (cd web && npm run build)",
+    "graphql-deploy": "lerna run graphql-deploy",
+    "lint": "lerna run lint",
+    "postinstall": "lerna bootstrap",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "prettier": "^1.19.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/katmh/weareamericaproject"
-  },
-  "bugs": {
-    "url": "https://github.com/katmh/weareamericaproject/issues"
+    "@sanity/cli": "^2.7.4",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.21.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.22.0",
+    "lerna": "^3.13.1",
+    "prettier": "^2.2.1"
   }
 }
