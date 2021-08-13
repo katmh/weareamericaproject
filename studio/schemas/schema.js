@@ -12,6 +12,7 @@ import page from "./documents/page"
 // Object types
 import textSection from "./objects/textSection"
 import partnersSection from "./objects/partnersSection"
+import partner from "./objects/partner"
 import contactSection from "./objects/contactSection"
 import bodyPortableText from "./objects/bodyPortableText"
 import bioPortableText from "./objects/bioPortableText"
@@ -36,6 +37,7 @@ export default createSchema({
     excerptPortableText,
     textSection,
     partnersSection,
+    partner,
     contactSection,
 
     // When added to this list, object types can be used as
