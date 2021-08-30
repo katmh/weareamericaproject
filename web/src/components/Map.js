@@ -9,7 +9,7 @@ import "./Map.css"
 const Map = () => {
   const data = useStaticQuery(graphql`
     {
-      allAirtable {
+      allAirtable(filter: { table: { eq: "Teachers" } }) {
         edges {
           node {
             data {
