@@ -1,0 +1,9 @@
+.state {
+    stroke: black;
+    stroke-width: 1.5;
+    fill: lightgray;
+}
+
+.active {
+    fill: purple;
+}
