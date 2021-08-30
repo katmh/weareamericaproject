@@ -4,7 +4,7 @@ import { Dialog } from "@reach/dialog"
 import "@reach/dialog/styles.css"
 import React from "react"
 
-const PersonCard = props => {
+const PersonCard = (props) => {
   const [showDialog, setShowDialog] = React.useState(false)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
@@ -81,7 +81,7 @@ const PersonCard = props => {
             }}
           >
             {props.title ? props.title : ""}
-            {props.school ? props.school : ""}
+            {props.school ? props.school.trim() : ""}
             {props.city ? ", " + props.city : ""}
             {props.state ? ", " + props.state : ""}
           </p>

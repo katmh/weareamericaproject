@@ -23,5 +23,9 @@
     "eslint-plugin-react": "^7.22.0",
     "lerna": "^3.13.1",
     "prettier": "^2.2.1"
+  },
+  "dependencies": {
+    "@svg-maps/usa": "^1.1.1",
+    "react-svg-map": "^2.2.0"
   }
 }
