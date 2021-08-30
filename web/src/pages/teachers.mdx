@@ -7,16 +7,17 @@ import PersonCard from "../components/PersonCard"
 import { graphql } from "gatsby"
 import { jsx } from "theme-ui"
 import Gallery from "../components/Gallery"
+import Map from "../components/Map"
 
 <Layout>
 
 # Teachers
 
-<br />
-
 Learn more about our 50 teachers and classrooms across 28 states.
 
-![Map of the USA; states with We Are America class(es) are highlighted in purple](/map.png)
+<Map />
+
+<br />
 
 <Gallery n={4}>
 {props.data.allAirtable.edges.map((edge, i) => {
@@ -24,6 +25,7 @@ Learn more about our 50 teachers and classrooms across 28 states.
   return (
     person.Picture &&
     <PersonCard
+      key={person.Name}
       photoUrl={person.Picture[0].thumbnails.large.url}
       name={person.Name}
       school={person.School_Name}
