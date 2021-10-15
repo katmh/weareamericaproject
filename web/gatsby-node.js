@@ -31,6 +31,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 url
               }
               School
+              State
               Tags
               Grade
               Text

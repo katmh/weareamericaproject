@@ -7,7 +7,7 @@ import slugify from "../../utils/slugify"
 import ReactMarkdown from "react-markdown"
 import ShareBtns from "../components/ShareBtns"
 
-export default ({ pageContext: { data } }) => {
+const Story = ({ pageContext: { data } }) => {
   return (
     <Layout>
       <BackToAll name="stories" path="/stories" />
@@ -39,7 +39,7 @@ export default ({ pageContext: { data } }) => {
               mb: 3,
             }}
           >
-            {data.Author} ({data.School})
+            {data.Author} ({data.School}, {data.State})
           </h2>
           <p>
             {data.Tags ? (
@@ -53,8 +53,9 @@ export default ({ pageContext: { data } }) => {
                 >
                   Tags:
                 </span>
-                {data.Tags.map(tag => (
+                {data.Tags.map((tag) => (
                   <li
+                    key={slugify(tag)}
                     sx={{
                       listStyle: "none",
                       display: "inline-block",
@@ -158,9 +159,11 @@ export default ({ pageContext: { data } }) => {
         <p>
           © {data.Author}. All rights reserved. If you are interested in quoting
           this story, contact the national team through this website and we can
-          put you in touch with the young person's teacher.
+          put you in touch with the young person’s teacher.
         </p>
       </div>
     </Layout>
   )
 }
+
+export default Story
