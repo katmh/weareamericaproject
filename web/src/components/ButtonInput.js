@@ -7,7 +7,7 @@ const FONT_SIZES = {
   large: 3,
 }
 
-const ButtonInput = props => (
+const ButtonInput = (props) => (
   <input
     sx={{
       appearance: "none",
@@ -18,7 +18,7 @@ const ButtonInput = props => (
       color: "background",
       display: "inline-block",
       mx: "auto",
-      p: ".5em .6em .45em",
+      p: ".55em .65em .45em",
       textDecoration: "none",
       fontFamily: "heading",
       fontWeight: "heading",

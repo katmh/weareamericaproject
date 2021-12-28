@@ -2,44 +2,15 @@
 import React from "react"
 import FeaturedStories from "../components/FeaturedStories"
 import ButtonLink from "../components/ButtonLink"
-import ButtonInput from "../components/ButtonInput"
 import Layout from "../components/Layout"
 import Container from "../components/Container"
 import Gallery from "../components/Gallery"
-import addToMailchimp from "gatsby-plugin-mailchimp"
 import { jsx } from "theme-ui"
 import { Timeline } from "react-twitter-widgets"
 import { Link } from "gatsby"
+import Subscribe from "../components/Subscribe"
 
 export default class IndexPage extends React.Component {
-  state = {
-    email: null,
-  }
-
-  _handleChange = e => {
-    this.setState({
-      [`${e.target.name}`]: e.target.value,
-    })
-  }
-
-  _handleSubmit = e => {
-    e.preventDefault()
-
-    addToMailchimp(this.state.email, this.state)
-      .then(({ msg, result }) => {
-        console.log("msg", `${result}: ${msg}`)
-
-        if (result !== "success") {
-          throw msg
-        }
-        alert(msg)
-      })
-      .catch(err => {
-        console.log("err", err)
-        alert(err)
-      })
-  }
-
   render() {
     return (
       <Layout>
@@ -81,31 +52,10 @@ export default class IndexPage extends React.Component {
                   display: "inline-block",
                 }}
               >
-                Subscribe for updates:
+                Subscribe to our newsletter for updates:
               </p>
 
-              <form
-                sx={{
-                  display: "inline-block",
-                  mt: 2,
-                }}
-                onSubmit={this._handleSubmit}
-              >
-                <input
-                  sx={{
-                    variant: "body",
-                    padding: 1,
-                    fontSize: 1,
-                    mr: 2,
-                    display: "inline-block",
-                  }}
-                  type="email"
-                  onChange={this._handleChange}
-                  placeholder="name@email.com"
-                  name="email"
-                />
-                <ButtonInput type="submit" value="Submit" />
-              </form>
+              <Subscribe />
 
               <p
                 sx={{
