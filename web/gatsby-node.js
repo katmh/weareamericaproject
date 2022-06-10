@@ -1,7 +1,7 @@
-const slugify = require("./utils/slugify")
+const slugify = require("./utils/slugify");
 
 exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions
+  const { createPage } = actions;
   const stories = await graphql(`
     query allStoriesQuery {
       allAirtable(
@@ -16,6 +16,7 @@ exports.createPages = async ({ graphql, actions }) => {
             data {
               Author
               Story_Name
+              Photo_URL
               Photo {
                 thumbnails {
                   large {
@@ -40,7 +41,7 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     }
-  `)
+  `);
   const tags = await graphql(`
     query storiesByTagsQuery {
       allAirtable(
@@ -70,7 +71,7 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     }
-  `)
+  `);
   const schools = await graphql(`
     query storiesByTagsQuery {
       allAirtable(
@@ -100,7 +101,7 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     }
-  `)
+  `);
   const states = await graphql(`
     query storiesByTagsQuery {
       allAirtable(
@@ -130,7 +131,7 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     }
-  `)
+  `);
   const blogPosts = await graphql(`
     query allBlogPosts {
       allMarkdownRemark {
@@ -146,39 +147,39 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     }
-  `)
+  `);
 
   stories.data.allAirtable.edges.forEach(({ node: { id, data } }) => {
     createPage({
       path: `/story/${slugify(data.Author ? data.Author : id)}/`,
       component: require.resolve("./src/templates/story.js"),
-      context: { data },
-    })
-  })
+      context: { data }
+    });
+  });
 
   tags.data.allAirtable.group.forEach(({ fieldValue, edges }) => {
     createPage({
       path: `/tag/${slugify(fieldValue ? fieldValue : "")}/`,
       component: require.resolve("./src/templates/tag.js"),
-      context: { edges, fieldValue },
-    })
-  })
+      context: { edges, fieldValue }
+    });
+  });
 
   schools.data.allAirtable.group.forEach(({ fieldValue, edges }) => {
     createPage({
       path: `/school/${slugify(fieldValue ? fieldValue : "")}/`,
       component: require.resolve("./src/templates/tag.js"),
-      context: { edges, fieldValue },
-    })
-  })
+      context: { edges, fieldValue }
+    });
+  });
 
   states.data.allAirtable.group.forEach(({ fieldValue, edges }) => {
     createPage({
       path: `/state/${slugify(fieldValue ? fieldValue : "")}/`,
       component: require.resolve("./src/templates/tag.js"),
-      context: { edges, fieldValue },
-    })
-  })
+      context: { edges, fieldValue }
+    });
+  });
 
   blogPosts.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({
@@ -186,7 +187,7 @@ exports.createPages = async ({ graphql, actions }) => {
         node.frontmatter.path ? node.frontmatter.path : ""
       )}/`,
       component: require.resolve("./src/templates/blog-post.js"),
-      context: { node },
-    })
-  })
-}
+      context: { node }
+    });
+  });
+};
