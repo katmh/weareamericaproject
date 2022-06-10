@@ -151,7 +151,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   stories.data.allAirtable.edges.forEach(({ node: { id, data } }) => {
     createPage({
-      path: `/story/${slugify(data.Author ?? id)}/`,
+      path: `/story/${slugify(data.Author ? data.Author : id)}/`,
       component: require.resolve("./src/templates/story.js"),
       context: { data }
     });
