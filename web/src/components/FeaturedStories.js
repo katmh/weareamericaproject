@@ -25,9 +25,6 @@ const FeaturedStories = ({ nCols }) => {
                 }
               }
             }
-            Audio {
-              url
-            }
             School
             Tags
             Grade

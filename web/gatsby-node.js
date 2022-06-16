@@ -24,6 +24,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   }
                 }
               }
+              Audio_URL
               Audio {
                 url
               }
