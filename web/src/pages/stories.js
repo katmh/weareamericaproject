@@ -39,9 +39,7 @@ const StoriesPage = ({ data }) => {
             key={story.id}
             id={story.id}
             photoUrl={
-              story.data.Photo_URL
-                ? story.data.Photo[0].thumbnails.large.url
-                : ""
+              story.data.Photo_URL ?? story.data.Photo[0].thumbnails.large.url
             }
             title={story.data.Story_Name}
             author={story.data.Author}
