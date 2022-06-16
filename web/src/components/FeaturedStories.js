@@ -48,7 +48,6 @@ const FeaturedStories = ({ nCols }) => {
             story.data.Photo_URL ?? story.data.Photo[0].thumbnails.large.url
           }
           author={story.data.Author}
-          audio={story.data.Audio ? story.data.Audio[0].url : ""}
         />
       ))}
     </Gallery>
