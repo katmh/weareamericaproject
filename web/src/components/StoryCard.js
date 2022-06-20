@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
 import slugify from "../../utils/slugify"
 
 const StoryCard = props => (
@@ -74,3 +74,18 @@ const StoryCard = props => (
 )
 
 export default StoryCard
+
+export const query = graphql`
+  fragment StoryCardInformation on AirtableData {
+    Author
+    Story_Name
+    Photo_URL
+    Photo {
+      thumbnails {
+        large {
+          url
+        }
+      }
+    }
+  }
+`
