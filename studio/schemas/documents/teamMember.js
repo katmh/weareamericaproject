@@ -16,11 +16,12 @@ export default {
     {
       name: "bio",
       title: "Biography",
-      type: "text",
+      type: "array",
+      of: [{ type: "block" }],
     },
     {
       name: "photo",
-      title: "Portrait",
+      title: "Headshot",
       type: "image",
     },
     {
