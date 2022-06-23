@@ -1,8 +1,10 @@
 /** @jsx jsx */
-import Gallery from "../components/Gallery";
+
 import { graphql } from "gatsby";
-import Heading from "../components/Heading";
 import { jsx } from "theme-ui";
+
+import Gallery from "../components/Gallery";
+import Heading from "../components/Heading";
 import Layout from "../components/Layout";
 import PersonCard from "../components/PersonCard";
 
