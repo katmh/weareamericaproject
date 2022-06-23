@@ -1,13 +1,14 @@
 /** @jsx jsx */
-import { jsx } from "theme-ui"
-import { Dialog } from "@reach/dialog"
-import "@reach/dialog/styles.css"
-import React from "react"
+import { jsx } from "theme-ui";
+import { Dialog } from "@reach/dialog";
+import "@reach/dialog/styles.css";
+import React from "react";
+import { PortableText } from "@portabletext/react";
 
-const PersonCard = (props) => {
-  const [showDialog, setShowDialog] = React.useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+const PersonCard = props => {
+  const [showDialog, setShowDialog] = React.useState(false);
+  const open = () => setShowDialog(true);
+  const close = () => setShowDialog(false);
 
   return (
     <>
@@ -22,17 +23,17 @@ const PersonCard = (props) => {
             fontSize: 0,
             lineHeight: "140%",
             mt: 1,
-            mb: 2,
+            mb: 2
           },
           ":hover img": {
-            transform: "scale(1.1)",
-          },
+            transform: "scale(1.1)"
+          }
         }}
       >
         <div
           className="image-wrapper"
           sx={{
-            overflow: "hidden",
+            overflow: "hidden"
           }}
         >
           <img
@@ -46,7 +47,7 @@ const PersonCard = (props) => {
               transition: ".15s",
               position: "relative",
               zIndex: "-1",
-              display: "block",
+              display: "block"
             }}
           />
         </div>
@@ -54,7 +55,7 @@ const PersonCard = (props) => {
         <div
           sx={{
             zIndex: "1",
-            background: "#fff",
+            background: "#fff"
           }}
         >
           <h4
@@ -67,7 +68,7 @@ const PersonCard = (props) => {
               mb: ".25rem",
               lineHeight: "100%",
               pointer: "cursor",
-              clear: "both",
+              clear: "both"
             }}
           >
             {props.name}
@@ -77,7 +78,7 @@ const PersonCard = (props) => {
               mt: "0 !important",
               fontSize: "1.25rem",
               fontFamily: "heading",
-              color: "muted",
+              color: "muted"
             }}
           >
             {props.title ? props.title : ""}
@@ -107,8 +108,8 @@ const PersonCard = (props) => {
             appearance: "none",
             border: "none",
             ":hover": {
-              color: "#444",
-            },
+              color: "#444"
+            }
           }}
         >
           x
@@ -119,7 +120,7 @@ const PersonCard = (props) => {
             fontFamily: "heading",
             fontSize: 3,
             fontWeight: 44,
-            color: "text",
+            color: "text"
           }}
         >
           {props.name}
@@ -131,15 +132,15 @@ const PersonCard = (props) => {
               lineHeight: "135%",
               mt: 2,
               fontSize: 0,
-              color: "text",
+              color: "text"
             }}
           >
-            {props.bio}
+            <PortableText value={props.bio} />
           </p>
         </div>
       </Dialog>
     </>
-  )
-}
+  );
+};
 
-export default PersonCard
+export default PersonCard;

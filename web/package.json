@@ -15,6 +15,7 @@
     "@emotion/core": "^10.1.1",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
+    "@portabletext/react": "^1.0.6",
     "@reach/dialog": "^0.4.0",
     "eslint-plugin-flowtype": "^4.7.0",
     "gatsby": "^3.10.2",
