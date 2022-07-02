@@ -4,13 +4,13 @@ export default {
   type: "document",
   fields: [
     {
-      name: "title",
-      title: "Title",
+      name: "author",
+      title: "Author",
       type: "string",
     },
     {
-      name: "author",
-      title: "Author",
+      name: "storyTitle",
+      title: "Story Title",
       type: "string",
     },
     {
