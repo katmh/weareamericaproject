@@ -17,7 +17,9 @@ export default {
       name: "grade",
       title: "Grade Level",
       type: "string",
-      list: ["High School", "8th Grade"],
+      options: {
+        list: ["High School", "8th Grade"],
+      },
     },
     {
       name: "teachers",
