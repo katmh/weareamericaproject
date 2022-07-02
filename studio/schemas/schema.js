@@ -9,6 +9,9 @@ import post from "./documents/post";
 import siteSettings from "./documents/siteSettings";
 import page from "./documents/page";
 import teamMember from "./documents/teamMember";
+import story from "./documents/story";
+import school from "./documents/school";
+import teacher from "./documents/teacher";
 
 // Object types
 import textSection from "./objects/textSection";
@@ -33,6 +36,9 @@ export default createSchema({
     siteSettings,
     post,
     teamMember,
+    story,
+    school,
+    teacher,
 
     mainImage,
     bodyPortableText,
