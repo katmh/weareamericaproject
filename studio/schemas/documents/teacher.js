@@ -25,8 +25,8 @@ export default {
       to: [{ type: "school" }],
     },
     {
-      name: "cohorts",
-      title: "WAA cohort(s)",
+      name: "cohort",
+      title: "Cohort",
       type: "string",
       options: {
         list: [
