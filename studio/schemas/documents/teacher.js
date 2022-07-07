@@ -24,11 +24,18 @@ export default {
       type: "reference",
       to: [{ type: "school" }],
     },
-    /* {
+    {
       name: "cohorts",
       title: "WAA cohort(s)",
-      type: "array",
-      of: [{ type: "string" }],
-    }, */
+      type: "string",
+      options: {
+        list: [
+          "Cohort 1 (2019-2020)",
+          "Cohort 2 (2020-2021)",
+          "Cohort 3 (2021-2022)",
+          "Cohort 4 (2022-2023)",
+        ],
+      },
+    },
   ],
 };
