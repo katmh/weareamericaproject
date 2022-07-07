@@ -9,6 +9,11 @@ export default {
       type: "string",
     },
     {
+      name: "city",
+      title: "City",
+      type: "string",
+    },
+    {
       name: "location",
       title: "State/Location",
       type: "string",
@@ -20,12 +25,6 @@ export default {
       options: {
         list: ["High School", "8th Grade"],
       },
-    },
-    {
-      name: "teachers",
-      title: "WAA Teacher Fellow(s)",
-      type: "array",
-      of: [{ type: "teacher" }],
     },
   ],
 };
