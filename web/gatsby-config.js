@@ -1,6 +1,6 @@
 // Load variables from `.env` as soon as possible
 require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV || "development"}`,
+  path: `.env.${process.env.NODE_ENV || "development"}`
 });
 
 const clientConfig = require("./client-config");
@@ -17,29 +17,29 @@ module.exports = {
     navLinks: [
       {
         name: "Stories",
-        path: "/stories",
+        path: "/stories"
       },
       {
         name: "Books",
-        path: "/books",
+        path: "/books"
       },
       {
         name: "About",
-        path: "/about",
+        path: "/about"
       },
       {
         name: "Founders",
-        path: "/founders",
+        path: "/founders"
       },
       {
         name: "Teachers",
-        path: "/teachers",
+        path: "/teachers"
       },
       {
         name: "News",
-        path: "/news",
-      },
-    ],
+        path: "/news"
+      }
+    ]
   },
   plugins: [
     `gatsby-plugin-mdx`,
@@ -49,8 +49,8 @@ module.exports = {
       resolve: `gatsby-plugin-mailchimp`,
       options: {
         endpoint:
-          "https://weareamericaproject.us4.list-manage.com/subscribe/post?u=466aceffe785790da648587fc&amp;id=3a60133af9",
-      },
+          "https://weareamericaproject.us4.list-manage.com/subscribe/post?u=466aceffe785790da648587fc&amp;id=3a60133af9"
+      }
     },
     {
       resolve: `gatsby-source-airtable`,
@@ -59,18 +59,18 @@ module.exports = {
         tables: [
           {
             baseId: process.env.AIRTABLE_STORIES_BASE_ID,
-            tableName: `Stories`,
+            tableName: `Stories`
           },
           {
             baseId: process.env.AIRTABLE_PEOPLE_BASE_ID,
-            tableName: `Teachers`,
+            tableName: `Teachers`
           },
           {
             baseId: process.env.AIRTABLE_PEOPLE_BASE_ID,
-            tableName: `Founders`,
-          },
-        ],
-      },
+            tableName: `Founders`
+          }
+        ]
+      }
     },
     {
       resolve: `gatsby-plugin-webfonts`,
@@ -79,29 +79,29 @@ module.exports = {
           google: [
             {
               family: `Fira Sans Condensed`,
-              variants: [`700`],
+              variants: [`700`]
             },
             {
               family: `Fira Sans`,
-              variants: [`400`, `400i`],
-            },
-          ],
-        },
-      },
+              variants: [`400`, `400i`]
+            }
+          ]
+        }
+      }
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `pages`,
-        path: `${__dirname}/src/pages/`,
-      },
+        path: `${__dirname}/src/pages/`
+      }
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `blog`,
-        path: `${__dirname}/src/blog/`,
-      },
+        path: `${__dirname}/src/blog/`
+      }
     },
     `gatsby-transformer-remark`,
     {
@@ -110,8 +110,9 @@ module.exports = {
         ...clientConfig.sanity,
         token: process.env.SANITY_READ_TOKEN,
         watchMode: !isProd,
-        overlayDrafts: !isProd,
-      },
+        overlayDrafts: !isProd
+      }
     },
-  ],
-}
+    `gatsby-plugin-sass`
+  ]
+};
