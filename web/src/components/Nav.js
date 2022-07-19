@@ -1,5 +1,6 @@
 import React from "react";
 import { graphql, Link, useStaticQuery } from "gatsby";
+import "../styles/components/nav.scss";
 
 const query = graphql`
   {
