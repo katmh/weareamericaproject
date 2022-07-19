@@ -2,28 +2,19 @@ export default {
   name: "siteSettings",
   type: "document",
   title: "Site Settings",
-  __experimental_actions: ["update", /* 'create', 'delete', */ "publish"],
   fields: [
     {
       name: "title",
       type: "string",
       title: "Title",
+      description: "Currently not used for anything",
     },
     {
-      name: "description",
-      type: "text",
-      title: "Description",
-      description: "Describe your blog for search engines and social media.",
-    },
-    {
-      name: "keywords",
+      name: "navItems",
       type: "array",
-      title: "Keywords",
-      description: "Add keywords that describes your blog.",
-      of: [{ type: "string" }],
-      options: {
-        layout: "tags",
-      },
+      of: [{ type: "navItem" }],
+      title: "Navigation Links",
+      description: "Header and footer links to pages in the website",
     },
   ],
-}
+};
