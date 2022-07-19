@@ -4,7 +4,7 @@
 
 nav {
     display: flex;
-    gap: 1.6rem;
+    gap: 2rem;
     align-items: baseline;
     justify-content: flex-end;
 
@@ -20,7 +20,8 @@ nav {
         transition: 0.1s;
 
         display: flex;
-        gap: 0.3rem;
+        gap: 0.4rem;
+        align-items: center;
         
         &:hover, &:active {
             color: colors.$text-hover;
@@ -33,7 +34,9 @@ nav {
     .chevron {
         path {
             stroke: colors.$text-body;
+            stroke-width: 3;
         }
+        transform: scale(0.75);
     }
 
     .emphasized {
@@ -61,8 +64,6 @@ nav {
     }
 
     .top_level_item {
-        display: inline-block;
-
         & > a { // direct children
             padding-bottom: 0.5rem;
         }
