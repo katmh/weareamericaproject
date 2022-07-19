@@ -3,11 +3,14 @@ import { graphql, Link, useStaticQuery } from "gatsby";
 import "../styles/components/nav.scss";
 
 const query = graphql`
-  {
-    site {
-      siteMetadata {
-        navLinks {
-          name
+  query NavItemsQuery {
+    sanitySiteSettings {
+      navItems {
+        isEmphasized
+        title
+        path
+        subItems {
+          title
           path
         }
       }
@@ -17,14 +20,18 @@ const query = graphql`
 
 const Nav = () => {
   const data = useStaticQuery(query);
-  const { navLinks } = data.site.siteMetadata;
+  const { navItems } = data.sanitySiteSettings;
 
   return (
     <nav>
-      {navLinks.map(link => {
+      {navItems.map(item => {
         return (
-          <Link key={link.path} to={link.path}>
-            {link.name}
+          <Link
+            key={item.path}
+            to={`/${item.path}`}
+            className={item.isEmphasized ? "emphasized" : ""}
+          >
+            {item.title}
           </Link>
         );
       })}
