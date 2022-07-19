@@ -1,0 +1,16 @@
+// mutually exclusive
+
+$screen-tablet-max: 899px;
+$screen-desktop-min: 900px;
+
+@mixin screen-tablet {
+  @media (max-width: $screen-tablet-max) {
+    @content
+  }
+}
+
+@mixin screen-desktop {
+  @media (min-width: $screen-desktop-min) {
+    @content
+  }
+}
