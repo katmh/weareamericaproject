@@ -83,7 +83,11 @@ module.exports = {
             },
             {
               family: `Fira Sans`,
-              variants: [`400`, `400i`]
+              variants: [`400`, `400i`, `700`]
+            },
+            {
+              family: `PT Sans`,
+              variants: [`400`, `400i`, `700`]
             }
           ]
         }
