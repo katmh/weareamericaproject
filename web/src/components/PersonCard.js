@@ -54,8 +54,7 @@ const PersonCard = props => {
 
         <div
           sx={{
-            zIndex: "1",
-            background: "#fff"
+            zIndex: "1"
           }}
         >
           <h4
