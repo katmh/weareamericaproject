@@ -16,6 +16,9 @@ const ContactPage = () => {
         about the project? We would love to hear from you!
       </p>
       <ContactForm />
+      <br />
+      <br />
+      <br />
       <Heading>Newsletter</Heading>
       <p>
         Subscribe to our newsletter for updates on the We Are America Project.
