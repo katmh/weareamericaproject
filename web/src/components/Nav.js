@@ -5,7 +5,7 @@ import HamburgerMenu from "../components/icons/HamburgerMenu";
 import X from "../components/icons/X";
 import "../styles/components/nav.scss";
 
-const query = graphql`
+export const navItemsQuery = graphql`
   query NavItemsQuery {
     sanitySiteSettings {
       navItems {
@@ -22,7 +22,7 @@ const query = graphql`
 `;
 
 const Nav = () => {
-  const data = useStaticQuery(query);
+  const data = useStaticQuery(navItemsQuery);
   const { navItems } = data.sanitySiteSettings;
   const [isNavOpen, setIsNavOpen] = useState(false);
   const toggleNav = () => setIsNavOpen(!isNavOpen);
@@ -48,7 +48,6 @@ const Nav = () => {
           return (
             <div key={item.path} className="top_level_item">
               <Link
-                key={item.path}
                 to={`/${item.path}`}
                 className={item.isEmphasized ? " emphasized" : ""}
                 activeClassName="active"

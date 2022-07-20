@@ -1,0 +1,19 @@
+@use "sass:color";
+@use "src/styles/abstract/colors";
+
+footer {
+  width: 90%;
+  max-width: 1440px;
+  margin: 4rem auto;
+  
+  border-top: 4px solid rgb(colors.$border, 0.3);
+  padding-top: 2rem;
+
+  & > #flex {
+    display: flex;
+    gap: 2rem;
+    & > div#left, & > nav {
+      width: 100%;
+    }
+  }
+}
