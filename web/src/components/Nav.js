@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { graphql, Link, useStaticQuery } from "gatsby";
 import ChevronDown from "../components/icons/ChevronDown";
+import HamburgerMenu from "../components/icons/HamburgerMenu";
+import X from "../components/icons/X";
 import "../styles/components/nav.scss";
 
 const query = graphql`
@@ -27,7 +29,7 @@ const Nav = () => {
   return (
     <nav>
       <div className="mobile_only hamburger" onClick={toggleNav}>
-        ☰
+        <HamburgerMenu />
       </div>
 
       <div
@@ -39,7 +41,7 @@ const Nav = () => {
         className={`items_container${isNavOpen ? " items_container_open" : ""}`}
       >
         <div className="mobile_only close_nav_button" onClick={toggleNav}>
-          x
+          <X />
         </div>
         {navItems.map(item => {
           const hasSubmenu = item.subItems.length > 0;
