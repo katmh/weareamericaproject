@@ -1,55 +1,80 @@
-/** @jsx jsx */
-import { Link } from "gatsby"
-import { StaticQuery, graphql } from "gatsby"
-import { jsx } from "theme-ui"
+import React, { useState } from "react";
+import { graphql, Link, useStaticQuery } from "gatsby";
+import ChevronDown from "../components/icons/ChevronDown";
+import HamburgerMenu from "../components/icons/HamburgerMenu";
+import X from "../components/icons/X";
+import "../styles/components/nav.scss";
 
 const query = graphql`
-  {
-    site {
-      siteMetadata {
-        navLinks {
-          name
+  query NavItemsQuery {
+    sanitySiteSettings {
+      navItems {
+        isEmphasized
+        title
+        path
+        subItems {
+          title
           path
         }
       }
     }
   }
-`
+`;
 
-const Nav = () => (
-  <StaticQuery
-    query={query}
-    render={data => (
-      <nav>
-        {data.site.siteMetadata.navLinks.map(link => (
-          <Link
-            key={link.path}
-            to={link.path}
-            sx={{
-              display: "inline-block",
-              textDecoration: "none",
-              fontSize: 3,
-              fontWeight: "heading",
-              color: "#eee",
-              mr: [2, 3],
-              mb: [2, 0],
-              borderBottom: "2px solid transparent",
-              transition: ".1s",
-              textTransform: "uppercase",
-              ":hover": {
-                borderBottomColor: "background",
-              },
-            }}
-            activeStyle={{
-              borderBottomColor: "#eee",
-            }}
-          >
-            {link.name}
-          </Link>
-        ))}
-      </nav>
-    )}
-  />
-)
+const Nav = () => {
+  const data = useStaticQuery(query);
+  const { navItems } = data.sanitySiteSettings;
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const toggleNav = () => setIsNavOpen(!isNavOpen);
+  return (
+    <nav>
+      <div className="mobile_only hamburger" onClick={toggleNav}>
+        <HamburgerMenu />
+      </div>
 
-export default Nav
+      <div
+        className={`mobile_only overlay${isNavOpen ? " overlay_open" : ""}`}
+        onClick={toggleNav}
+      />
+
+      <div
+        className={`items_container${isNavOpen ? " items_container_open" : ""}`}
+      >
+        <div className="mobile_only close_nav_button" onClick={toggleNav}>
+          <X />
+        </div>
+        {navItems.map(item => {
+          const hasSubmenu = item.subItems.length > 0;
+          return (
+            <div key={item.path} className="top_level_item">
+              <Link
+                key={item.path}
+                to={`/${item.path}`}
+                className={item.isEmphasized ? " emphasized" : ""}
+                activeClassName="active"
+              >
+                <span>{item.title}</span>
+                {hasSubmenu && <ChevronDown className="chevron desktop_only" />}
+              </Link>
+              {hasSubmenu && (
+                <div className="submenu">
+                  {item.subItems.map(subitem => (
+                    <Link
+                      key={subitem.path}
+                      to={`/${subitem.path}`}
+                      activeClassName="active"
+                    >
+                      {subitem.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </nav>
+  );
+};
+
+export default Nav;

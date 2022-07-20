@@ -1,0 +1,18 @@
+@use "src/styles/abstract/colors";
+@use "src/styles/abstract/fonts";
+
+header {
+    width: 90%;
+    max-width: 1440px;
+    margin: 4rem auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 a {
+        color: colors.$text-headings;
+        text-decoration: none;
+        font: bold 2rem fonts.$headings;
+    }
+}

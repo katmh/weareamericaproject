@@ -1,0 +1,18 @@
+@use "src/styles/abstract/colors";
+@use "src/styles/abstract/fonts";
+
+body {
+  background: colors.$body-background;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+p {
+  color: colors.$text-body;
+  font: normal 1.25rem/145% fonts.$body;
+  margin: 1.75rem 0;
+}
