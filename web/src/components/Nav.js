@@ -49,6 +49,7 @@ const Nav = () => {
                 key={item.path}
                 to={`/${item.path}`}
                 className={item.isEmphasized ? " emphasized" : ""}
+                activeClassName="active"
               >
                 <span>{item.title}</span>
                 {hasSubmenu && <ChevronDown className="chevron desktop_only" />}
@@ -56,7 +57,11 @@ const Nav = () => {
               {hasSubmenu && (
                 <div className="submenu">
                   {item.subItems.map(subitem => (
-                    <Link key={subitem.path} to={`/${subitem.path}`}>
+                    <Link
+                      key={subitem.path}
+                      to={`/${subitem.path}`}
+                      activeClassName="active"
+                    >
                       {subitem.title}
                     </Link>
                   ))}

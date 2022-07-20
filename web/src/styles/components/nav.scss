@@ -84,13 +84,20 @@ nav {
             }
         }
 
+        a.active {
+            color: colors.$text-hover;
+            .chevron > path {
+                stroke: colors.$text-hover;
+            }
+        }
+
         .emphasized {
             background: colors.$text-headings;
             color: colors.$body-background;
-            padding: 0.4rem 0.8rem 0.4rem 0.85rem;
-            border-radius: 1.5rem;
+            padding: 0.415rem 0.6rem 0.4rem 0.65rem;
+            border-radius: .5rem;
     
-            &:hover {
+            &:hover, &.active {
                 color: colors.$body-background;
                 background: colors.$text-hover;
             }
