@@ -11,8 +11,94 @@ body {
   box-sizing: border-box;
 }
 
-p {
+//
+// TYPE
+//
+
+h1, h2, h3, h4, h5, h6 {
+  color: colors.$text-headings;
+}
+
+p, label {
   color: colors.$text-body;
   font: normal 1.25rem/145% fonts.$body;
-  margin: 1.75rem 0;
+}
+
+//
+// LAYOUT
+//
+
+p {
+  margin: 1.5rem 0;
+}
+
+label {
+  display: block;
+  margin: 0.5rem 0;
+}
+
+//
+// UTILITY CLASSES
+//
+
+/*
+- logo (regular/header and small/footer)
+- big heading (~ h1 or h2 above)
+- small heading (~h2 above)
+- subheading p
+- nav link
+- caption (e.g. form label)
+- caption2 (e.g. copyright notice)
+*/
+
+a.logo {
+  color: colors.$text-headings;
+  font: bold 2rem fonts.$headings;
+  text-decoration: none;
+}
+
+a.logo.small_logo {
+  font-size: 1.5rem;
+}
+
+.heading {
+  font-weight: bold;
+  font-family: fonts.$headings;
+  color: colors.$text-headings;
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+.heading.large_heading {
+  font-size: 2.5rem;
+}
+
+.heading.small_heading {
+  font-size: 1.75rem;
+}
+
+.subheading {
+  font: normal 1.25rem/150% fonts.$body;
+  color: colors.$text-body;
+  margin: 4rem 0;
+}
+
+a.nav_link {
+  font: bold 1.25rem/1 fonts.$body;
+  text-decoration: none;
+  color: colors.$text-body;
+  transition: 0.1s;
+
+  &:hover, &:active {
+    color: colors.$text-hover;
+  }
+}
+
+.caption1 {
+  font-size: 1.15rem;
+}
+
+.caption2 {
+  font-size: 1rem;
+  color: colors.$text-captions;
 }

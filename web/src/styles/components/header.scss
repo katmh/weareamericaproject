@@ -9,10 +9,4 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    h1 a {
-        color: colors.$text-headings;
-        text-decoration: none;
-        font: bold 2rem fonts.$headings;
-    }
 }

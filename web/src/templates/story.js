@@ -1,11 +1,11 @@
 /** @jsx jsx */
-import Layout from "../components/Layout"
-import { jsx } from "theme-ui"
-import BackToAll from "../components/BackToAll"
-import { Link } from "gatsby"
-import slugify from "../../utils/slugify"
-import ReactMarkdown from "react-markdown"
-import ShareBtns from "../components/ShareBtns"
+import Layout from "../components/Layout";
+import { jsx } from "theme-ui";
+import BackToAll from "../components/BackToAll";
+import { Link } from "gatsby";
+import slugify from "../../utils/slugify";
+import ReactMarkdown from "react-markdown";
+import ShareBtns from "../components/ShareBtns";
 
 const Story = ({ pageContext: { data } }) => {
   return (
@@ -15,7 +15,7 @@ const Story = ({ pageContext: { data } }) => {
         sx={{
           display: "grid",
           gridTemplateColumns: ["1fr", "1fr 2fr"],
-          gridGap: "1rem",
+          gridGap: "1rem"
         }}
       >
         <div className="story-info">
@@ -25,7 +25,7 @@ const Story = ({ pageContext: { data } }) => {
               fontSize: 4,
               color: "accent",
               lineHeight: 1.1,
-              mb: 2,
+              mb: 2
             }}
           >
             {data.Story_Name}
@@ -36,7 +36,7 @@ const Story = ({ pageContext: { data } }) => {
               fontSize: 2,
               lineHeight: 1.25,
               color: "muted",
-              mb: 3,
+              mb: 3
             }}
           >
             {data.Author} ({data.School}, {data.State})
@@ -48,18 +48,18 @@ const Story = ({ pageContext: { data } }) => {
                   sx={{
                     fontFamily: "body",
                     fontWeight: "700",
-                    mr: 1,
+                    mr: 1
                   }}
                 >
                   Tags:
                 </span>
-                {data.Tags.map((tag) => (
+                {data.Tags.map(tag => (
                   <li
                     key={slugify(tag)}
                     sx={{
                       listStyle: "none",
                       display: "inline-block",
-                      mr: 1,
+                      mr: 1
                     }}
                   >
                     <Link
@@ -79,8 +79,8 @@ const Story = ({ pageContext: { data } }) => {
                         my: ".15rem",
                         ":hover": {
                           color: "#fff",
-                          background: "#844",
-                        },
+                          background: "#844"
+                        }
                       }}
                     >
                       {tag}
@@ -98,7 +98,7 @@ const Story = ({ pageContext: { data } }) => {
             src={data.Audio ? data.Audio[0].url : ""}
             sx={{
               display: "block",
-              my: 4,
+              my: 4
             }}
           >
             Your browser does not support the <code>audio</code> element. :(
@@ -110,7 +110,7 @@ const Story = ({ pageContext: { data } }) => {
                 fontFamily: "body",
                 fontWeight: "700",
                 mr: 1,
-                verticalAlign: "top",
+                verticalAlign: "top"
               }}
             >
               Listen in {data.Second_Language}
@@ -127,7 +127,7 @@ const Story = ({ pageContext: { data } }) => {
               sx={{
                 display: "block",
                 mt: 2,
-                mb: 4,
+                mb: 4
               }}
             >
               Your browser does not support the <code>audio</code> element. :(
@@ -140,30 +140,21 @@ const Story = ({ pageContext: { data } }) => {
           src={data.Photo ? data.Photo[0].thumbnails.large.url : ""}
           alt={"Photo of" + data.Author}
           sx={{
-            maxWidth: "100%",
+            maxWidth: "100%"
           }}
         />
       </div>
-      <div
-        sx={{
-          mt: 4,
-          p: {
-            my: 3,
-            fontFamily: "body",
-            lineHeight: 1.5,
-            color: "text",
-          },
-        }}
-      >
+      <div sx={{ mt: 4 }}>
         <ReactMarkdown>{data.Text}</ReactMarkdown>
-        <p>
+        <p className="caption2">
           © {data.Author}. All rights reserved. If you are interested in quoting
-          this story, contact the national team through this website and we can
-          put you in touch with the young person’s teacher.
+          this story, <Link to="/contact">contact</Link> the national team
+          through this website and we can put you in touch with the young
+          person’s teacher.
         </p>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default Story
+export default Story;

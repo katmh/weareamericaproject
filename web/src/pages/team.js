@@ -4,7 +4,6 @@ import { graphql } from "gatsby";
 import { jsx } from "theme-ui";
 
 import Gallery from "../components/Gallery";
-import Heading from "../components/Heading";
 import Layout from "../components/Layout";
 import PersonCard from "../components/PersonCard";
 
@@ -16,7 +15,7 @@ const TeamMembersPage = ({ data }) => {
     .concat(showLower);
   return (
     <Layout>
-      <Heading>Meet our team</Heading>
+      <h1 className="heading large_heading">Meet our team</h1>
       <Gallery n={4}>
         {teamMembersOrdered.map(person => {
           return (

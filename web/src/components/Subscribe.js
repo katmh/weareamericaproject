@@ -1,61 +1,55 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
-import { useState } from "react"
-import ButtonInput from "../components/ButtonInput"
-import addToMailchimp from "gatsby-plugin-mailchimp"
+import React, { useState } from "react";
+import ButtonInput from "../components/ButtonInput";
+import addToMailchimp from "gatsby-plugin-mailchimp";
 
 const Subscribe = () => {
-  const [email, setEmail] = useState({})
+  const [email, setEmail] = useState({});
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setEmail({
-      [`${e.target.name}`]: e.target.value,
-    })
-  }
+      [`${e.target.name}`]: e.target.value
+    });
+  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = e => {
+    e.preventDefault();
 
     addToMailchimp(email)
       .then(({ msg, result }) => {
-        console.log("msg", `${result}: ${msg}`)
+        console.log("msg", `${result}: ${msg}`);
 
         if (result !== "success") {
-          throw msg
+          throw msg;
         }
-        alert(msg)
+        alert(msg);
       })
-      .catch((err) => {
-        console.log("err", err)
-        alert(err)
-      })
-  }
+      .catch(err => {
+        console.log("err", err);
+        alert(err);
+      });
+  };
 
   return (
     <form
-      sx={{
-        display: "inline-block",
-        mt: 2,
+      style={{
+        marginTop: "1rem",
+        display: "flex",
+        width: "100%",
+        maxWidth: "22.5rem",
+        gap: "0.75rem"
       }}
       onSubmit={handleSubmit}
     >
       <input
-        sx={{
-          variant: "body",
-          padding: "7px 8px 6px",
-          lineHeight: "1",
-          fontSize: 1,
-          mr: 2,
-          display: "inline-block",
-        }}
         type="email"
         onChange={handleChange}
         placeholder="name@email.com"
         name="email"
+        style={{ width: "100%" }}
       />
       <ButtonInput type="submit" value="Submit" />
     </form>
-  )
-}
+  );
+};
 
-export default Subscribe
+export default Subscribe;

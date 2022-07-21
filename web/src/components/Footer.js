@@ -11,8 +11,12 @@ const Footer = () => {
     <footer>
       <div id="flex">
         <div id="left">
-          <Link to="/">We Are America</Link>
-          <p>Subscribe to our newsletter for monthly updates</p>
+          <Link to="/" className="logo small_logo">
+            We Are America
+          </Link>
+          <p className="caption1">
+            Subscribe to our newsletter for monthly updates
+          </p>
           <Subscribe />
         </div>
         <nav>
@@ -20,13 +24,17 @@ const Footer = () => {
             const hasSubmenu = item.subItems.length > 0;
             return (
               <div key={item.path}>
-                <Link to={`/${item.path}`}>
+                <Link to={`/${item.path}`} className="nav_link">
                   <span>{item.title}</span>
                 </Link>
                 {hasSubmenu && (
                   <div className="footer_submenu">
                     {item.subItems.map(subitem => (
-                      <Link key={subitem.path} to={`/${subitem.path}`}>
+                      <Link
+                        key={subitem.path}
+                        to={`/${subitem.path}`}
+                        className="nav_link"
+                      >
                         {subitem.title}
                       </Link>
                     ))}
@@ -37,7 +45,9 @@ const Footer = () => {
           })}
         </nav>
       </div>
-      <p>© 2019-2022 We Are America Project. All Rights Reserved.</p>
+      <p className="caption2">
+        © 2019-2022 We Are America Project. All Rights Reserved.
+      </p>
     </footer>
   );
 };

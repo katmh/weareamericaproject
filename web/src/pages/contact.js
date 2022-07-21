@@ -1,13 +1,11 @@
 import React from "react";
+import ButtonInput from "../components/ButtonInput";
 import Layout from "../components/Layout";
-import Heading from "../components/Heading";
-import ContactForm from "../components/ContactForm";
-import Subscribe from "../components/Subscribe";
 
 const ContactPage = () => {
   return (
     <Layout>
-      <Heading>Contact Us</Heading>
+      <h1 className="heading large_heading">Contact Us</h1>
       <p>
         Would you like to learn more about the We Are America National Project?
         Are you a teacher interested in applying to be considered for the next
@@ -15,15 +13,18 @@ const ContactPage = () => {
         classroom? Are you a member of the press interested in learning more
         about the project? We would love to hear from you!
       </p>
-      <ContactForm />
-      <br />
-      <br />
-      <br />
-      <Heading>Newsletter</Heading>
-      <p>
-        Subscribe to our newsletter for updates on the We Are America Project.
-      </p>
-      <Subscribe />
+      <form action="https://formspree.io/f/xnqoojjv" method="POST">
+        <label htmlFor="name">Name: </label>
+        <input type="text" name="name" id="name" />
+
+        <label htmlFor="email">Email: </label>
+        <input type="email" name="email" id="email" />
+
+        <label htmlFor="message">Message: </label>
+        <textarea name="message" id="message"></textarea>
+
+        <ButtonInput type="submit" value="Submit" />
+      </form>
     </Layout>
   );
 };

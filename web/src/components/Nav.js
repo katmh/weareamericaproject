@@ -49,7 +49,7 @@ const Nav = () => {
             <div key={item.path} className="top_level_item">
               <Link
                 to={`/${item.path}`}
-                className={item.isEmphasized ? " emphasized" : ""}
+                className={`nav_link ${item.isEmphasized ? " emphasized" : ""}`}
                 activeClassName="active"
               >
                 <span>{item.title}</span>
@@ -61,6 +61,7 @@ const Nav = () => {
                     <Link
                       key={subitem.path}
                       to={`/${subitem.path}`}
+                      className="nav_link"
                       activeClassName="active"
                     >
                       {subitem.title}

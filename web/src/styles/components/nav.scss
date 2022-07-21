@@ -4,17 +4,6 @@
 @use "src/styles/abstract/media";
 
 nav {
-    a {
-        font: bold 1.25rem/1 fonts.$body;
-        text-decoration: none;
-        color: colors.$text-body;
-        transition: 0.1s;
-
-        &:hover, &:active {
-            color: colors.$text-hover;
-        }
-    }
-
     @include media.screen-tablet {
         .desktop_only {
             display: none;
@@ -107,7 +96,7 @@ nav {
             }
         }
 
-        .emphasized {
+        a.emphasized {
             background: colors.$text-headings;
             color: colors.$body-background;
             padding: 0.415rem 0.6rem 0.4rem 0.65rem;
