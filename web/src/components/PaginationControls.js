@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui";
+import React from "react";
 import { Link } from "gatsby";
 
 const PaginationControls = ({
@@ -9,15 +8,10 @@ const PaginationControls = ({
   numPages
 }) => {
   return (
-    <div
-      sx={{
-        fontFamily: "body",
-        color: "text"
-      }}
-    >
+    <p className="caption1">
       {prevPage && <Link to={prevPage}>Previous</Link>} Page {currentPage} of{" "}
       {numPages} {nextPage && <Link to={nextPage}>Next</Link>}
-    </div>
+    </p>
   );
 };
 

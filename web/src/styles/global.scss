@@ -1,5 +1,9 @@
+@use "sass:color";
 @use "src/styles/abstract/colors";
 @use "src/styles/abstract/fonts";
+
+@use "src/styles/components/runners";
+@use "src/styles/components/forms";
 
 body {
   background: colors.$body-background;
@@ -11,8 +15,93 @@ body {
   box-sizing: border-box;
 }
 
-p {
+//
+// TYPE
+//
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: fonts.$headings;
+  color: colors.$text-headings;
+}
+
+p,
+li,
+label,
+input,
+textarea,
+textarea {
   color: colors.$text-body;
   font: normal 1.25rem/145% fonts.$body;
-  margin: 1.75rem 0;
 }
+
+input,
+textarea {
+  font-size: 1.15rem;
+}
+
+a {
+  color: colors.$text-hover;
+}
+
+.caption1 {
+  font-size: 1.15rem;
+}
+
+.caption2 {
+  font-size: 1rem;
+  color: colors.$text-captions;
+}
+
+.heading {
+  font-weight: bold;
+  font-family: fonts.$headings;
+  color: colors.$text-headings;
+}
+
+.heading.large_heading {
+  font-size: 2.5rem;
+}
+
+.heading.small_heading {
+  font-size: 1.75rem;
+}
+
+.subheading {
+  font: normal 1.25rem/150% fonts.$body;
+  color: colors.$text-body;
+}
+
+//
+// LAYOUT
+//
+
+p {
+  margin: 1.5rem 0;
+}
+
+label {
+  display: block;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.heading {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+.subheading {
+  margin: 4rem 0;
+}
+
+//
+// DEFAULTS
+//
+
+//
+// UTILITY CLASSES
+//

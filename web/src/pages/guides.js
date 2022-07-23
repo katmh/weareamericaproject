@@ -1,11 +1,10 @@
 import React from "react";
 import Layout from "../components/Layout";
-import Heading from "../components/Heading";
 
 const GuidesPage = () => {
   return (
     <Layout>
-      <Heading>Conversation Guides</Heading>
+      <h1 className="heading large_heading">Conversation Guides</h1>
       <p>Coming soon!</p>
     </Layout>
   );
