@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ButtonInput from "../components/ButtonInput";
 import addToMailchimp from "gatsby-plugin-mailchimp";
 
 const Subscribe = () => {
@@ -47,7 +46,7 @@ const Subscribe = () => {
         name="email"
         style={{ width: "100%" }}
       />
-      <ButtonInput type="submit" value="Submit" />
+      <button>Submit</button>
     </form>
   );
 };
