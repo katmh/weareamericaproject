@@ -3,7 +3,6 @@ import { graphql, Link, useStaticQuery } from "gatsby";
 import ChevronDown from "../components/icons/ChevronDown";
 import HamburgerMenu from "../components/icons/HamburgerMenu";
 import X from "../components/icons/X";
-import "../styles/components/nav.scss";
 
 export const navItemsQuery = graphql`
   query NavItemsQuery {

@@ -148,9 +148,8 @@ const Story = ({ pageContext: { data } }) => {
         <ReactMarkdown>{data.Text}</ReactMarkdown>
         <p className="caption2">
           © {data.Author}. All rights reserved. If you are interested in quoting
-          this story, <Link to="/contact">contact</Link> the national team
-          through this website and we can put you in touch with the young
-          person’s teacher.
+          this story, <Link to="/contact">contact</Link> the national team and
+          we can put you in touch with the author’s teacher.
         </p>
       </div>
     </Layout>

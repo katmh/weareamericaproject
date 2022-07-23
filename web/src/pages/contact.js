@@ -1,5 +1,4 @@
 import React from "react";
-import ButtonInput from "../components/ButtonInput";
 import Layout from "../components/Layout";
 
 const ContactPage = () => {
@@ -23,7 +22,8 @@ const ContactPage = () => {
         <label htmlFor="message">Message: </label>
         <textarea name="message" id="message"></textarea>
 
-        <ButtonInput type="submit" value="Submit" />
+        <br />
+        <button>Submit</button>
       </form>
     </Layout>
   );

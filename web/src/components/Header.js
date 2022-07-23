@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
 import Nav from "./Nav";
-import "../styles/components/header.scss";
 
 const Header = () => (
   <header>

@@ -2,7 +2,6 @@ import React from "react";
 import { Link, useStaticQuery } from "gatsby";
 import { navItemsQuery } from "./Nav";
 import Subscribe from "./Subscribe";
-import "../styles/components/footer.scss";
 
 const Footer = () => {
   const data = useStaticQuery(navItemsQuery);

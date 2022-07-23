@@ -1,0 +1,47 @@
+@use "sass:color";
+@use "src/styles/abstract/colors";
+@use "src/styles/abstract/fonts";
+
+input,
+textarea {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid colors.$border;
+  display: block;
+
+  &:active,
+  &:focus {
+    box-shadow: 1px 1px 6px color.change(colors.$border, $alpha: 0.5);
+    outline: none;
+  }
+}
+
+button {
+  display: inline-block;
+
+  appearance: none;
+  border: none;
+  cursor: pointer;
+
+  border-radius: 0.75rem;
+  padding: 0.6rem 1rem;
+  font: bold 1.25rem/100% fonts.$body;
+  background: colors.$text-headings;
+  color: colors.$body-background;
+
+  transition: 0.2s;
+  &:hover {
+    background: colors.$text-hover;
+  }
+}
+
+form {
+  input {
+    width: 100%;
+    max-width: 25rem;
+  }
+  textarea {
+    width: 100%;
+    max-width: 40rem;
+  }
+}
