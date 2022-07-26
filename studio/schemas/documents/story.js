@@ -30,13 +30,25 @@ export default {
       type: "file",
       accept: "audio/*",
     },
-    /* {
+    {
       name: "secondLanguageAudio",
       title: "Second language audio (if applicable)",
-      type: "array",
-      of: [{ type: "secondLanguageAudio" }],
+      type: "object",
+      fields: [
+        {
+          name: "language",
+          title: "Language",
+          type: "string",
+        },
+        {
+          name: "audio",
+          title: "Second language audio",
+          type: "file",
+          accept: "audio/*",
+        },
+      ],
     },
-    {
+    /* {
       name: "topics",
       title: "Topic(s)",
       type: "array",
