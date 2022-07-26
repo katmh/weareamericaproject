@@ -30,13 +30,12 @@ export default {
       type: "file",
       accept: "audio/*",
     },
-    /* {
+    {
       name: "secondLanguageAudio",
       title: "Second language audio (if applicable)",
-      type: "array",
-      of: [{ type: "secondLanguageAudio" }],
+      type: "secondLanguageAudio",
     },
-    {
+    /* {
       name: "topics",
       title: "Topic(s)",
       type: "array",
