@@ -2,45 +2,43 @@ const slugify = require("./utils/slugify");
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
+
   const storiesResult = await graphql(`
-    query allStoriesQuery {
-      allAirtable(
-        filter: {
-          table: { eq: "Stories" }
-          data: { Status: { eq: "Published" } }
-        }
-      ) {
-        edges {
-          node {
-            id
-            data {
-              Author
-              Story_Name
-              Photo {
-                thumbnails {
-                  large {
-                    url
-                  }
-                }
-              }
-              Audio {
-                url
-              }
-              Second_Language
-              Second_Language_Audio {
-                url
-              }
-              School
-              State
-              Tags
-              Grade
-              Text
+    query storiesQuery {
+      allSanityStory(filter: { isHidden: { ne: true } }) {
+        nodes {
+          id
+          author
+          storyTitle
+          photo {
+            asset {
+              url
             }
           }
+          audio {
+            asset {
+              url
+            }
+          }
+          secondLanguageAudio {
+            language
+            audio {
+              asset {
+                url
+              }
+            }
+          }
+          school {
+            name
+            location
+          }
+          tags
+          _rawText
         }
       }
     }
   `);
+
   const tags = await graphql(`
     query storiesByTagsQuery {
       allAirtable(
@@ -72,7 +70,7 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
   const schools = await graphql(`
-    query storiesByTagsQuery {
+    query storiesBySchoolQuery {
       allAirtable(
         filter: {
           table: { eq: "Stories" }
@@ -102,7 +100,7 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
   const states = await graphql(`
-    query storiesByTagsQuery {
+    query storiesByStateQuery {
       allAirtable(
         filter: {
           table: { eq: "Stories" }
@@ -148,7 +146,7 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
 
-  const stories = storiesResult.data.allAirtable.edges;
+  const stories = storiesResult.data.allSanityStory.nodes;
   const storiesPerPage = 18;
   const numPages = Math.ceil(stories.length / storiesPerPage);
   for (let i = 0; i < numPages; i++) {
@@ -164,11 +162,16 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   }
 
-  storiesResult.data.allAirtable.edges.forEach(({ node: { id, data } }) => {
+  storiesResult.data.allSanityStory.nodes.forEach(node => {
+    if (!node.author) {
+      return;
+    }
     createPage({
-      path: `/story/${slugify(data.Author ? data.Author : id)}/`,
+      path: `/story/${slugify(node.author)}/`,
       component: require.resolve("./src/templates/story.js"),
-      context: { data }
+      context: {
+        data: node
+      }
     });
   });
 
