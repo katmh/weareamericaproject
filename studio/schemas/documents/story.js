@@ -35,12 +35,39 @@ export default {
       title: "Second language audio (if applicable)",
       type: "secondLanguageAudio",
     },
-    /* {
-      name: "topics",
-      title: "Topic(s)",
+    {
+      name: "tags",
+      title: "Tags",
+      description: "Topics relevant to this story",
       type: "array",
-      of: [{ type: "topic" }],
-    }, */
+      of: [
+        {
+          type: "string",
+          options: {
+            list: [
+              "Family",
+              "Community",
+              "Health and Illness",
+              "Friendship and Kindness",
+              "Migration",
+              "Violence",
+              "Gender and Sexuality",
+              "Loneliness, Doubt or Loss",
+              "Education",
+              "Language and Communication",
+              "Sports",
+              "Justice and Law",
+              "Discrimination",
+              "Appearance",
+              "Spirituality and Faith",
+              "Arts and Expression",
+              "Different Abilities",
+              "Mentors",
+            ],
+          },
+        },
+      ],
+    },
     {
       name: "school",
       title: "School",
