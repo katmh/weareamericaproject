@@ -40,28 +40,16 @@ exports.createPages = async ({ graphql, actions }) => {
   `);
 
   const tags = await graphql(`
-    query storiesByTagsQuery {
-      allAirtable(
-        filter: {
-          table: { eq: "Stories" }
-          data: { Status: { eq: "Published" } }
-        }
-      ) {
-        group(field: data___Tags) {
+    query storiesByTagQuery {
+      allSanityStory(filter: { isHidden: { ne: true } }) {
+        group(field: tags) {
           fieldValue
-          edges {
-            node {
-              id
-              data {
-                Author
-                Story_Name
-                Photo {
-                  thumbnails {
-                    large {
-                      url
-                    }
-                  }
-                }
+          nodes {
+            author
+            storyTitle
+            photo {
+              asset {
+                url
               }
             }
           }
@@ -71,27 +59,15 @@ exports.createPages = async ({ graphql, actions }) => {
   `);
   const schools = await graphql(`
     query storiesBySchoolQuery {
-      allAirtable(
-        filter: {
-          table: { eq: "Stories" }
-          data: { Status: { eq: "Published" } }
-        }
-      ) {
-        group(field: data___School) {
+      allSanityStory(filter: { isHidden: { ne: true } }) {
+        group(field: school___name) {
           fieldValue
-          edges {
-            node {
-              id
-              data {
-                Author
-                Story_Name
-                Photo {
-                  thumbnails {
-                    large {
-                      url
-                    }
-                  }
-                }
+          nodes {
+            author
+            storyTitle
+            photo {
+              asset {
+                url
               }
             }
           }
@@ -100,28 +76,16 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
   const states = await graphql(`
-    query storiesByStateQuery {
-      allAirtable(
-        filter: {
-          table: { eq: "Stories" }
-          data: { Status: { eq: "Published" } }
-        }
-      ) {
-        group(field: data___State) {
+    query storiesByLocationQuery {
+      allSanityStory(filter: { isHidden: { ne: true } }) {
+        group(field: school___location) {
           fieldValue
-          edges {
-            node {
-              id
-              data {
-                Author
-                Story_Name
-                Photo {
-                  thumbnails {
-                    large {
-                      url
-                    }
-                  }
-                }
+          nodes {
+            author
+            storyTitle
+            photo {
+              asset {
+                url
               }
             }
           }
@@ -163,9 +127,6 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   storiesResult.data.allSanityStory.nodes.forEach(node => {
-    if (!node.author) {
-      return;
-    }
     createPage({
       path: `/story/${slugify(node.author)}/`,
       component: require.resolve("./src/templates/story.js"),
@@ -175,29 +136,20 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-  tags.data.allAirtable.group.forEach(({ fieldValue, edges }) => {
+  const createTagPage = subdir => ({ fieldValue: tag, nodes }) => {
     createPage({
-      path: `/tag/${slugify(fieldValue ? fieldValue : "")}/`,
+      path: `/${subdir}/${slugify(tag)}`,
       component: require.resolve("./src/templates/tag.js"),
-      context: { edges, fieldValue }
+      context: {
+        nodes,
+        tag
+      }
     });
-  });
+  };
 
-  schools.data.allAirtable.group.forEach(({ fieldValue, edges }) => {
-    createPage({
-      path: `/school/${slugify(fieldValue ? fieldValue : "")}/`,
-      component: require.resolve("./src/templates/tag.js"),
-      context: { edges, fieldValue }
-    });
-  });
-
-  states.data.allAirtable.group.forEach(({ fieldValue, edges }) => {
-    createPage({
-      path: `/state/${slugify(fieldValue ? fieldValue : "")}/`,
-      component: require.resolve("./src/templates/tag.js"),
-      context: { edges, fieldValue }
-    });
-  });
+  tags.data.allSanityStory.group.forEach(createTagPage("tag"));
+  schools.data.allSanityStory.group.forEach(createTagPage("school"));
+  states.data.allSanityStory.group.forEach(createTagPage("state"));
 
   blogPosts.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({
