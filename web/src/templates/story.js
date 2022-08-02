@@ -1,10 +1,10 @@
 /** @jsx jsx */
-import Layout from "../components/Layout";
 import { jsx } from "theme-ui";
-import BackToAll from "../components/BackToAll";
 import { Link } from "gatsby";
+import { PortableText } from "@portabletext/react";
 import slugify from "../../utils/slugify";
-import ReactMarkdown from "react-markdown";
+import BackToAll from "../components/BackToAll";
+import Layout from "../components/Layout";
 import ShareBtns from "../components/ShareBtns";
 
 const Story = ({ pageContext: { data } }) => {
@@ -28,7 +28,7 @@ const Story = ({ pageContext: { data } }) => {
               mb: 2
             }}
           >
-            {data.Story_Name}
+            {data.storyTitle}
           </h1>
           <h2
             sx={{
@@ -39,10 +39,10 @@ const Story = ({ pageContext: { data } }) => {
               mb: 3
             }}
           >
-            {data.Author} ({data.School}, {data.State})
+            {data.author}, ({data.school.name}, {data.school.location})
           </h2>
           <p>
-            {data.Tags ? (
+            {data.tags ? (
               <ul>
                 <span
                   sx={{
@@ -53,7 +53,7 @@ const Story = ({ pageContext: { data } }) => {
                 >
                   Tags:
                 </span>
-                {data.Tags.map(tag => (
+                {data.tags.map(tag => (
                   <li
                     key={slugify(tag)}
                     sx={{
@@ -95,7 +95,7 @@ const Story = ({ pageContext: { data } }) => {
 
           <audio
             controls
-            src={data.Audio ? data.Audio[0].url : ""}
+            src={data.audio ? data.audio.asset.url : ""}
             sx={{
               display: "block",
               my: 4
@@ -104,7 +104,7 @@ const Story = ({ pageContext: { data } }) => {
             Your browser does not support the <code>audio</code> element. :(
           </audio>
 
-          {data.Second_Language ? (
+          {data.secondLanguageAudio ? (
             <span
               sx={{
                 fontFamily: "body",
@@ -113,15 +113,15 @@ const Story = ({ pageContext: { data } }) => {
                 verticalAlign: "top"
               }}
             >
-              Listen in {data.Second_Language}
+              Listen in {data.secondLanguageAudio.language}
             </span>
           ) : null}
-          {data.Second_Language ? (
+          {data.secondLanguageAudio ? (
             <audio
               controls
               src={
                 data.Second_Language_Audio
-                  ? data.Second_Language_Audio[0].url
+                  ? data.secondLanguageAudio.asset.url
                   : ""
               }
               sx={{
@@ -134,10 +134,10 @@ const Story = ({ pageContext: { data } }) => {
             </audio>
           ) : null}
 
-          <ShareBtns title={data.Story_Name} />
+          <ShareBtns title={data.storyTitle} />
         </div>
         <img
-          src={data.Photo ? data.Photo[0].thumbnails.large.url : ""}
+          src={data.photo ? data.photo.asset.url : ""}
           alt={"Photo of" + data.Author}
           sx={{
             maxWidth: "100%"
@@ -145,9 +145,9 @@ const Story = ({ pageContext: { data } }) => {
         />
       </div>
       <div sx={{ mt: 4 }}>
-        <ReactMarkdown>{data.Text}</ReactMarkdown>
+        <PortableText value={data._rawText} />
         <p className="caption2">
-          © {data.Author}. All rights reserved. If you are interested in quoting
+          © {data.author}. All rights reserved. If you are interested in quoting
           this story, <Link to="/contact">contact</Link> the national team and
           we can put you in touch with the author’s teacher.
         </p>
