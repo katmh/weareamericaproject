@@ -1,27 +1,27 @@
 /** @jsx jsx */
-import { jsx } from "theme-ui"
-import { Link, graphql } from "gatsby"
-import slugify from "../../utils/slugify"
+import { jsx } from "theme-ui";
+import { Link, graphql } from "gatsby";
+import slugify from "../../utils/slugify";
 
 const StoryCard = props => (
   <article
     sx={{
       mb: "30px",
       ":hover img": {
-        transform: "scale(1.1)",
-      },
+        transform: "scale(1.1)"
+      }
     }}
   >
     <Link
       to={`/story/${slugify(props.author)}`}
       sx={{
-        textDecoration: "none",
+        textDecoration: "none"
       }}
     >
       <div
         className="image-wrapper"
         sx={{
-          overflow: "hidden",
+          overflow: "hidden"
         }}
       >
         <img
@@ -33,7 +33,7 @@ const StoryCard = props => (
             transition: ".15s",
             position: "relative",
             zIndex: "-1",
-            display: "block",
+            display: "block"
           }}
         />
       </div>
@@ -42,7 +42,7 @@ const StoryCard = props => (
         sx={{
           bg: "background",
           overflow: "hidden",
-          p: ".75rem 1rem",
+          p: ".75rem 1rem"
         }}
       >
         <h3
@@ -52,7 +52,7 @@ const StoryCard = props => (
             m: "0",
             fontSize: "1.5rem",
             display: "inline-block",
-            lineHeight: 1.25,
+            lineHeight: 1.25
           }}
         >
           {props.title}
@@ -63,7 +63,7 @@ const StoryCard = props => (
             fontFamily: "heading",
             color: "muted",
             margin: "0",
-            fontSize: "1.25rem",
+            fontSize: "1.25rem"
           }}
         >
           {props.author}
@@ -71,21 +71,19 @@ const StoryCard = props => (
       </div>
     </Link>
   </article>
-)
+);
 
-export default StoryCard
+export default StoryCard;
 
 export const query = graphql`
-  fragment StoryCardInformation on AirtableData {
-    Author
-    Story_Name
-    Photo_URL
-    Photo {
-      thumbnails {
-        large {
-          url
-        }
+  fragment StoryCardInformation on SanityStory {
+    id
+    author
+    storyTitle
+    photo {
+      asset {
+        url
       }
     }
   }
-`
+`;
