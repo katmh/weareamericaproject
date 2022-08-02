@@ -1,7 +1,7 @@
 /** @jsx jsx */
-import { jsx } from "theme-ui"
-import { Link } from "gatsby"
-import slugify from "../../utils/slugify"
+import { jsx } from "theme-ui";
+import { Link } from "gatsby";
+import slugify from "../../utils/slugify";
 
 const Dropdown = props => (
   <div
@@ -11,8 +11,8 @@ const Dropdown = props => (
       mr: 2,
       ":hover ul": {
         display: "block",
-        maxHeight: "30vh",
-      },
+        maxHeight: "30vh"
+      }
     }}
   >
     <button
@@ -26,7 +26,7 @@ const Dropdown = props => (
         fontWeight: "400",
         padding: ".4rem .6rem .25rem",
         fontSize: 1,
-        color: "text",
+        color: "text"
       }}
     >
       {props.contentName}
@@ -39,16 +39,17 @@ const Dropdown = props => (
         float: "left",
         opacity: "1",
         transition: ".15s",
-        border: "1px solid #bbb",
+        border: "1px solid #bbb"
       }}
     >
       {props.content.group.map(group => (
         <li
+          key={group.fieldValue}
           sx={{
             listStyle: "none",
             fontFamily: "body",
             background: "#fff",
-            maxWidth: "400px",
+            maxWidth: "400px"
           }}
         >
           <Link
@@ -64,8 +65,8 @@ const Dropdown = props => (
               transition: ".15s",
               ":hover": {
                 background: "#633",
-                color: "#fff",
-              },
+                color: "#fff"
+              }
             }}
           >
             {group.fieldValue}
@@ -74,6 +75,6 @@ const Dropdown = props => (
       ))}
     </ul>
   </div>
-)
+);
 
-export default Dropdown
+export default Dropdown;

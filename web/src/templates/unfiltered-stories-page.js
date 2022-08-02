@@ -1,12 +1,11 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui";
+import React from "react";
 import { graphql } from "gatsby";
-import Layout from "../components/Layout";
-import Gallery from "../components/Gallery";
 import Dropdown from "../components/Dropdown";
-import StoryCard from "../components/StoryCard";
-import SearchText from "../components/SearchText";
+import Gallery from "../components/Gallery";
+import Layout from "../components/Layout";
 import PaginationControls from "../components/PaginationControls";
+import SearchText from "../components/SearchText";
+import StoryCard from "../components/StoryCard";
 
 const UnfilteredStoriesPage = ({
   data,
@@ -19,19 +18,10 @@ const UnfilteredStoriesPage = ({
   const nextPage =
     currentPage === 1 ? "page/2" : `../${(currentPage + 1).toString()}`;
 
-  const stories = data.stories.edges;
+  const stories = data.stories.nodes;
   return (
     <Layout>
-      <h1
-        sx={{
-          fontSize: [4, 5],
-          fontFamily: "heading",
-          fontWeight: "400",
-          color: "accent"
-        }}
-      >
-        Library of Stories
-      </h1>
+      <h1 className="heading large_heading">Library of Stories</h1>
       <SearchText />
       <Dropdown content={data.tags} contentName="Topic" contentSlug="tag" />
       <Dropdown content={data.states} contentName="State" contentSlug="state" />
@@ -50,14 +40,13 @@ const UnfilteredStoriesPage = ({
       />
       <br />
       <Gallery n={3}>
-        {stories.map(node => {
-          const story = node.node.data;
+        {stories.map(story => {
           return (
             <StoryCard
-              key={node.id}
-              author={story.Author}
-              title={story.Story_Name}
-              photoUrl={story.Photo[0].thumbnails.large.url}
+              key={story.id}
+              author={story.author}
+              title={story.storyTitle}
+              photoUrl={story.photo.asset.url}
             />
           );
         })}
@@ -78,51 +67,28 @@ export default UnfilteredStoriesPage;
 
 export const query = graphql`
   query UnfilteredStoriesPageQuery($skip: Int!, $limit: Int!) {
-    stories: allAirtable(
-      filter: {
-        table: { eq: "Stories" }
-        data: { Status: { eq: "Published" } }
-      }
+    stories: allSanityStory(
+      filter: { isHidden: { ne: true } }
       skip: $skip
       limit: $limit
     ) {
-      edges {
-        node {
-          id
-          data {
-            ...StoryCardInformation
-          }
-        }
+      nodes {
+        ...StoryCardInformation
       }
     }
 
-    tags: allAirtable(
-      filter: {
-        table: { eq: "Stories" }
-        data: { Status: { eq: "Published" } }
-      }
-    ) {
-      group(field: data___Tags) {
+    tags: allSanityStory(filter: { isHidden: { ne: true } }) {
+      group(field: tags) {
         fieldValue
       }
     }
-    states: allAirtable(
-      filter: {
-        table: { eq: "Stories" }
-        data: { Status: { eq: "Published" } }
-      }
-    ) {
-      group(field: data___State) {
+    states: allSanityStory(filter: { isHidden: { ne: true } }) {
+      group(field: school___location) {
         fieldValue
       }
     }
-    schools: allAirtable(
-      filter: {
-        table: { eq: "Stories" }
-        data: { Status: { eq: "Published" } }
-      }
-    ) {
-      group(field: data___School) {
+    schools: allSanityStory(filter: { isHidden: { ne: true } }) {
+      group(field: school___name) {
         fieldValue
       }
     }
