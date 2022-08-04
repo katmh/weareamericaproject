@@ -30,6 +30,7 @@
     "react-icons": "^3.11.0",
     "sanity-plugin-dashboard-widget-document-list": "^0.0.13",
     "sanity-plugin-dashboard-widget-netlify": "^1.0.1",
+    "sanity-plugin-media": "^1.4.10",
     "styled-components": "^5.3.5"
   }
 }
