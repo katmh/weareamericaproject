@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Export dataset
-        uses: sanity-io/github-action-sanity@v0.2-alpha
+        uses: katmh/github-action-sanity@master
         env:
           SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
         with:
