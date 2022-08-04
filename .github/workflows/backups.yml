@@ -1,25 +1,38 @@
 name: Backup Routine
+
 on:
   workflow_dispatch:
   schedule:
     # Runs at 04:00 UTC on the 1st and 17th of every month
     - cron: "0 4 */16 * *"
+
+env:
+  SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+
 jobs:
   backup-dataset:
     runs-on: ubuntu-18.04
     name: Backup dataset
     steps:
-      - uses: actions/checkout@v2
-      - name: Export dataset
-        uses: katmh/github-action-sanity@master
-        env:
-          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+      - name: Check out repo
+        uses: actions/checkout@v2
+
+      - name: Install node
+        uses: actions/setup-node@v3
         with:
-          args: dataset export production backups/backup.tar.gz
+          node-version: "14"
+
+      - name: Install @sanity/cli
+        run: npm install -g @sanity/cli
+
+      - name: Export dataset
+        working-directory: ./studio
+        run: sanity install && sanity dataset export production backups/backup.tar.gz
+
       - name: Upload backup.tar.gz
         uses: actions/upload-artifact@v2
         with:
           name: backup-tarball
-          path: backups/backup.tar.gz
+          path: studio/backups/backup.tar.gz
           # Fails the workflow if no files are found; defaults to 'warn'
           if-no-files-found: error
