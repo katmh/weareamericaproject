@@ -1,11 +1,11 @@
 import React from "react";
 import { graphql } from "gatsby";
 import { PortableText } from "@portabletext/react";
-import Layout from "../components/Layout";
+import Layout from "../../components/Layout";
 
-const ResourcesPage = ({ data }) => {
+const TenementMuseumGuide = ({ data }) => {
   const page = data.allSanityPage.nodes[0];
-  const rawText = data.allSanityPage.nodes[0].content[0]._rawContent;
+  const rawText = page.content[0]._rawContent;
   return (
     <Layout>
       <h1 className="heading large_heading">{page.title}</h1>
@@ -15,9 +15,9 @@ const ResourcesPage = ({ data }) => {
 };
 
 export const query = graphql`
-  query EducatorResourcesPageQuery {
+  query TenementMuseumGuidePageQuery {
     allSanityPage(
-      filter: { _id: { eq: "d130afef-6556-4f93-a5d5-aa319f34616e" } }
+      filter: { _id: { eq: "d904fbea-ed40-4a6c-8c81-98f5bc1511a8" } }
     ) {
       nodes {
         title
@@ -31,4 +31,4 @@ export const query = graphql`
   }
 `;
 
-export default ResourcesPage;
+export default TenementMuseumGuide;
