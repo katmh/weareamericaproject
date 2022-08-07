@@ -58,16 +58,8 @@ module.exports = {
         apiKey: process.env.AIRTABLE_API_KEY,
         tables: [
           {
-            baseId: process.env.AIRTABLE_STORIES_BASE_ID,
-            tableName: `Stories`
-          },
-          {
             baseId: process.env.AIRTABLE_PEOPLE_BASE_ID,
             tableName: `Teachers`
-          },
-          {
-            baseId: process.env.AIRTABLE_PEOPLE_BASE_ID,
-            tableName: `Founders`
           }
         ]
       }
