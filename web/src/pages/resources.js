@@ -1,15 +1,36 @@
 import React from "react";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import { PortableText } from "@portabletext/react";
 import Layout from "../components/Layout";
 
+const Guide = ({ guide }) => {
+  const { url, path, title } = guide;
+  return (
+    <li>
+      {url ? (
+        <a href={url}>{title}</a>
+      ) : (
+        <Link to={`/guides/${path}`}>{title}</Link>
+      )}
+    </li>
+  );
+};
+
 const ResourcesPage = ({ data }) => {
   const page = data.allSanityPage.nodes[0];
-  const rawText = data.allSanityPage.nodes[0].content[0]._rawContent;
+  const rawText = page.content[0]._rawContent;
+  const guides = page.content[1].guides;
   return (
     <Layout>
       <h1 className="heading large_heading">{page.title}</h1>
       <PortableText value={rawText} />
+      {guides && (
+        <ul>
+          {guides.map(guide => (
+            <Guide key={guide.id} guide={guide} />
+          ))}
+        </ul>
+      )}
     </Layout>
   );
 };
@@ -24,6 +45,14 @@ export const query = graphql`
         content {
           ... on SanityTextSection {
             _rawContent
+          }
+          ... on SanityGuidesSection {
+            guides {
+              id
+              url
+              path
+              title
+            }
           }
         }
       }

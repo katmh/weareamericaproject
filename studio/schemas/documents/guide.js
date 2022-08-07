@@ -7,6 +7,10 @@ export default {
       title: "partner",
     },
   },
+  fieldsets: [
+    { name: "external", title: "If the guide lives on a different website..." },
+    { name: "internal", title: "If the guide lives on our website..." },
+  ],
   fields: [
     {
       name: "title",
@@ -21,18 +25,20 @@ export default {
       description: "Example: The Tenement Museum",
     },
     {
-      name: "isExternal",
-      type: "boolean",
-      title: "Use external link",
-      description:
-        "If the guide lives on a different website, turn this switch on.",
-    },
-    {
       name: "url",
       type: "url",
       title: "External URL",
       description:
         "If the guide lives on a different website, paste the link to it here.",
+      fieldset: "external",
+    },
+    {
+      name: "path",
+      type: "string",
+      title: "Path",
+      description:
+        "If the guide lives on our website, write the URL-friendly text that comes after `weareamericaproject.com/guides/` here.",
+      fieldset: "internal",
     },
     {
       name: "content",
@@ -40,6 +46,7 @@ export default {
       title: "Content",
       description:
         "If the guide lives on our website, paste and format the guide's contents here.",
+      fieldset: "internal",
     },
   ],
 };
