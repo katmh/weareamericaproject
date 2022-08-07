@@ -15,6 +15,7 @@ import school from "./documents/school";
 import teacher from "./documents/teacher";
 
 // Object types
+import guidesSection from "./objects/page-sections/guides";
 import textSection from "./objects/textSection";
 import partnersSection from "./objects/partnersSection";
 import partner from "./objects/partner";
@@ -54,6 +55,7 @@ export default createSchema({
     contactSection,
     navItem,
     secondLanguageAudio,
+    guidesSection,
 
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
