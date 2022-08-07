@@ -8,6 +8,7 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 import post from "./documents/post";
 import siteSettings from "./documents/siteSettings";
 import page from "./documents/page";
+import guide from "./documents/guide";
 import teamMember from "./documents/teamMember";
 import story from "./documents/story";
 import school from "./documents/school";
@@ -35,6 +36,7 @@ export default createSchema({
     // The following are document types which will appear
     // in the studio.
     page,
+    guide,
     siteSettings,
     post,
     teamMember,
