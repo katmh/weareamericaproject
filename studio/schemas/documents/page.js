@@ -16,7 +16,8 @@ export default {
         { type: "textSection" },
         { type: "partnersSection" },
         { type: "contactSection" },
+        { type: "guidesSection" },
       ],
     },
   ],
-}
+};

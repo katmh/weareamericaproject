@@ -98,6 +98,10 @@ label {
   margin: 4rem 0;
 }
 
+li {
+  margin: 0.5rem 0 0.5rem 2.5rem;
+}
+
 //
 // DEFAULTS
 //
@@ -105,3 +109,17 @@ label {
 //
 // UTILITY CLASSES
 //
+
+//
+// RANDOM SHIT (TODO: ORGANIZE lol)
+//
+
+.guide_link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.guide_link > .icon_container {
+  display: flex;
+}

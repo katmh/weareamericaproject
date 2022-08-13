@@ -8,12 +8,14 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 import post from "./documents/post";
 import siteSettings from "./documents/siteSettings";
 import page from "./documents/page";
+import guide from "./documents/guide";
 import teamMember from "./documents/teamMember";
 import story from "./documents/story";
 import school from "./documents/school";
 import teacher from "./documents/teacher";
 
 // Object types
+import guidesSection from "./objects/page-sections/guides";
 import textSection from "./objects/textSection";
 import partnersSection from "./objects/partnersSection";
 import partner from "./objects/partner";
@@ -35,6 +37,7 @@ export default createSchema({
     // The following are document types which will appear
     // in the studio.
     page,
+    guide,
     siteSettings,
     post,
     teamMember,
@@ -52,6 +55,7 @@ export default createSchema({
     contactSection,
     navItem,
     secondLanguageAudio,
+    guidesSection,
 
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
