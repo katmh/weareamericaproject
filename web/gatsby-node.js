@@ -160,4 +160,27 @@ exports.createPages = async ({ graphql, actions }) => {
       context: { node }
     });
   });
+
+  const internalConversationGuides = await graphql(`
+    query InternalConversationGuides {
+      allSanityGuide(filter: { path: { ne: null } }) {
+        nodes {
+          path
+          title
+          _rawContent
+        }
+      }
+    }
+  `);
+
+  internalConversationGuides.data.allSanityGuide.nodes.forEach(guide => {
+    createPage({
+      path: `/guides/${guide.path}`,
+      component: require.resolve("./src/templates/conversation-guide.js"),
+      context: {
+        title: guide.title,
+        content: guide._rawContent
+      }
+    });
+  });
 };
