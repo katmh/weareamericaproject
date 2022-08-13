@@ -1,6 +1,8 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
 import { PortableText } from "@portabletext/react";
+
+import ExternalLinkIcon from "../components/icons/ExternalLink";
 import Layout from "../components/Layout";
 
 const Guide = ({ guide }) => {
@@ -8,7 +10,12 @@ const Guide = ({ guide }) => {
   return (
     <li>
       {url ? (
-        <a href={url}>{title}</a>
+        <a className="guide_link" href={url}>
+          <span>{title}</span>{" "}
+          <span className="icon_container">
+            <ExternalLinkIcon />
+          </span>
+        </a>
       ) : (
         <Link to={`/guides/${path}`}>{title}</Link>
       )}
