@@ -43,7 +43,7 @@ footer {
 }
 
 nav {
-  @include media-queries.screen-tablet {
+  @include media-queries.screen-tablet-down {
     .desktop_only {
       display: none;
     }

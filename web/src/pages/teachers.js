@@ -1,64 +1,71 @@
 import React from "react";
 import { graphql } from "gatsby";
-import Layout from "../components/Layout";
+import { PortableText } from "@portabletext/react";
+
 import Gallery from "../components/Gallery";
+import Layout from "../components/Layout";
 import PersonCard from "../components/PersonCard";
-import Map from "../components/Map";
 
 const Teachers = ({ data }) => {
-  const numTeachers = data.allAirtable.edges.length;
-  const states = data.allAirtable.edges.map(edge => edge.node.data.State);
-  const cleaned = states.filter(state => state !== null);
-  const unique = cleaned.filter((state, i, arr) => arr.indexOf(state) === i);
-  const numStates = unique.length;
+  const page = data.allSanityPage.nodes[0];
+  const content = page.content[0]._rawContent;
   return (
     <Layout>
-      <h1 className="heading large_heading">Teachers</h1>
-      <p>
-        Learn more about our {numTeachers || "50"} teachers and classrooms
-        across {numStates || "34"} states.
-      </p>
-      <Map />
+      <h1 className="heading large_heading">{page.title}</h1>
+      <PortableText value={content} />
       <br />
-      <Gallery n={4}>
-        {data.allAirtable.edges.map(edge => {
-          const person = edge.node.data;
-          return (
-            person.Picture && (
-              <PersonCard
-                key={person.Name}
-                photoUrl={person.Picture[0].thumbnails.large.url}
-                name={person.Name}
-                school={person.School_Name}
-                city={person.City}
-                state={person.State}
-                bio={person.Bio}
-              />
-            )
-          );
-        })}
-      </Gallery>
+      {data.allSanityTeacher.group.reverse().map(cohort => {
+        return (
+          <section key={cohort.fieldValue}>
+            <h2 className="heading small_heading">{cohort.fieldValue}</h2>
+            <Gallery masonry={false} n={5}>
+              {cohort.nodes.map(teacher => {
+                return (
+                  <PersonCard
+                    key={teacher.name}
+                    photoUrl={teacher.photo.asset.url}
+                    name={teacher.name}
+                    school={teacher.school.name}
+                    location={teacher.school.location}
+                    bio={teacher.bio}
+                  />
+                );
+              })}
+            </Gallery>
+          </section>
+        );
+      })}
     </Layout>
   );
 };
 
 export const pageQuery = graphql`
-  query TeachersPageQuery {
-    allAirtable(filter: { table: { eq: "Teachers" } }) {
-      edges {
-        node {
-          data {
-            Name
-            School_Name
-            City
-            State
-            Bio
-            Picture {
-              thumbnails {
-                large {
-                  url
-                }
-              }
+  query TeachersQuery {
+    allSanityPage(
+      filter: { _id: { eq: "620acce4-5b3b-4583-a141-c3f9c69b0b0a" } }
+    ) {
+      nodes {
+        title
+        content {
+          ... on SanityTextSection {
+            _rawContent
+          }
+        }
+      }
+    }
+    allSanityTeacher {
+      group(field: cohort) {
+        fieldValue
+        nodes {
+          name
+          school {
+            name
+            location
+          }
+          bio
+          photo {
+            asset {
+              url
             }
           }
         }

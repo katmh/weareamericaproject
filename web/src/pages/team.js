@@ -16,7 +16,7 @@ const TeamMembersPage = ({ data }) => {
   return (
     <Layout>
       <h1 className="heading large_heading">Meet our team</h1>
-      <Gallery n={4}>
+      <Gallery masonry={false} n={5}>
         {teamMembersOrdered.map(person => {
           return (
             person.photo && (

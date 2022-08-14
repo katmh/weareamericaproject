@@ -49,7 +49,8 @@ const Dropdown = props => (
             listStyle: "none",
             fontFamily: "body",
             background: "#fff",
-            maxWidth: "400px"
+            maxWidth: "400px",
+            margin: 0
           }}
         >
           <Link
