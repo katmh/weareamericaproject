@@ -3,6 +3,9 @@ import { jsx } from "theme-ui";
 import { Dialog } from "@reach/dialog";
 import "@reach/dialog/styles.css";
 import React from "react";
+import { Link } from "gatsby";
+import { PortableText } from "@portabletext/react";
+import slugify from "../../utils/slugify";
 import X from "../components/icons/X";
 
 const PersonCard = props => {
@@ -72,18 +75,19 @@ const PersonCard = props => {
           >
             {props.name}
           </h4>
-          <p
-            sx={{
-              mt: "0 !important",
-              fontSize: "1.25rem",
-              fontFamily: "heading",
-              color: "muted"
-            }}
-          >
+          <p className="caption1">
             {props.title ? props.title : ""}
             {props.school ? props.school.trim() : ""}
             {props.location ? ` (${props.location})` : ""}
           </p>
+          {props.story && (
+            <p className="caption1">
+              Story:{" "}
+              <Link to={`/story/${slugify(props.story.author)}`}>
+                {props.story.storyTitle}
+              </Link>
+            </p>
+          )}
         </div>
       </article>
 
@@ -100,7 +104,11 @@ const PersonCard = props => {
             <X />
           </button>
         </div>
-        <p className="caption1">{props.bio}</p>
+        {Array.isArray(props.bio) ? (
+          <PortableText value={props.bio} />
+        ) : (
+          <p className="caption1">{props.bio}</p>
+        )}
       </Dialog>
     </>
   );
