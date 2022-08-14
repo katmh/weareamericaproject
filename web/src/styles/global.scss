@@ -1,6 +1,7 @@
 @use "sass:color";
 @use "src/styles/abstract/colors";
 @use "src/styles/abstract/fonts";
+@use "src/styles/abstract/media-queries";
 
 @use "src/styles/components/runners";
 @use "src/styles/components/forms";
@@ -122,6 +123,24 @@ li {
 //
 // UTILITY CLASSES
 //
+
+.grid {
+  display: grid;
+  gap: 0 2rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@include media-queries.screen-tablet-only {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@include media-queries.screen-desktop {
+  .grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
 
 //
 // RANDOM SHIT (TODO: ORGANIZE lol)

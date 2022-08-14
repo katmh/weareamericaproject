@@ -1,24 +1,24 @@
 import React from "react";
 import { graphql } from "gatsby";
-import Layout from "../components/Layout";
+import { PortableText } from "@portabletext/react";
+
 import Gallery from "../components/Gallery";
+import Layout from "../components/Layout";
 import PersonCard from "../components/PersonCard";
-// import Map from "../components/Map";
 
 const Teachers = ({ data }) => {
+  const page = data.allSanityPage.nodes[0];
+  const content = page.content[0]._rawContent;
   return (
     <Layout>
-      <h1 className="heading large_heading">Teachers</h1>
-      <p>
-        Learn more about our 50 teachers and classrooms across 34 states. TODO
-      </p>
-      {/* <Map /> */}
+      <h1 className="heading large_heading">{page.title}</h1>
+      <PortableText value={content} />
       <br />
       {data.allSanityTeacher.group.reverse().map(cohort => {
         return (
           <section key={cohort.fieldValue}>
             <h2 className="heading small_heading">{cohort.fieldValue}</h2>
-            <Gallery n={5}>
+            <Gallery masonry={false} n={5}>
               {cohort.nodes.map(teacher => {
                 return (
                   <PersonCard
@@ -41,6 +41,18 @@ const Teachers = ({ data }) => {
 
 export const pageQuery = graphql`
   query TeachersQuery {
+    allSanityPage(
+      filter: { _id: { eq: "620acce4-5b3b-4583-a141-c3f9c69b0b0a" } }
+    ) {
+      nodes {
+        title
+        content {
+          ... on SanityTextSection {
+            _rawContent
+          }
+        }
+      }
+    }
     allSanityTeacher {
       group(field: cohort) {
         fieldValue

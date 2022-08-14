@@ -13,7 +13,7 @@ const PersonCard = props => {
   return (
     <>
       <article
-        onClick={open}
+        onClick={props.bio ? open : () => {}}
         sx={{
           mb: 4,
           overflow: "auto",
@@ -40,7 +40,7 @@ const PersonCard = props => {
             src={props.photoUrl}
             alt={"Photo of " + props.name}
             sx={{
-              maxWidth: ["35%", "100%"],
+              maxWidth: "100%",
               float: ["left", "none"],
               mr: [3, 0],
               mb: [2, 0],
