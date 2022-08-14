@@ -38,5 +38,11 @@ export default {
         "This person will be shown in a separate section for former team members",
       type: "boolean",
     },
+    {
+      name: "story",
+      title: "Story",
+      type: "reference",
+      to: [{ type: "story" }],
+    },
   ],
 };
