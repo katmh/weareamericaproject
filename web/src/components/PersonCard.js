@@ -3,7 +3,7 @@ import { jsx } from "theme-ui";
 import { Dialog } from "@reach/dialog";
 import "@reach/dialog/styles.css";
 import React from "react";
-import { PortableText } from "@portabletext/react";
+import X from "../components/icons/X";
 
 const PersonCard = props => {
   const [showDialog, setShowDialog] = React.useState(false);
@@ -82,61 +82,25 @@ const PersonCard = props => {
           >
             {props.title ? props.title : ""}
             {props.school ? props.school.trim() : ""}
-            {props.city ? ", " + props.city : ""}
-            {props.state ? ", " + props.state : ""}
+            {props.location ? ` (${props.location})` : ""}
           </p>
         </div>
       </article>
 
-      <Dialog
-        aria-label="announcement"
-        sx={{}}
-        isOpen={showDialog}
-        onDismiss={close}
-      >
-        <button
-          onClick={close}
-          sx={{
-            cursor: "pointer",
-            float: "right",
-            fontFamily: "Arial, sans-serif",
-            fontSize: 1,
-            lineHeight: "100%",
-            color: "text",
-            transition: ".1s",
-            appearance: "none",
-            border: "none",
-            ":hover": {
-              color: "#444"
-            }
+      <Dialog aria-label="announcement" isOpen={showDialog} onDismiss={close}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "top"
           }}
         >
-          x
-        </button>
-
-        <h4
-          sx={{
-            fontFamily: "heading",
-            fontSize: 3,
-            fontWeight: 44,
-            color: "text"
-          }}
-        >
-          {props.name}
-        </h4>
-        <div>
-          <p
-            sx={{
-              fontFamily: "body",
-              lineHeight: "135%",
-              mt: 2,
-              fontSize: 0,
-              color: "text"
-            }}
-          >
-            <PortableText value={props.bio} />
-          </p>
+          <h4 className="title">{props.name}</h4>
+          <button onClick={close} className="modal_close">
+            <X />
+          </button>
         </div>
+        <p className="caption1">{props.bio}</p>
       </Dialog>
     </>
   );

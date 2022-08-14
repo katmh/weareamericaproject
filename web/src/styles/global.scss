@@ -71,6 +71,10 @@ a {
   font-size: 1.75rem;
 }
 
+.title {
+  font-size: 1.5rem;
+}
+
 .subheading {
   font: normal 1.25rem/150% fonts.$body;
   color: colors.$text-body;
@@ -84,6 +88,10 @@ p {
   margin: 1.5rem 0;
 }
 
+.caption1 {
+  margin: 1rem 0;
+}
+
 label {
   display: block;
   margin: 1.5rem 0 0.5rem;
@@ -92,6 +100,11 @@ label {
 .heading {
   margin-top: 0.75em;
   margin-bottom: 0.75em;
+}
+
+.title {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
 }
 
 .subheading {
@@ -122,4 +135,22 @@ li {
 
 .guide_link > .icon_container {
   display: flex;
+}
+
+.modal_close {
+  cursor: pointer;
+  float: right;
+  border: none;
+  background: transparent;
+}
+
+[data-reach-dialog-overlay="true"] {
+  cursor: pointer;
+  & > [role="dialog"] {
+    cursor: auto;
+  }
+}
+
+[data-reach-dialog-content] {
+  width: 90vw !important;
 }

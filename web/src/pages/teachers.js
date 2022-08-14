@@ -26,8 +26,7 @@ const Teachers = ({ data }) => {
                     photoUrl={teacher.photo.asset.url}
                     name={teacher.name}
                     school={teacher.school.name}
-                    city={""}
-                    state={teacher.school.location}
+                    location={teacher.school.location}
                     bio={teacher.bio}
                   />
                 );
