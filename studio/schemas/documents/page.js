@@ -17,6 +17,7 @@ export default {
         { type: "partnersSection" },
         { type: "contactSection" },
         { type: "guidesSection" },
+        { type: "booksSection" },
       ],
     },
   ],

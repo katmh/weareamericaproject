@@ -13,12 +13,14 @@ import teamMember from "./documents/teamMember";
 import story from "./documents/story";
 import school from "./documents/school";
 import teacher from "./documents/teacher";
+import book from "./documents/book";
 
 // Object types
 import guidesSection from "./objects/page-sections/guides";
 import textSection from "./objects/textSection";
 import partnersSection from "./objects/partnersSection";
 import partner from "./objects/partner";
+import booksSection from "./objects/page-sections/books";
 import contactSection from "./objects/contactSection";
 import bodyPortableText from "./objects/bodyPortableText";
 import bioPortableText from "./objects/bioPortableText";
@@ -44,6 +46,7 @@ export default createSchema({
     story,
     school,
     teacher,
+    book,
 
     mainImage,
     bodyPortableText,
@@ -56,6 +59,7 @@ export default createSchema({
     navItem,
     secondLanguageAudio,
     guidesSection,
+    booksSection,
 
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
