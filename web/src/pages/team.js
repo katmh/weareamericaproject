@@ -1,36 +1,58 @@
-/** @jsx jsx */
-
+import React from "react";
 import { graphql } from "gatsby";
-import { jsx } from "theme-ui";
 
 import Gallery from "../components/Gallery";
 import Layout from "../components/Layout";
 import PersonCard from "../components/PersonCard";
 
 const TeamMembersPage = ({ data }) => {
-  const teamMembers = data.allSanityTeamMember.nodes;
-  const showLower = teamMembers.filter(member => member.showLower);
-  const teamMembersOrdered = teamMembers
-    .filter(member => !member.showLower)
-    .concat(showLower);
+  const members = data.allSanityTeamMember.nodes;
+  const active = members
+    .filter(member => member.isInactive !== true)
+    .sort((a, b) => {
+      if (a.showLower === b.showLower) {
+        return 0;
+      }
+      // return a value >0 to sort a after b
+      return a.showLower ? 1 : -1;
+    });
+  const inactive = members.filter(member => member.isInactive);
   return (
     <Layout>
       <h1 className="heading large_heading">Meet our team</h1>
       <Gallery masonry={false} n={5}>
-        {teamMembersOrdered.map(person => {
+        {active.map(person => {
           return (
-            person.photo && (
-              <PersonCard
-                key={person._id}
-                photoUrl={person.photo.asset.url}
-                name={person.name}
-                title={person.role}
-                bio={person._rawBio}
-              />
-            )
+            <PersonCard
+              key={person._id}
+              photoUrl={person.photo.asset.url}
+              name={person.name}
+              title={person.role}
+              bio={person._rawBio}
+              story={person.story}
+            />
           );
         })}
       </Gallery>
+      {inactive && (
+        <section>
+          <h2 className="heading small_heading">Former team members</h2>
+          <Gallery masonry={false} n={5}>
+            {inactive.map(person => {
+              return (
+                <PersonCard
+                  key={person._id}
+                  photoUrl={person.photo.asset.url}
+                  name={person.name}
+                  title={person.role}
+                  bio={person._rawBio}
+                  story={person.story}
+                />
+              );
+            })}
+          </Gallery>
+        </section>
+      )}
     </Layout>
   );
 };
@@ -52,6 +74,10 @@ export const pageQuery = graphql`
         _rawBio
         showLower
         isInactive
+        story {
+          author
+          storyTitle
+        }
       }
     }
   }
