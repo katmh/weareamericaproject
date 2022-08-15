@@ -59,7 +59,9 @@ const Story = ({ pageContext: { data } }) => {
                     sx={{
                       listStyle: "none",
                       display: "inline-block",
-                      mr: 1
+                      mr: 1,
+                      my: 0,
+                      ml: 0
                     }}
                   >
                     <Link
