@@ -8,11 +8,11 @@ const Subscribe = () => {
         <div class="mc-field-group">
           <label for="mce-EMAIL" class="caption1">Email address:</label>
           <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
-          <span id="mce-EMAIL-HELPERTEXT" class="helper_text"></span>
+          <p><span id="mce-EMAIL-HELPERTEXT" class="helper_text"></span></p>
         </div>
         <div id="mce-responses" class="clear foot">
-          <div class="response" id="mce-error-response" style="display:none"></div>
-          <div class="response" id="mce-success-response" style="display:none"></div>
+          <p><div class="response" id="mce-error-response" style="display:none"></div></p>
+          <p><div class="response" id="mce-success-response" style="display:none"></div></p>
         </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
         <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_466aceffe785790da648587fc_3a60133af9" tabindex="-1" value=""></div>
         <div class="mailchimp_button_container">
