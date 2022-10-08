@@ -31,9 +31,10 @@ export default {
       accept: "audio/*",
     },
     {
-      name: "secondLanguageAudio",
-      title: "Second language audio (if applicable)",
-      type: "secondLanguageAudio",
+      name: "school",
+      title: "School",
+      type: "reference",
+      to: [{ type: "school" }],
     },
     {
       name: "tags",
@@ -69,10 +70,9 @@ export default {
       ],
     },
     {
-      name: "school",
-      title: "School",
-      type: "reference",
-      to: [{ type: "school" }],
+      name: "secondLanguageAudio",
+      title: "Second language audio (if applicable)",
+      type: "secondLanguageAudio",
     },
     {
       name: "isFeatured",
