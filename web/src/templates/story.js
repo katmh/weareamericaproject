@@ -95,16 +95,18 @@ const Story = ({ pageContext: { data } }) => {
             )}
           </p>
 
-          <audio
-            controls
-            src={data.audio ? data.audio.asset.url : ""}
-            sx={{
-              display: "block",
-              my: 4
-            }}
-          >
-            Your browser does not support the <code>audio</code> element. :(
-          </audio>
+          {data.audio?.asset ? (
+            <audio
+              controls
+              src={data.audio.asset.url}
+              sx={{
+                display: "block",
+                my: 4
+              }}
+            >
+              Your browser does not support the <code>audio</code> element. :(
+            </audio>
+          ) : null}
 
           {data.secondLanguageAudio ? (
             <span
