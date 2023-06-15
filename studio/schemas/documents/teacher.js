@@ -34,6 +34,7 @@ export default {
           "Cohort 2 (2020-2021)",
           "Cohort 3 (2021-2022)",
           "Cohort 4 (2022-2023)",
+          "Cohort 5 (2023-2024)",
         ],
       },
     },
