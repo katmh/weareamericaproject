@@ -7,11 +7,13 @@ export default {
       name: "name",
       title: "Name",
       type: "string",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "role",
       title: "Role",
       type: "string",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "bio",
@@ -23,19 +25,20 @@ export default {
       name: "photo",
       title: "Headshot",
       type: "image",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "showLower",
       title: "Show lower on page",
       description:
-        "This person is a current team member, but for one reason or another (e.g. they don't have a professional headshot) we want to show them after all the members who don't have this checked off",
+        "This person is a current team member, but for some reason (e.g. they don't have a professional headshot) we want them to appear below all others who don't have this checked off.",
       type: "boolean",
     },
     {
       name: "isInactive",
       title: "Inactive",
       description:
-        "This person will be shown in a separate section for former team members",
+        "This person will be shown in a separate section for former team members.",
       type: "boolean",
     },
     {

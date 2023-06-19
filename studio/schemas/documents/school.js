@@ -7,6 +7,7 @@ export default {
       name: "name",
       title: "Name",
       type: "string",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "city",
@@ -17,6 +18,7 @@ export default {
       name: "location",
       title: "State/Location",
       type: "string",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "grade",

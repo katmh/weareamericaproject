@@ -7,11 +7,13 @@ export default {
       name: "author",
       title: "Author",
       type: "string",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "storyTitle",
       title: "Story Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "text",
@@ -23,6 +25,7 @@ export default {
       name: "photo",
       title: "Photo",
       type: "image",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "audio",
@@ -35,6 +38,7 @@ export default {
       title: "School",
       type: "reference",
       to: [{ type: "school" }],
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "tags",
