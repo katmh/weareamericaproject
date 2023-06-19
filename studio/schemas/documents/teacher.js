@@ -7,11 +7,13 @@ export default {
       name: "name",
       title: "Name",
       type: "string",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "photo",
       title: "Portrait",
       type: "image",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "bio",
@@ -23,6 +25,7 @@ export default {
       title: "School",
       type: "reference",
       to: [{ type: "school" }],
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "cohort",
@@ -37,6 +40,7 @@ export default {
           "Cohort 5 (2023-2024)",
         ],
       },
+      validation: (Rule) => Rule.required(),
     },
   ],
 };
