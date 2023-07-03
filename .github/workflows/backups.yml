@@ -11,7 +11,7 @@ env:
 
 jobs:
   backup-dataset:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     name: Backup dataset
     steps:
       - name: Check out repo
