@@ -10,7 +10,7 @@ const Guide = ({ guide }) => {
   return (
     <li>
       {url ? (
-        <a className="guide_link" href={url}>
+        <a className="guide_link" href={url} target="_blank" rel="noreferrer">
           <span>{title}</span>{" "}
           <span className="icon_container">
             <ExternalLinkIcon />
