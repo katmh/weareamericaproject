@@ -17,6 +17,8 @@ const ShareBtns = ({ title }) => {
         href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
           tweetText(title)
         )}&url=${encodeURIComponent(url)}`}
+        target="_blank"
+        rel="noreferrer"
       >
         <TwitterIcon width="3rem" />
       </a>
