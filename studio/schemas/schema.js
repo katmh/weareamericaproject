@@ -5,7 +5,6 @@ import createSchema from "part:@sanity/base/schema-creator";
 import schemaTypes from "all:part:@sanity/base/schema-type";
 
 // document schemas
-import post from "./documents/post";
 import siteSettings from "./documents/siteSettings";
 import page from "./documents/page";
 import guide from "./documents/guide";
@@ -14,6 +13,7 @@ import story from "./documents/story";
 import school from "./documents/school";
 import teacher from "./documents/teacher";
 import book from "./documents/book";
+import newsItem from "./documents/newsItem";
 
 // Object types
 import guidesSection from "./objects/page-sections/guides";
@@ -41,12 +41,12 @@ export default createSchema({
     page,
     guide,
     siteSettings,
-    post,
     teamMember,
     story,
     school,
     teacher,
     book,
+    newsItem,
 
     mainImage,
     bodyPortableText,

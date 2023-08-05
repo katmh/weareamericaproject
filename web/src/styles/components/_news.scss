@@ -1,0 +1,20 @@
+@use "sass:color";
+@use "src/styles/abstract/colors";
+
+.news_item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding-bottom: 1.4rem;
+  margin-bottom: 1.4rem;
+  border-bottom: 1px solid color.change(colors.$text-captions, $alpha: 0.25);
+}
+
+.news_item:last-of-type {
+  border-bottom: none;
+}
+
+.news_item p {
+  margin: 0 !important;
+  line-height: 1 !important;
+}
