@@ -9,10 +9,18 @@ import PersonCard from "../components/PersonCard";
 const Teachers = ({ data }) => {
   const page = data.allSanityPage.nodes[0];
   const content = page.content[0]._rawContent;
+  const states = data.allSanitySchool.distinct;
   return (
     <Layout>
       <h1 className="heading large_heading">{page.title}</h1>
       <PortableText value={content} />
+      <p>We Are America fellows are in the following locations:</p>
+      {states.map(state => (
+        <li className="caption1" key={state}>
+          {state}
+        </li>
+      ))}
+
       <br />
       {data.allSanityTeacher.group.reverse().map(cohort => {
         return (
@@ -52,6 +60,9 @@ export const pageQuery = graphql`
           }
         }
       }
+    }
+    allSanitySchool(sort: { fields: location }) {
+      distinct(field: location)
     }
     allSanityTeacher {
       group(field: cohort) {
