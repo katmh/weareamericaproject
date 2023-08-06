@@ -45,7 +45,7 @@ const Footer = () => {
         </nav>
       </div>
       <p className="caption2">
-        © 2019-2022 We Are America Project. All Rights Reserved.
+        © 2019-2023 We Are America Project. All Rights Reserved.
       </p>
     </footer>
   );
