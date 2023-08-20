@@ -1,0 +1,20 @@
+.map_container {
+  max-width: 40rem;
+  margin: 2rem auto 3rem;
+}
+
+.state {
+  stroke: #888;
+  stroke-width: 1.25;
+  fill: #fefefe;
+}
+
+.state.active {
+  fill: #fc6;
+  stroke: #666;
+}
+
+.map_caption {
+  text-align: center;
+  margin-top: 2rem;
+}

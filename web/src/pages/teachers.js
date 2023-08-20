@@ -5,16 +5,16 @@ import { PortableText } from "@portabletext/react";
 import Gallery from "../components/Gallery";
 import Layout from "../components/Layout";
 import PersonCard from "../components/PersonCard";
+import Map from "../components/Map";
 
 const Teachers = ({ data }) => {
   const page = data.allSanityPage.nodes[0];
   const content = page.content[0]._rawContent;
-  // const states = data.allSanitySchool.distinct;
   return (
     <Layout>
       <h1 className="heading large_heading">{page.title}</h1>
       <PortableText value={content} />
-      <br />
+      <Map />
       {data.allSanityTeacher.group.reverse().map(cohort => {
         return (
           <section key={cohort.fieldValue}>
