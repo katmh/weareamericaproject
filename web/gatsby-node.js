@@ -30,6 +30,7 @@ exports.createPages = async ({ graphql, actions }) => {
           }
           school {
             name
+            city
             location
           }
           tags

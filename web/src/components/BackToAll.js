@@ -7,18 +7,20 @@ const BackToAll = ({ name, path }) => (
     sx={{
       mb: 4
     }}
+    className="caption1"
   >
     <Link
       to={path}
       sx={{
         display: "inline-block",
-        color: "#444",
+        color: "#555",
         textDecoration: "none",
-        pb: "1px",
-        borderBottom: "1px solid #999",
+        pb: "0.5px",
+        borderBottom: "1px solid #777",
         transition: ".15s",
         ":hover": {
-          borderBottom: "1px solid #666"
+          color: "#777",
+          borderBottom: "1px solid #999"
         }
       }}
     >

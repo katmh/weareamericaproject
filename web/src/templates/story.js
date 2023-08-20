@@ -2,153 +2,100 @@
 import { jsx } from "theme-ui";
 import { Link } from "gatsby";
 import { PortableText } from "@portabletext/react";
-import slugify from "../../utils/slugify";
+import StoryTags from "../components/StoryTags";
 import BackToAll from "../components/BackToAll";
 import Layout from "../components/Layout";
-import ShareBtns from "../components/ShareBtns";
+import LocationIcon from "../components/icons/Location";
 
 const Story = ({ pageContext: { data } }) => {
   return (
-    <Layout>
+    <Layout width="thin">
       <BackToAll name="stories" path="/stories" />
+      <div className="story-info">
+        <h1
+          className="heading large_heading"
+          sx={{
+            mb: 1
+          }}
+        >
+          {data.storyTitle}
+        </h1>
+        <p className="caption1" sx={{ mb: 4 }}>
+          By {data.author}
+        </p>
+      </div>
+      <img
+        src={data.photo ? data.photo.asset.url : ""}
+        alt={"Photo of" + data.Author}
+        sx={{
+          maxWidth: "100%"
+        }}
+      />
+
       <div
         sx={{
-          display: "grid",
-          gridTemplateColumns: ["1fr", "1fr 2fr"],
-          gridGap: "1rem"
+          display: "flex",
+          alignItems: "center",
+          gap: 2
         }}
       >
-        <div className="story-info">
-          <h1
-            sx={{
-              fontFamily: "heading",
-              fontSize: 4,
-              color: "accent",
-              lineHeight: 1.1,
-              mb: 2
-            }}
-          >
-            {data.storyTitle}
-          </h1>
-          <h2
-            sx={{
-              fontFamily: "heading",
-              fontSize: 2,
-              lineHeight: 1.25,
-              color: "muted",
-              mb: 3
-            }}
-          >
-            {data.author}, ({data.school.name}, {data.school.location})
-          </h2>
-          <p>
-            {data.tags ? (
-              <ul>
-                <span
-                  sx={{
-                    fontFamily: "body",
-                    fontWeight: "700",
-                    mr: 1
-                  }}
-                >
-                  Tags:
-                </span>
-                {data.tags.map(tag => (
-                  <li
-                    key={slugify(tag)}
-                    sx={{
-                      listStyle: "none",
-                      display: "inline-block",
-                      mr: 1,
-                      my: 0,
-                      ml: 0
-                    }}
-                  >
-                    <Link
-                      to={"/tag/" + slugify(tag)}
-                      sx={{
-                        fontFamily: "body",
-                        lineHeight: "100%",
-                        textDecoration: "none",
-                        bg: "accent",
-                        color: "background",
-                        p: ".4rem .6rem",
-                        borderRadius: ".3rem",
-                        fontSize: 0,
-                        fontWeight: "700",
-                        transition: ".1s",
-                        display: "inline-block",
-                        my: ".15rem",
-                        ":hover": {
-                          color: "#fff",
-                          background: "#844"
-                        }
-                      }}
-                    >
-                      {tag}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              ""
-            )}
-          </p>
-
-          {data.audio?.asset ? (
-            <audio
-              controls
-              src={data.audio.asset.url}
-              sx={{
-                display: "block",
-                my: 4
-              }}
-            >
-              Your browser does not support the <code>audio</code> element. :(
-            </audio>
-          ) : null}
-
-          {data.secondLanguageAudio ? (
-            <span
-              sx={{
-                fontFamily: "body",
-                fontWeight: "700",
-                mr: 1,
-                verticalAlign: "top"
-              }}
-            >
-              Listen in {data.secondLanguageAudio.language}
-            </span>
-          ) : null}
-          {data.secondLanguageAudio ? (
-            <audio
-              controls
-              src={
-                data.Second_Language_Audio
-                  ? data.secondLanguageAudio.asset.url
-                  : ""
-              }
-              sx={{
-                display: "block",
-                mt: 2,
-                mb: 4
-              }}
-            >
-              Your browser does not support the <code>audio</code> element. :(
-            </audio>
-          ) : null}
-
-          <ShareBtns title={data.storyTitle} />
-        </div>
-        <img
-          src={data.photo ? data.photo.asset.url : ""}
-          alt={"Photo of" + data.Author}
+        <LocationIcon
+          width={20}
+          height={20}
           sx={{
-            maxWidth: "100%"
+            path: {
+              // fill: "red"
+            }
           }}
         />
+        <p className="caption1">
+          {data.school.name}, {!!data.school.city && `${data.school.city}, `}
+          {data.school.location}
+        </p>
       </div>
-      <div sx={{ mt: 4 }}>
+
+      {data.audio?.asset ? (
+        <audio
+          controls
+          src={data.audio.asset.url}
+          sx={{
+            display: "block",
+            my: 4
+          }}
+        >
+          Your browser does not support the <code>audio</code> element. :(
+        </audio>
+      ) : null}
+
+      {data.secondLanguageAudio ? (
+        <span
+          sx={{
+            fontFamily: "body",
+            fontWeight: "700",
+            mr: 1,
+            verticalAlign: "top"
+          }}
+        >
+          Listen in {data.secondLanguageAudio.language}
+        </span>
+      ) : null}
+      {data.secondLanguageAudio ? (
+        <audio
+          controls
+          src={
+            data.Second_Language_Audio ? data.secondLanguageAudio.asset.url : ""
+          }
+          sx={{
+            display: "block",
+            mt: 2,
+            mb: 4
+          }}
+        >
+          Your browser does not support the <code>audio</code> element. :(
+        </audio>
+      ) : null}
+
+      <div sx={{ mt: 4, mb: 5 }}>
         <PortableText value={data._rawText} />
         <p className="caption2">
           © {data.author}. All rights reserved. If you are interested in quoting
@@ -156,6 +103,8 @@ const Story = ({ pageContext: { data } }) => {
           we can put you in touch with the author’s teacher.
         </p>
       </div>
+
+      <StoryTags tags={data.tags} />
     </Layout>
   );
 };
