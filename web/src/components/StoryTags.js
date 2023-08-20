@@ -5,7 +5,7 @@ import { Link } from "gatsby";
 
 const StoryTags = ({ tags }) => {
   if (!tags || !tags.length) {
-    return;
+    return null;
   }
 
   return (
