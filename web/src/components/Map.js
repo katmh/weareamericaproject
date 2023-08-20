@@ -22,8 +22,8 @@ const Map = () => {
     <div className="map_container">
       <SVGMap map={USA} locationClassName={getLocationClassName} />
       <p className="caption2 map_caption">
-        The We Are America Project has been in classrooms all across the country
-        and beyond.
+        The We Are America Project is in classrooms all across the country and
+        beyond.
       </p>
     </div>
   );
