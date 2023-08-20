@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@sanity/cli": "^2.30.0",
+    "@types/theme-ui": "^0.6.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^8.1.0",
