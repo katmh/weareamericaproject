@@ -8,22 +8,7 @@ import BackToAll from "../components/BackToAll";
 const TagPage = ({ pageContext: { nodes, tag } }) => (
   <Layout>
     <BackToAll name="stories" path="/stories" />
-    <h1
-      sx={{
-        fontFamily: "heading",
-        fontSize: 4,
-        mb: 3
-      }}
-    >
-      <span
-        sx={{
-          color: "accent"
-        }}
-      >
-        {tag}{" "}
-      </span>
-      stories ({nodes.length})
-    </h1>
+    <h1 className="heading large_heading">Stories about: {tag}</h1>
     <Gallery n={3}>
       {nodes.map(node => (
         <StoryCard
