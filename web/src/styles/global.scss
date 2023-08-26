@@ -36,13 +36,15 @@ li,
 label,
 input,
 textarea,
-textarea {
+select {
   color: colors.$text-body;
   font: normal 1.25rem/145% fonts.$body;
 }
 
+label,
 input,
-textarea {
+textarea,
+select {
   font-size: 1.15rem;
 }
 
@@ -92,11 +94,6 @@ p {
 
 .caption1 {
   margin: 1rem 0;
-}
-
-label {
-  display: block;
-  margin: 1.5rem 0 0.5rem;
 }
 
 .heading {

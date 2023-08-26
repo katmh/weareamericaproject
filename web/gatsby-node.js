@@ -137,13 +137,14 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-  const createTagPage = subdir => ({ fieldValue: tag, nodes }) => {
+  const createTagPage = tagType => ({ fieldValue: tag, nodes }) => {
     createPage({
-      path: `/${subdir}/${slugify(tag)}`,
+      path: `/${tagType}/${slugify(tag)}`,
       component: require.resolve("./src/templates/tag.js"),
       context: {
         nodes,
-        tag
+        tag,
+        tagType
       }
     });
   };

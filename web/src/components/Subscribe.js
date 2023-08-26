@@ -6,7 +6,7 @@ const Subscribe = () => {
     <div id="mc_embed_signup">
       <form action="https://weareamericaproject.us4.list-manage.com/subscribe/post?u=466aceffe785790da648587fc&amp;id=3a60133af9&amp;f_id=00d6dae9f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
         <div class="mc-field-group">
-          <label for="mce-EMAIL" class="caption1">Email address:</label>
+          <label for="mce-EMAIL" class="caption1"><p>Email address:</p></label>
           <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
           <p><span id="mce-EMAIL-HELPERTEXT" class="helper_text"></span></p>
         </div>

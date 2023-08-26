@@ -4,8 +4,8 @@ import Dropdown from "../components/Dropdown";
 import Gallery from "../components/Gallery";
 import Layout from "../components/Layout";
 import PaginationControls from "../components/PaginationControls";
-import SearchText from "../components/SearchText";
 import StoryCard from "../components/StoryCard";
+import SearchBar from "../components/SearchBar";
 
 const UnfilteredStoriesPage = ({
   data,
@@ -21,23 +21,31 @@ const UnfilteredStoriesPage = ({
   const stories = data.stories.nodes;
   return (
     <Layout>
-      <h1 className="heading large_heading">Library of Stories</h1>
-      <SearchText />
-      <Dropdown content={data.tags} contentName="Topic" contentSlug="tag" />
-      <Dropdown content={data.states} contentName="State" contentSlug="state" />
-      <Dropdown
-        content={data.schools}
-        contentName="School"
-        contentSlug="school"
-      />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center"
+        }}
+      >
+        <h1 className="heading large_heading">Library of Stories</h1>
+        <SearchBar />
+      </div>
+      <div id="filters">
+        <Dropdown content={data.tags} contentName="Topic" contentSlug="tag" />
+        <Dropdown
+          content={data.states}
+          contentName="Location"
+          contentSlug="state"
+        />
+        <Dropdown
+          content={data.schools}
+          contentName="School"
+          contentSlug="school"
+        />
+      </div>
       <br />
       <br />
-      <PaginationControls
-        currentPage={currentPage}
-        numPages={numPages}
-        prevPage={!isFirstPage ? prevPage : ""}
-        nextPage={!isLastPage ? nextPage : ""}
-      />
       <br />
       <Gallery n={3}>
         {stories.map(story => {

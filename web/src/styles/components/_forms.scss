@@ -3,10 +3,10 @@
 @use "src/styles/abstract/fonts";
 
 input,
-textarea {
+textarea,
+select {
   padding: 0.5rem 0.75rem;
-  border-radius: 0.5rem;
-  border: 1px solid colors.$border;
+
   display: block;
 
   &:active,
@@ -14,6 +14,12 @@ textarea {
     box-shadow: 1px 1px 6px color.change(colors.$border, $alpha: 0.5);
     outline: none;
   }
+}
+
+input,
+textarea {
+  border: 1px solid colors.$border;
+  border-radius: 0.5rem;
 }
 
 form button,
@@ -45,5 +51,72 @@ form {
     width: 100%;
     max-width: 40rem;
     min-height: 8rem;
+  }
+  label {
+    display: block;
+    margin: 1.5rem 0 0.5rem;
+  }
+}
+
+#filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.dropdown {
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  border-radius: 0.5rem;
+  border: 1px solid colors.$border;
+
+  label {
+    background: colors.$desaturated-red;
+    color: colors.$body-background;
+    padding: 0.25rem 0.75rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    border-top-left-radius: 0.3rem;
+    border-bottom-left-radius: 0.3rem;
+  }
+
+  select {
+    padding-left: 0.5rem;
+
+    max-width: 14rem;
+    height: 100%;
+
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    border: none;
+    border-right: 0.5rem solid transparent; // padding to the right of the arrow
+  }
+}
+
+#search_form {
+  position: relative;
+  width: min-content;
+
+  input {
+    width: 20rem;
+  }
+
+  button {
+    all: unset;
+    position: absolute;
+    cursor: pointer;
+    top: 0.65rem;
+    right: 0.65rem;
+  }
+
+  #search_icon {
+    width: 24px;
+    height: 24px;
+    path {
+      stroke: colors.$text-captions;
+    }
   }
 }
