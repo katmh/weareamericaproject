@@ -64,7 +64,7 @@ const Story = ({ pageContext: { data } }) => {
       {!!audio?.asset && (
         <audio
           controls
-          src={data.audio.asset.url}
+          src={audio.asset.url}
           sx={{
             display: "block",
             my: 4
@@ -74,7 +74,7 @@ const Story = ({ pageContext: { data } }) => {
         </audio>
       )}
 
-      {!!secondLanguageAudio && (
+      {!!secondLanguageAudio?.asset && (
         <div>
           <span
             sx={{
@@ -84,11 +84,11 @@ const Story = ({ pageContext: { data } }) => {
               verticalAlign: "top"
             }}
           >
-            Listen in {data.secondLanguageAudio.language}
+            Listen in {secondLanguageAudio.language}
           </span>
           <audio
             controls
-            src={data.secondLanguageAudio.asset.url}
+            src={secondLanguageAudio.asset.url}
             sx={{
               display: "block",
               mt: 2,
