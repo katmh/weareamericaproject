@@ -21,7 +21,7 @@ const Story = ({ pageContext: { data } }) => {
 
   // Workaround: Sometimes people format stories with an extra newline between paragraphs,
   // so skip any blocks that consist of just a newline.
-  const rawText = _rawText.filter(block => block.children?.[0]?.text !== "\n");
+  const rawText = _rawText?.filter(block => block.children?.[0]?.text !== "\n");
 
   return (
     <Layout width="thin">
