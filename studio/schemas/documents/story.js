@@ -18,6 +18,8 @@ export default {
     {
       name: "text",
       title: "Text",
+      description:
+        "Only one line break/“enter”/return is needed between paragraphs. You may need to reformat the story text a bit.",
       type: "array",
       of: [{ type: "block" }],
     },
