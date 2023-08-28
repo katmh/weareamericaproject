@@ -81,6 +81,8 @@ export default {
     {
       name: "isFeatured",
       title: "Featured",
+      description:
+        "The front page of the We Are America Project website showcases a rotation of randomly chosen featured stories. You can designate a story as featured here. Please select a maximum of 2-3 stories from your classroom to be featured.",
       type: "boolean",
     },
     {
