@@ -75,7 +75,7 @@ const Story = ({ pageContext: { data } }) => {
       )}
 
       {!!secondLanguageAudio && (
-        <>
+        <div>
           <span
             sx={{
               fontFamily: "body",
@@ -97,7 +97,7 @@ const Story = ({ pageContext: { data } }) => {
           >
             The audio player is not supported in your browser.
           </audio>
-        </>
+        </div>
       )}
 
       <div sx={{ mt: 4, mb: 5 }}>
