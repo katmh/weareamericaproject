@@ -13,10 +13,10 @@ const Footer = () => {
           <Link to="/" className="logo small_logo">
             We Are America
           </Link>
-          <p className="caption1">
+          {/* <p className="caption1">
             Subscribe to our newsletter for monthly updates
           </p>
-          <Subscribe />
+          <Subscribe /> */}
         </div>
         <nav>
           {navItems.map(item => {

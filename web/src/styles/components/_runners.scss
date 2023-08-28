@@ -31,6 +31,12 @@ footer {
     }
   }
 
+  @include media-queries.screen-tablet-down {
+    #flex {
+      flex-wrap: wrap;
+    }
+  }
+
   .footer_submenu {
     flex-direction: column;
     margin-left: 1.5rem;
