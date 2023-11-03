@@ -5,9 +5,23 @@ export default {
   fields: [
     {
       name: "author",
-      title: "Author",
+      title: "Author Full Name",
       type: "string",
       validation: (Rule) => Rule.required(),
+    },
+    {
+      name: "authorFirstName",
+      title: "Author First Name",
+      type: "string",
+      // TODO: make required
+      // validation: (Rule) => Rule.required(),
+    },
+    {
+      name: "authorLastName",
+      title: "Author Last Name",
+      type: "string",
+      // TODO: make required
+      // validation: (Rule) => Rule.required(),
     },
     {
       name: "storyTitle",
