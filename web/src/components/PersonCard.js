@@ -83,7 +83,7 @@ const PersonCard = props => {
           {props.story && (
             <p className="caption1">
               Story:{" "}
-              <Link to={`/story/${slugify(props.story.author)}`}>
+              <Link to={`/story/${slugify(props.story.storyTitle)}`}>
                 {props.story.storyTitle}
               </Link>
             </p>

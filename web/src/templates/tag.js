@@ -14,10 +14,10 @@ const TagPage = ({ pageContext: { nodes, tag, tagType } }) => (
     <Gallery n={3}>
       {nodes.map(node => (
         <StoryCard
-          key={node.author}
+          key={node.authorFirstName}
           photoUrl={node.photo.asset.url}
           title={node.storyTitle}
-          author={node.author}
+          author={node.authorFirstName}
         />
       ))}
     </Gallery>

@@ -3,7 +3,7 @@ import { jsx } from "theme-ui";
 import { Link, graphql } from "gatsby";
 import slugify from "../../utils/slugify";
 
-const StoryCard = props => (
+const StoryCard = ({ title, photoUrl, author }) => (
   <article
     sx={{
       mb: "30px",
@@ -13,7 +13,7 @@ const StoryCard = props => (
     }}
   >
     <Link
-      to={`/story/${slugify(props.author)}`}
+      to={`/story/${slugify(title)}`}
       sx={{
         textDecoration: "none"
       }}
@@ -25,8 +25,8 @@ const StoryCard = props => (
         }}
       >
         <img
-          src={props.photoUrl}
-          alt={"Photo of " + props.author}
+          src={photoUrl}
+          alt={"Photo of " + author}
           sx={{
             maxWidth: "100%",
             m: "0",
@@ -55,7 +55,7 @@ const StoryCard = props => (
             lineHeight: 1.25
           }}
         >
-          {props.title}
+          {title}
         </h3>
 
         <h4
@@ -66,7 +66,7 @@ const StoryCard = props => (
             fontSize: "1.25rem"
           }}
         >
-          {props.author}
+          {author}
         </h4>
       </div>
     </Link>
@@ -78,7 +78,7 @@ export default StoryCard;
 export const query = graphql`
   fragment StoryCardInformation on SanityStory {
     id
-    author
+    authorFirstName
     storyTitle
     photo {
       asset {

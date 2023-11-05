@@ -75,7 +75,7 @@ export const pageQuery = graphql`
         showLower
         isInactive
         story {
-          author
+          authorFirstName
           storyTitle
         }
       }

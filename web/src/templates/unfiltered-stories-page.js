@@ -52,7 +52,7 @@ const UnfilteredStoriesPage = ({
           return (
             <StoryCard
               key={story.id}
-              author={story.author}
+              author={story.authorFirstName}
               title={story.storyTitle}
               photoUrl={story.photo.asset.url}
             />

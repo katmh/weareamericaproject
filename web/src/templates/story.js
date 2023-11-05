@@ -10,7 +10,7 @@ import LocationIcon from "../components/icons/Location";
 const Story = ({ pageContext: { data } }) => {
   const {
     storyTitle,
-    author,
+    authorFirstName: author,
     photo,
     school,
     audio,

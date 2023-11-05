@@ -8,7 +8,7 @@ exports.createPages = async ({ graphql, actions }) => {
       allSanityStory(filter: { isHidden: { ne: true } }) {
         nodes {
           id
-          author
+          authorFirstName
           storyTitle
           photo {
             asset {
@@ -46,7 +46,7 @@ exports.createPages = async ({ graphql, actions }) => {
         group(field: tags) {
           fieldValue
           nodes {
-            author
+            authorFirstName
             storyTitle
             photo {
               asset {
@@ -64,7 +64,7 @@ exports.createPages = async ({ graphql, actions }) => {
         group(field: school___name) {
           fieldValue
           nodes {
-            author
+            authorFirstName
             storyTitle
             photo {
               asset {
@@ -82,7 +82,7 @@ exports.createPages = async ({ graphql, actions }) => {
         group(field: school___location) {
           fieldValue
           nodes {
-            author
+            authorFirstName
             storyTitle
             photo {
               asset {
@@ -129,7 +129,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   storiesResult.data.allSanityStory.nodes.forEach(node => {
     createPage({
-      path: `/story/${slugify(node.author)}/`,
+      path: `/story/${slugify(node.storyTitle)}/`,
       component: require.resolve("./src/templates/story.js"),
       context: {
         data: node

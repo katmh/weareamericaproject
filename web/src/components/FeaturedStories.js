@@ -21,7 +21,7 @@ const FeaturedStories = ({ nCols, nStories }) => {
       ) {
         nodes {
           id
-          author
+          authorFirstName
           storyTitle
           photo {
             asset {
@@ -49,7 +49,7 @@ const FeaturedStories = ({ nCols, nStories }) => {
           key={story.id}
           title={story.storyTitle}
           photoUrl={story.photo.asset.url}
-          author={story.author}
+          author={story.authorFirstName}
         />
       ))}
     </Gallery>
