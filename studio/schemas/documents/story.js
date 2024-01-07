@@ -6,18 +6,15 @@ export default {
     {
       name: "author",
       title: "Author Full Name",
+      description:
+        "We store the student's full name to keep track of stories in our system, but the website will only show the student's first name, which you can specify in the next box.",
       type: "string",
       validation: (Rule) => Rule.required(),
     },
     {
       name: "authorFirstName",
       title: "Author First Name",
-      type: "string",
-      validation: (Rule) => Rule.required(),
-    },
-    {
-      name: "authorLastName",
-      title: "Author Last Name",
+      description: "This is what will show on the website.",
       type: "string",
       validation: (Rule) => Rule.required(),
     },
@@ -29,9 +26,9 @@ export default {
     },
     {
       name: "text",
-      title: "Text",
+      title: "Story Text",
       description:
-        "Only one line break/“enter”/return is needed between paragraphs. You may need to reformat the story text a bit.",
+        "Note: You only need to hit “enter” once in between paragraphs. This might mean that the text needs to be reformatted a bit.",
       type: "array",
       of: [{ type: "block" }],
     },
@@ -46,13 +43,6 @@ export default {
       title: "Audio",
       type: "file",
       accept: "audio/*",
-    },
-    {
-      name: "school",
-      title: "School",
-      type: "reference",
-      to: [{ type: "school" }],
-      validation: (Rule) => Rule.required(),
     },
     {
       name: "tags",
@@ -90,7 +80,46 @@ export default {
     {
       name: "secondLanguageAudio",
       title: "Second language audio (if applicable)",
+      description:
+        "Some students record a version of their story in another language, such as their native language. If applicable, you can specify the language and audio recording here.",
       type: "secondLanguageAudio",
+    },
+    {
+      name: "school",
+      title: "School",
+      type: "reference",
+      to: [{ type: "school" }],
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: "teacher",
+      title: "Teacher",
+      description:
+        "Note: The options in this dropdown depend on the school selected.",
+      type: "reference",
+      to: [{ type: "teacher" }],
+      options: {
+        filter: ({ document }) => {
+          console.log(document);
+          if (document.school) {
+            return {
+              filter: "school._ref == $school",
+              params: { school: document.school._ref },
+            };
+          } else {
+            return {
+              filter: "",
+            };
+          }
+        },
+        disableNew: true,
+      },
+      // validation: (Rule) => Rule.required(),
+    },
+    {
+      name: "consent",
+      title: "Consent (required)",
+      type: "consent",
     },
     {
       name: "isFeatured",
@@ -102,6 +131,8 @@ export default {
     {
       name: "isHidden",
       title: "Hide story",
+      description:
+        "Check this box to unpublish the story from the website. This is intended for admin use.",
       type: "boolean",
     },
   ],

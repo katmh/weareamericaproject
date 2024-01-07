@@ -28,6 +28,7 @@ import excerptPortableText from "./objects/excerptPortableText";
 import mainImage from "./objects/mainImage";
 import navItem from "./objects/navItem";
 import secondLanguageAudio from "./objects/secondLanguageAudio";
+import consent from "./objects/consent";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -60,6 +61,7 @@ export default createSchema({
     secondLanguageAudio,
     guidesSection,
     booksSection,
+    consent,
 
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
