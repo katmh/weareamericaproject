@@ -46,18 +46,6 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-netlify-cms`,
     {
-      resolve: `gatsby-source-airtable`,
-      options: {
-        apiKey: process.env.AIRTABLE_API_KEY,
-        tables: [
-          {
-            baseId: process.env.AIRTABLE_PEOPLE_BASE_ID,
-            tableName: `Teachers`
-          }
-        ]
-      }
-    },
-    {
       resolve: `gatsby-plugin-webfonts`,
       options: {
         fonts: {
