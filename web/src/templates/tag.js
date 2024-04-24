@@ -15,7 +15,7 @@ const TagPage = ({ pageContext: { nodes, tag, tagType } }) => (
       {nodes.map(node => (
         <StoryCard
           key={node.authorFirstName}
-          photoUrl={node.photo.asset.url}
+          photoUrl={node.photo.asset?.url}
           title={node.storyTitle}
           author={node.authorFirstName}
         />

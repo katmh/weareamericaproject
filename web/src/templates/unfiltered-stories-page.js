@@ -54,7 +54,7 @@ const UnfilteredStoriesPage = ({
               key={story.id}
               author={story.authorFirstName}
               title={story.storyTitle}
-              photoUrl={story.photo.asset.url}
+              photoUrl={story.photo.asset?.url}
             />
           );
         })}

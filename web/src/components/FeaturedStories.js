@@ -48,7 +48,7 @@ const FeaturedStories = ({ nCols, nStories }) => {
         <StoryCard
           key={story.id}
           title={story.storyTitle}
-          photoUrl={story.photo.asset.url}
+          photoUrl={story.photo.asset?.url}
           author={story.authorFirstName}
         />
       ))}

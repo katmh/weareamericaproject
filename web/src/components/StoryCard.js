@@ -18,25 +18,27 @@ const StoryCard = ({ title, photoUrl, author }) => (
         textDecoration: "none"
       }}
     >
-      <div
-        className="image-wrapper"
-        sx={{
-          overflow: "hidden"
-        }}
-      >
-        <img
-          src={photoUrl}
-          alt={"Photo of " + author}
+      {photoUrl && (
+        <div
+          className="image-wrapper"
           sx={{
-            maxWidth: "100%",
-            m: "0",
-            transition: ".15s",
-            position: "relative",
-            zIndex: "-1",
-            display: "block"
+            overflow: "hidden"
           }}
-        />
-      </div>
+        >
+          <img
+            src={photoUrl}
+            alt={"Photo of " + author}
+            sx={{
+              maxWidth: "100%",
+              m: "0",
+              transition: ".15s",
+              position: "relative",
+              zIndex: "-1",
+              display: "block"
+            }}
+          />
+        </div>
+      )}
 
       <div
         sx={{
