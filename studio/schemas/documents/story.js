@@ -135,5 +135,11 @@ export default {
         "Check this box to unpublish the story from the website. This is intended for admin use.",
       type: "boolean",
     },
+    {
+      name: "slug",
+      title: "Slug",
+      type: "string",
+      hidden: true, // Hide in Sanity Studio.
+    },
   ],
 };
