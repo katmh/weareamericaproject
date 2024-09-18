@@ -128,8 +128,15 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   storiesResult.data.allSanityStory.nodes.forEach(node => {
+    const truncatedStoryTitle = node.storyTitle
+      .split(" ")
+      .slice(0, 4)
+      .join("");
+    const firstLetterOfFirstName = node.authorFirstName[0];
+    const slug = slugify(`${truncatedStoryTitle}-${firstLetterOfFirstName}`);
+
     createPage({
-      path: `/story/${slugify(node.storyTitle)}/`,
+      path: `/story/${slug}/`,
       component: require.resolve("./src/templates/story.js"),
       context: {
         data: node
