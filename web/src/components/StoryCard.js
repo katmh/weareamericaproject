@@ -1,79 +1,82 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
 import { Link, graphql } from "gatsby";
-import slugify from "../../utils/slugify";
+import * as slugUtils from "../../utils/slugify";
 
-const StoryCard = ({ title, photoUrl, author }) => (
-  <article
-    sx={{
-      mb: "30px",
-      ":hover img": {
-        transform: "scale(1.1)"
-      }
-    }}
-  >
-    <Link
-      to={`/story/${slugify(title)}`}
+const StoryCard = ({ title, photoUrl, author }) => {
+  const slug = slugUtils.getStorySlug(title, author);
+  return (
+    <article
       sx={{
-        textDecoration: "none"
+        mb: "30px",
+        ":hover img": {
+          transform: "scale(1.1)"
+        }
       }}
     >
-      {photoUrl && (
-        <div
-          className="image-wrapper"
-          sx={{
-            overflow: "hidden"
-          }}
-        >
-          <img
-            src={photoUrl}
-            alt={"Photo of " + author}
-            sx={{
-              maxWidth: "100%",
-              m: "0",
-              transition: ".15s",
-              position: "relative",
-              zIndex: "-1",
-              display: "block"
-            }}
-          />
-        </div>
-      )}
-
-      <div
+      <Link
+        to={`/story/${slug}`}
         sx={{
-          bg: "background",
-          overflow: "hidden",
-          p: ".75rem 1rem"
+          textDecoration: "none"
         }}
       >
-        <h3
-          sx={{
-            fontFamily: "heading",
-            color: "text",
-            m: "0",
-            fontSize: "1.5rem",
-            display: "inline-block",
-            lineHeight: 1.25
-          }}
-        >
-          {title}
-        </h3>
+        {photoUrl && (
+          <div
+            className="image-wrapper"
+            sx={{
+              overflow: "hidden"
+            }}
+          >
+            <img
+              src={photoUrl}
+              alt={"Photo of " + author}
+              sx={{
+                maxWidth: "100%",
+                m: "0",
+                transition: ".15s",
+                position: "relative",
+                zIndex: "-1",
+                display: "block"
+              }}
+            />
+          </div>
+        )}
 
-        <h4
+        <div
           sx={{
-            fontFamily: "heading",
-            color: "muted",
-            margin: "0",
-            fontSize: "1.25rem"
+            bg: "background",
+            overflow: "hidden",
+            p: ".75rem 1rem"
           }}
         >
-          {author}
-        </h4>
-      </div>
-    </Link>
-  </article>
-);
+          <h3
+            sx={{
+              fontFamily: "heading",
+              color: "text",
+              m: "0",
+              fontSize: "1.5rem",
+              display: "inline-block",
+              lineHeight: 1.25
+            }}
+          >
+            {title}
+          </h3>
+
+          <h4
+            sx={{
+              fontFamily: "heading",
+              color: "muted",
+              margin: "0",
+              fontSize: "1.25rem"
+            }}
+          >
+            {author}
+          </h4>
+        </div>
+      </Link>
+    </article>
+  );
+};
 
 export default StoryCard;
 

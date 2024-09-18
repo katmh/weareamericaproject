@@ -5,13 +5,15 @@ import "@reach/dialog/styles.css";
 import React from "react";
 import { Link } from "gatsby";
 import { PortableText } from "@portabletext/react";
-import slugify from "../../utils/slugify";
+import { getStorySlug } from "../../utils/slugify";
 import X from "../components/icons/X";
 
 const PersonCard = props => {
   const [showDialog, setShowDialog] = React.useState(false);
   const open = () => setShowDialog(true);
   const close = () => setShowDialog(false);
+
+  const storySlug = getStorySlug(props.story.storyTitle, props.name);
 
   return (
     <>
@@ -83,9 +85,7 @@ const PersonCard = props => {
           {props.story && (
             <p className="caption1">
               Story:{" "}
-              <Link to={`/story/${slugify(props.story.storyTitle)}`}>
-                {props.story.storyTitle}
-              </Link>
+              <Link to={`/story/${storySlug}`}>{props.story.storyTitle}</Link>
             </p>
           )}
         </div>

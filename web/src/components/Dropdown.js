@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import slugify from "../../utils/slugify";
+import { getTagSlug } from "../../utils/slugify";
 
 const Dropdown = ({ content, contentName, contentSlug }) => {
   const options = content.group.map(({ fieldValue }) => fieldValue);
@@ -11,9 +11,9 @@ const Dropdown = ({ content, contentName, contentSlug }) => {
         id={contentName}
         onChange={e => {
           if (typeof window !== undefined && e.target.value !== "All") {
-            window.location.pathname = `/${contentSlug}/${slugify(
-              e.target.value
-            )}`;
+            const tag = e.target.value;
+            const slug = getTagSlug(tag);
+            window.location.pathname = `/${contentSlug}/${slug}`;
           }
         }}
       >

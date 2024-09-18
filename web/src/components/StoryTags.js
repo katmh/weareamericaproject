@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import slugify from "../../utils/slugify";
+import { getTagSlug } from "../../utils/slugify";
 import { Link } from "gatsby";
 
 const StoryTags = ({ tags }) => {
@@ -29,9 +29,10 @@ const StoryTags = ({ tags }) => {
 };
 
 const Tag = ({ tag }) => {
+  const slug = getTagSlug(tag);
   return (
     <li
-      key={slugify(tag)}
+      key={slug}
       sx={{
         listStyle: "none",
         display: "inline-block",
@@ -41,7 +42,7 @@ const Tag = ({ tag }) => {
       }}
     >
       <Link
-        to={"/tag/" + slugify(tag)}
+        to={`/tag/${slug}`}
         sx={{
           fontFamily: "body",
           lineHeight: "100%",

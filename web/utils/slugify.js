@@ -1,9 +1,9 @@
-module.exports = function(string) {
+function slugify(string) {
   const a =
-    "àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;"
+    "àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;";
   const b =
-    "aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnooooooooprrsssssttuuuuuuuuuwxyyzzz------"
-  const p = new RegExp(a.split("").join("|"), "g")
+    "aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnooooooooprrsssssttuuuuuuuuuwxyyzzz------";
+  const p = new RegExp(a.split("").join("|"), "g");
 
   return string
     .toString()
@@ -14,5 +14,20 @@ module.exports = function(string) {
     .replace(/[^\w-]+/g, "") // Remove all non-word characters
     .replace(/--+/g, "-") // Replace multiple - with single -
     .replace(/^-+/, "") // Trim - from start of text
-    .replace(/-+$/, "") // Trim - from end of text
+    .replace(/-+$/, ""); // Trim - from end of text
 }
+
+function getStorySlug(storyTitle, authorFirstName) {
+  const truncatedStoryTitle = storyTitle
+    .split(" ")
+    .slice(0, 4)
+    .join(" ");
+  const firstLetterOfName = authorFirstName[0];
+  return slugify(`${truncatedStoryTitle}-${firstLetterOfName}`);
+}
+
+function getTagSlug(tag) {
+  return slugify(tag);
+}
+
+module.exports = { getStorySlug, getTagSlug };

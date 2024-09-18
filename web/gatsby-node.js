@@ -1,4 +1,4 @@
-const slugify = require("./utils/slugify");
+const slugUtils = require("./utils/slugify");
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -94,22 +94,6 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `);
-  const blogPosts = await graphql(`
-    query allBlogPosts {
-      allMarkdownRemark {
-        edges {
-          node {
-            frontmatter {
-              path
-              title
-              date(formatString: "MMMM DD, YYYY")
-            }
-            html
-          }
-        }
-      }
-    }
-  `);
 
   const stories = storiesResult.data.allSanityStory.nodes;
   const storiesPerPage = 18;
@@ -128,13 +112,7 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   storiesResult.data.allSanityStory.nodes.forEach(node => {
-    const truncatedStoryTitle = node.storyTitle
-      .split(" ")
-      .slice(0, 4)
-      .join("");
-    const firstLetterOfFirstName = node.authorFirstName[0];
-    const slug = slugify(`${truncatedStoryTitle}-${firstLetterOfFirstName}`);
-
+    const slug = slugUtils.getStorySlug(node.storyTitle, node.authorFirstName);
     createPage({
       path: `/story/${slug}/`,
       component: require.resolve("./src/templates/story.js"),
@@ -145,8 +123,9 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 
   const createTagPage = tagType => ({ fieldValue: tag, nodes }) => {
+    const slug = slugUtils.getTagSlug(tag);
     createPage({
-      path: `/${tagType}/${slugify(tag)}`,
+      path: `/${tagType}/${slug}`,
       component: require.resolve("./src/templates/tag.js"),
       context: {
         nodes,
@@ -159,16 +138,6 @@ exports.createPages = async ({ graphql, actions }) => {
   tags.data.allSanityStory.group.forEach(createTagPage("tag"));
   schools.data.allSanityStory.group.forEach(createTagPage("school"));
   states.data.allSanityStory.group.forEach(createTagPage("state"));
-
-  blogPosts.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    createPage({
-      path: `/news/${slugify(
-        node.frontmatter.path ? node.frontmatter.path : ""
-      )}/`,
-      component: require.resolve("./src/templates/blog-post.js"),
-      context: { node }
-    });
-  });
 
   const internalConversationGuides = await graphql(`
     query InternalConversationGuides {
