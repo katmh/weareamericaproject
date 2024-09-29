@@ -13,7 +13,10 @@ const PersonCard = props => {
   const open = () => setShowDialog(true);
   const close = () => setShowDialog(false);
 
-  const storySlug = getStorySlug(props.story.storyTitle, props.name);
+  // Person might not have story (e.g. person is a teacher).
+  const storySlug = props.story?.storyTitle
+    ? getStorySlug(props.story.storyTitle, props.name)
+    : undefined;
 
   return (
     <>
