@@ -15,10 +15,10 @@ jobs:
     name: Backup dataset
     steps:
       - name: Check out repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "14"
 
@@ -30,7 +30,7 @@ jobs:
         run: sanity install && sanity dataset export production backups/backup.tar.gz
 
       - name: Upload backup.tar.gz
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: backup-tarball
           path: studio/backups/backup.tar.gz
