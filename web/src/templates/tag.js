@@ -4,9 +4,11 @@ import Layout from "../components/Layout";
 import Gallery from "../components/Gallery";
 import StoryCard from "../components/StoryCard";
 import BackToAll from "../components/BackToAll";
+import SEO from "../components/SEO";
 
 const TagPage = ({ pageContext: { nodes, tag, tagType } }) => (
   <Layout>
+    <SEO noIndex />
     <BackToAll name="stories" path="/stories" />
     <h1 className="heading large_heading">
       Stories {tagType === "tag" ? `tagged with “${tag}”` : `from ${tag}`}

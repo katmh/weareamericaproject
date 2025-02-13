@@ -1,9 +1,9 @@
 /** @jsx jsx */
-import { jsx } from "theme-ui"
-import { Helmet } from "react-helmet"
-import { StaticQuery, graphql } from "gatsby"
+import { jsx } from "theme-ui";
+import { Helmet } from "react-helmet";
+import { StaticQuery, graphql } from "gatsby";
 
-const SEO = ({ title, description, image }) => (
+const SEO = ({ title = "", noIndex = false }) => (
   <StaticQuery
     query={graphql`
       {
@@ -18,14 +18,18 @@ const SEO = ({ title, description, image }) => (
       }
     `}
     render={data => {
-      const site = data.site.siteMetadata
+      const site = data.site.siteMetadata;
       return (
         <Helmet>
           <meta charset="utf-8" />
           <title>
             We Are America Project
-            {title ? " | " + title : ""}
+            {title.length ? " | " + title : ""}
           </title>
+
+          {/* Conditionally apply noindex for paginated pages */}
+          {noIndex && <meta name="robots" content="noindex, follow" />}
+
           <link rel="canonical" href={site.url} />
           <link rel="icon" type="image/ico" href="/favicon.ico" />
           <meta name="description" content={site.description} />
@@ -47,9 +51,9 @@ const SEO = ({ title, description, image }) => (
             content="Collage of students' eyes, with semi-transparent red and white stripes of the American flag overlaid"
           />
         </Helmet>
-      )
+      );
     }}
   />
-)
+);
 
-export default SEO
+export default SEO;

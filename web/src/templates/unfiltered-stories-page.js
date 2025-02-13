@@ -6,6 +6,7 @@ import Layout from "../components/Layout";
 import PaginationControls from "../components/PaginationControls";
 import StoryCard from "../components/StoryCard";
 import SearchBar from "../components/SearchBar";
+import SEO from "../components/SEO";
 
 const UnfilteredStoriesPage = ({
   data,
@@ -21,6 +22,7 @@ const UnfilteredStoriesPage = ({
   const stories = data.stories.nodes;
   return (
     <Layout>
+      <SEO noIndex />
       <div
         style={{
           display: "flex",
