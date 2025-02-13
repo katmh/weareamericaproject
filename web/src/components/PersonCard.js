@@ -14,7 +14,7 @@ const PersonCard = props => {
   const close = () => setShowDialog(false);
 
   // Person might not have story (e.g. person is a teacher).
-  const storySlug = props.story?.storyTitle
+  const storySlug = props.story
     ? getStorySlug(props.story.storyTitle, props.name)
     : undefined;
 
