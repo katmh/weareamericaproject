@@ -39,6 +39,7 @@ export default {
           "Cohort 4 (2022-2023)",
           "Cohort 5 (2023-2024)",
           "Cohort 6 (2024-2025)",
+          "Cohort 7 (2025-2026)",
         ],
       },
       validation: (Rule) => Rule.required(),
