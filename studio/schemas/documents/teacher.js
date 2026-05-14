@@ -30,19 +30,8 @@ export default {
     {
       name: "cohort",
       title: "Cohort",
-      type: "string",
-      options: {
-        list: [
-          "Cohort 1 (2019-2020)",
-          "Cohort 2 (2020-2021)",
-          "Cohort 3 (2021-2022)",
-          "Cohort 4 (2022-2023)",
-          "Cohort 5 (2023-2024)",
-          "Cohort 6 (2024-2025)",
-          "Cohort 7 (2025-2026)",
-          "Cohort 8 (2026-2027)",
-        ],
-      },
+      type: "reference",
+      to: [{ type: "cohort" }],
       validation: (Rule) => Rule.required(),
     },
   ],

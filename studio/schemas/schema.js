@@ -5,6 +5,7 @@ import guide from "./documents/guide";
 import teamMember from "./documents/teamMember";
 import story from "./documents/story";
 import school from "./documents/school";
+import cohort from "./documents/cohort";
 import teacher from "./documents/teacher";
 import book from "./documents/book";
 import newsItem from "./documents/newsItem";
@@ -32,6 +33,7 @@ export default [
   teamMember,
   story,
   school,
+  cohort,
   teacher,
   book,
   newsItem,
