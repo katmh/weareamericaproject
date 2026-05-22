@@ -28,7 +28,7 @@
     "gatsby-source-airtable": "^2.2.1",
     "gatsby-source-filesystem": "^3.10.0",
     "gatsby-source-sanity": "^7.0.7",
-    "gatsby-transformer-remark": "^4.7.0",
+    "gatsby-transformer-remark": "^5.25.1",
     "netlify-cms-app": "^2.14.12",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
