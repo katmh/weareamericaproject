@@ -9,7 +9,9 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \""
+    "test": "jest",
+    "test:ci": "jest --ci",
+    "test:update": "jest --updateSnapshot"
   },
   "dependencies": {
     "@emotion/core": "^10.1.1",
@@ -41,7 +43,12 @@
     "typescript": "^3.9.7"
   },
   "devDependencies": {
-    "prettier": "^1.19.1"
+    "@babel/core": "^7.29.7",
+    "babel-jest": "^27.5.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.5.1",
+    "prettier": "^1.19.1",
+    "react-test-renderer": "^16.14.0"
   },
   "repository": {
     "type": "git",
@@ -49,5 +56,26 @@
   },
   "bugs": {
     "url": "https://github.com/katmh/weareamericaproject/issues"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/setup-test-env.js"
+    ],
+    "transform": {
+      "^.+\\.[jt]sx?$": "<rootDir>/test/jest-preprocess.js"
+    },
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+      "\\.(jpg|jpeg|png|gif|webp|svg)$": "<rootDir>/test/__mocks__/file-mock.js"
+    },
+    "testPathIgnorePatterns": [
+      "node_modules",
+      ".cache",
+      "public"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!(gatsby|gatsby-link|gatsby-script|@gatsbyjs/reach-router|gatsby-react-router-scroll)/)"
+    ]
   }
 }

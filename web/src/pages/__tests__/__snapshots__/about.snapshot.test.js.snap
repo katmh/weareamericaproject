@@ -1,0 +1,218 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AboutPage matches the page snapshot 1`] = `
+Array [
+  <header>
+    <h1>
+      <a
+        className="logo"
+        href="/"
+      >
+        We Are America
+      </a>
+    </h1>
+    <nav>
+      <div
+        className="mobile_only hamburger"
+        onClick={[Function]}
+      >
+        <svg
+          height={48}
+          width={48}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M41 14H7a2 2 0 0 1 0-4h34a2 2 0 0 1 0 4ZM41 26H7a2 2 0 0 1 0-4h34a2 2 0 0 1 0 4ZM41 38H7a2 2 0 0 1 0-4h34a2 2 0 0 1 0 4Z"
+            fill="#000"
+          />
+        </svg>
+      </div>
+      <div
+        className="mobile_only overlay"
+        onClick={[Function]}
+      />
+      <div
+        className="items_container"
+      >
+        <div
+          className="mobile_only close_nav_button"
+          onClick={[Function]}
+        >
+          <svg
+            fill="none"
+            height={24}
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            width={24}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M18 6 6 18M6 6l12 12"
+            />
+          </svg>
+        </div>
+        <div
+          className="top_level_item"
+        >
+          <a
+            className="nav_link "
+            href="/stories"
+          >
+            <span>
+              Stories
+            </span>
+          </a>
+        </div>
+        <div
+          className="top_level_item"
+        >
+          <a
+            className="nav_link "
+            href="/books"
+          >
+            <span>
+              Books
+            </span>
+          </a>
+        </div>
+        <div
+          className="top_level_item"
+        >
+          <a
+            className="nav_link  emphasized"
+            href="/contact"
+          >
+            <span>
+              Contact
+            </span>
+            <svg
+              className="chevron desktop_only"
+              fill="none"
+              height={24}
+              width={24}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="m4 9 8 8 8-8"
+                stroke="#000"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+              />
+            </svg>
+          </a>
+          <div
+            className="submenu"
+          >
+            <a
+              className="nav_link"
+              href="/teachers"
+            >
+              Teachers
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>,
+  <section
+    className="css-59cf06-Container"
+  >
+    <h1
+      className="heading large_heading"
+    >
+      About
+    </h1>
+    <p>
+      We Are America helps young people tell stories about identity.
+    </p>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexWrap": "wrap",
+          "gap": "1rem",
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <a
+        href="https://example.com"
+        rel="noreferrer"
+        target="_blank"
+      >
+        <img
+          alt="Partner School logo"
+          src="https://example.com/logo.png"
+          width="200"
+        />
+      </a>
+    </div>
+  </section>,
+  <footer>
+    <div
+      id="flex"
+    >
+      <div
+        id="left"
+      >
+        <a
+          className="logo small_logo"
+          href="/"
+        >
+          We Are America
+        </a>
+      </div>
+      <nav>
+        <div>
+          <a
+            className="nav_link"
+            href="/stories"
+          >
+            <span>
+              Stories
+            </span>
+          </a>
+        </div>
+        <div>
+          <a
+            className="nav_link"
+            href="/books"
+          >
+            <span>
+              Books
+            </span>
+          </a>
+        </div>
+        <div>
+          <a
+            className="nav_link"
+            href="/contact"
+          >
+            <span>
+              Contact
+            </span>
+          </a>
+          <div
+            className="footer_submenu"
+          >
+            <a
+              className="nav_link"
+              href="/teachers"
+            >
+              Teachers
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <p
+      className="caption2"
+    >
+      © 2019-2024 We Are America Project. All Rights Reserved.
+    </p>
+  </footer>,
+]
+`;
