@@ -7,7 +7,12 @@ import SEO from "./SEO";
 import theme from "./theme";
 import "../styles/global.scss";
 
-const Layout = ({ children, width }) => (
+type LayoutProps = {
+  children: React.ReactNode
+  width?: "thin" | "medium" | "wide"
+}
+
+const Layout = ({ children, width }: LayoutProps) => (
   <ThemeProvider theme={theme}>
     <SEO />
     <Header />

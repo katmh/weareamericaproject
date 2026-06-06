@@ -2,7 +2,7 @@
 import { jsx } from "theme-ui";
 // import ButtonLink from "../components/ButtonLink";
 
-const Book = ({ title, image }) => {
+const Book = ({ title, image, url = undefined }) => {
   return (
     <article>
       {/* <a href={url}> */}

@@ -134,14 +134,20 @@ Array [
     >
       Featured stories
     </section>
-    <center>
+    <div
+      style={
+        Object {
+          "textAlign": "center",
+        }
+      }
+    >
       <a
         className="css-1lhz5vn-ButtonLink"
         href="/stories"
       >
         See All Stories
       </a>
-    </center>
+    </div>
   </section>,
   <footer>
     <div

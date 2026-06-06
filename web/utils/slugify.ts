@@ -17,7 +17,7 @@ function slugify(string) {
     .replace(/-+$/, ""); // Trim - from end of text
 }
 
-function getStorySlug(storyTitle, authorFirstName) {
+export function getStorySlug(storyTitle, authorFirstName) {
   const truncatedStoryTitle = storyTitle
     .split(" ")
     .slice(0, 4)
@@ -26,8 +26,6 @@ function getStorySlug(storyTitle, authorFirstName) {
   return slugify(`${truncatedStoryTitle}-${firstLetterOfName}`);
 }
 
-function getTagSlug(tag) {
+export function getTagSlug(tag) {
   return slugify(tag);
 }
-
-module.exports = { getStorySlug, getTagSlug };

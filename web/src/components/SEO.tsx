@@ -21,7 +21,7 @@ const SEO = ({ title = "", noIndex = false }) => (
       const site = data.site.siteMetadata;
       return (
         <Helmet>
-          <meta charset="utf-8" />
+          <meta charSet="utf-8" />
           <title>
             We Are America Project
             {title.length ? " | " + title : ""}

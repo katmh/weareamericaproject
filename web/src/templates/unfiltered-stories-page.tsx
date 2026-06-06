@@ -61,14 +61,14 @@ const UnfilteredStoriesPage = ({
           );
         })}
       </Gallery>
-      <center>
+      <div style={{ textAlign: "center" }}>
         <PaginationControls
           currentPage={currentPage}
           numPages={numPages}
           prevPage={!isFirstPage ? prevPage : ""}
           nextPage={!isLastPage ? nextPage : ""}
         />
-      </center>
+      </div>
     </Layout>
   );
 };

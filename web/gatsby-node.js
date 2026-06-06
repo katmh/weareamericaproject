@@ -1,4 +1,34 @@
-const slugUtils = require("./utils/slugify");
+function slugify(string) {
+  const a =
+    "àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;";
+  const b =
+    "aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnooooooooprrsssssttuuuuuuuuuwxyyzzz------";
+  const p = new RegExp(a.split("").join("|"), "g");
+
+  return string
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(p, c => b.charAt(a.indexOf(c)))
+    .replace(/&/g, "-and-")
+    .replace(/[^\w-]+/g, "")
+    .replace(/--+/g, "-")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
+}
+
+function getStorySlug(storyTitle, authorFirstName) {
+  const truncatedStoryTitle = storyTitle
+    .split(" ")
+    .slice(0, 4)
+    .join(" ");
+  const firstLetterOfName = authorFirstName[0];
+  return slugify(`${truncatedStoryTitle}-${firstLetterOfName}`);
+}
+
+function getTagSlug(tag) {
+  return slugify(tag);
+}
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -101,7 +131,7 @@ exports.createPages = async ({ graphql, actions }) => {
   for (let i = 0; i < numPages; i++) {
     createPage({
       path: i === 0 ? "/stories" : `/stories/page/${i + 1}`,
-      component: require.resolve("./src/templates/unfiltered-stories-page.js"),
+      component: require.resolve("./src/templates/unfiltered-stories-page.tsx"),
       context: {
         limit: storiesPerPage,
         skip: i * storiesPerPage,
@@ -112,10 +142,10 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   storiesResult.data.allSanityStory.nodes.forEach(node => {
-    const slug = slugUtils.getStorySlug(node.storyTitle, node.authorFirstName);
+    const slug = getStorySlug(node.storyTitle, node.authorFirstName);
     createPage({
       path: `/story/${slug}/`,
-      component: require.resolve("./src/templates/story.js"),
+      component: require.resolve("./src/templates/story.tsx"),
       context: {
         data: node
       }
@@ -123,10 +153,10 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 
   const createTagPage = tagType => ({ fieldValue: tag, nodes }) => {
-    const slug = slugUtils.getTagSlug(tag);
+    const slug = getTagSlug(tag);
     createPage({
       path: `/${tagType}/${slug}`,
-      component: require.resolve("./src/templates/tag.js"),
+      component: require.resolve("./src/templates/tag.tsx"),
       context: {
         nodes,
         tag,
@@ -154,7 +184,7 @@ exports.createPages = async ({ graphql, actions }) => {
   internalConversationGuides.data.allSanityGuide.nodes.forEach(guide => {
     createPage({
       path: `/guides/${guide.path}`,
-      component: require.resolve("./src/templates/conversation-guide.js"),
+      component: require.resolve("./src/templates/conversation-guide.tsx"),
       context: {
         title: guide.title,
         content: guide._rawContent
