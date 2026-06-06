@@ -1,0 +1,30 @@
+name: Snapshot Tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  web-snapshots:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Install node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Run snapshot tests
+        run: npm run test:ci

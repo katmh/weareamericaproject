@@ -11,6 +11,13 @@ npm i
 npm run dev
 ```
 
+### Tests
+
+```
+npm test
+npm --prefix web run test:update
+```
+
 ## Deploy Sanity GraphQL API
 
 ```
