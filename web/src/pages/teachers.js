@@ -58,7 +58,7 @@ export const pageQuery = graphql`
       distinct(field: location)
     }
     allSanityTeacher {
-      group(field: cohort) {
+      group(field: cohort___title) {
         fieldValue
         nodes {
           name
