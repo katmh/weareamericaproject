@@ -1,4 +1,5 @@
 /dist
+/.sanity
 /node_modules
 
 yarn.lock

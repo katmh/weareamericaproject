@@ -1,7 +1,6 @@
-import S from "@sanity/desk-tool/structure-builder";
 import { MdSettings } from "react-icons/md";
 import { MdDescription } from "react-icons/md";
-import IframePreview from "../previews/IframePreview";
+import IframePreview from "../previews/IframePreview.jsx";
 
 // Web preview configuration
 const remoteURL = "https://sanity-gatsby-blog-web-qq95ktt1.netlify.app"; // TODO: update remote URL
@@ -9,7 +8,7 @@ const localURL = "http://localhost:8000";
 const previewURL =
   window.location.hostname === "localhost" ? localURL : remoteURL;
 
-export const getDefaultDocumentNode = (props) => {
+export const getDefaultDocumentNode = (S, props) => {
   /**
    * Here you can define fallback views for document types without
    * a structure definition for the document node. If you want different
@@ -39,7 +38,7 @@ export const getDefaultDocumentNode = (props) => {
  * - https://www.sanity.io/docs/structure-builder-reference
  */
 
-export default () =>
+export const structure = (S) =>
   S.list()
     .title("Content")
     .items([
@@ -58,7 +57,7 @@ export default () =>
         .title("Site Settings")
         .icon(MdSettings)
         .child(
-          S.editor()
+          S.document()
             .id("siteSettings")
             .schemaType("siteSettings")
             .documentId("siteSettings")
