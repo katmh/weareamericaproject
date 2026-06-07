@@ -25,7 +25,15 @@ const FeaturedStories = ({ nCols, nStories }) => {
           storyTitle
           photo {
             asset {
+              id
               url
+              metadata {
+                dimensions {
+                  height
+                  width
+                }
+              }
+              gatsbyImageData
             }
           }
         }
@@ -48,7 +56,7 @@ const FeaturedStories = ({ nCols, nStories }) => {
         <StoryCard
           key={story.id}
           title={story.storyTitle}
-          photoUrl={story.photo.asset?.url}
+          photo={story.photo}
           author={story.authorFirstName}
         />
       ))}
