@@ -105,7 +105,7 @@ jobs:
             } else {
               core.setFailed('Timeout waiting for Netlify deployment to complete');
             }
-      - name: Run performance comparison (parallel)
+      - name: Run performance comparison
         id: benchmark
         if: steps.netlify-ready.outcome == 'success'
         timeout-minutes: 5
@@ -113,28 +113,6 @@ jobs:
           set -o pipefail
           cd web
 
-          # Run both audits in parallel
-          npm run perf:url -- "https://weareamericaproject.com" &
-          PROD_PID=$!
-
-          npm run perf:url -- "${{ steps.netlify-ready.outputs.deploy_url }}" &
-          PREVIEW_PID=$!
-
-          # Wait for both to complete
-          set +e
-          wait $PROD_PID
-          PROD_STATUS=$?
-          wait $PREVIEW_PID
-          PREVIEW_STATUS=$?
-          set -e
-
-          if [ "$PROD_STATUS" -ne 0 ] || [ "$PREVIEW_STATUS" -ne 0 ]; then
-            echo "Production benchmark exited with $PROD_STATUS"
-            echo "Preview benchmark exited with $PREVIEW_STATUS"
-            exit 1
-          fi
-
-          # Now compare the results
           npm run perf:compare -- \
             "https://weareamericaproject.com" \
             "${{ steps.netlify-ready.outputs.deploy_url }}" \
