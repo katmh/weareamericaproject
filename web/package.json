@@ -14,7 +14,8 @@
     "test:update": "jest --updateSnapshot",
     "typecheck": "tsc --noEmit",
     "perf:measure": "node ../scripts/measure-performance.js # Quick performance measurement of current branch",
-    "perf:benchmark": "node ../scripts/benchmark.js # Compare performance: main vs current branch"
+    "perf:benchmark": "node ../scripts/benchmark.js # Compare performance: main vs current branch",
+    "perf:url": "node ../scripts/benchmark-url.js # Benchmark external URL (deploy preview, production, etc)"
   },
   "dependencies": {
     "@emotion/core": "^10.1.1",
