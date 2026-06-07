@@ -94,27 +94,46 @@ jobs:
             }
         continue-on-error: true
 
-      - name: Verify deploy preview is ready
+      - name: Wait for Netlify deploy to complete
         id: netlify-ready
         if: steps.netlify-url.outputs.deploy_url
         timeout-minutes: 10
-        run: |
-          DEPLOY_URL="${{ steps.netlify-url.outputs.deploy_url }}"
-          echo "Checking if $DEPLOY_URL is ready..."
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Wait for Netlify deploy-preview status to be SUCCESS
+            const maxAttempts = 60; // ~10 minutes with 10 second intervals
+            let attempts = 0;
+            let deployReady = false;
 
-          # Poll up to 10 minutes (150 attempts × 4 seconds)
-          for i in {1..150}; do
-            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$DEPLOY_URL")
-            if [ "$HTTP_CODE" = "200" ]; then
-              echo "✅ Deploy preview is ready!"
-              exit 0
-            fi
-            echo "Attempt $i/150: HTTP $HTTP_CODE, waiting..."
-            sleep 4
-          done
+            while (attempts < maxAttempts && !deployReady) {
+              attempts++;
+              const { data: rollup } = await github.rest.repos.getCombinedStatusForRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: context.payload.pull_request.head.sha,
+              });
 
-          echo "❌ Timeout waiting for deployment to be accessible after 10 minutes"
-          exit 1
+              // Look for any netlify/*/deploy-preview status
+              const netlifyStatus = rollup.statuses?.find(status =>
+                status.context.includes('netlify') && status.context.includes('deploy-preview')
+              );
+
+              if (netlifyStatus?.state === 'success') {
+                console.log(`✅ Netlify deploy preview ready: ${netlifyStatus.target_url}`);
+                deployReady = true;
+              } else if (netlifyStatus?.state === 'failure') {
+                core.setFailed('Netlify deploy preview failed');
+                return;
+              } else {
+                console.log(`Attempt ${attempts}/${maxAttempts}: Waiting for Netlify deployment...`);
+                await new Promise(resolve => setTimeout(resolve, 10000));
+              }
+            }
+
+            if (!deployReady) {
+              core.setFailed('Timeout waiting for Netlify deployment to complete');
+            }
         continue-on-error: true
 
       - name: Run performance comparison (parallel)
