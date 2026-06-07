@@ -10,7 +10,7 @@
 #   4. Compares metrics and posts results in PR comment
 #
 # Features:
-#   - Non-blocking: Never fails the workflow (continue-on-error: true)
+#   - Non-blocking metrics: Performance regressions are reported but do not fail the workflow
 #   - Real deployment comparison: Production vs actual deploy
 #   - Core Web Vitals tracking: FCP, LCP, CLS
 #   - Real-world metrics: Actual CDN, caching, compression
@@ -39,64 +39,14 @@ on:
 jobs:
   benchmark:
     runs-on: ubuntu-latest
-    continue-on-error: true
     timeout-minutes: 30
 
     steps:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Find Netlify deploy preview URL
-        id: netlify-url
-        uses: actions/github-script@v7
-        with:
-          script: |
-            // Poll for Netlify bot comment with deploy preview URL
-            let deployUrl = null;
-            let attempts = 0;
-            const maxAttempts = 24; // ~2 minutes with 5 second intervals
-
-            while (!deployUrl && attempts < maxAttempts) {
-              attempts++;
-              const { data: comments } = await github.rest.issues.listComments({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-              });
-
-              // Look for Netlify bot comment with deploy preview URL
-              for (const comment of comments) {
-                if (comment.user.login === 'netlify' || comment.user.login.includes('netlify')) {
-                  // Extract URL from comment body (Netlify comments contain deploy preview links in Markdown)
-                  const match = comment.body.match(/https:\/\/deploy-preview-\d+--[^\s\)\]]+/);
-                  if (match) {
-                    deployUrl = new URL(match[0]).href;
-                    console.log(`Found deploy preview URL: ${deployUrl}`);
-                    break;
-                  }
-                }
-              }
-
-              if (!deployUrl) {
-                if (attempts < maxAttempts) {
-                  console.log(`Attempt ${attempts}/${maxAttempts}: Netlify comment not found yet, waiting...`);
-                  await new Promise(resolve => setTimeout(resolve, 5000));
-                } else {
-                  console.log('Timeout: Netlify deploy preview comment not found');
-                }
-              }
-            }
-
-            if (deployUrl) {
-              core.setOutput('deploy_url', deployUrl);
-            } else {
-              core.setFailed('Could not find Netlify deploy preview URL');
-            }
-        continue-on-error: true
-
       - name: Wait for Netlify deploy to complete
         id: netlify-ready
-        if: steps.netlify-url.outputs.deploy_url
         timeout-minutes: 10
         uses: actions/github-script@v7
         with:
@@ -107,9 +57,9 @@ jobs:
 
             const maxAttempts = 60; // ~10 minutes with 10 second intervals
             let attempts = 0;
-            let deployReady = false;
+            let deployUrl = null;
 
-            while (attempts < maxAttempts && !deployReady) {
+            while (attempts < maxAttempts && !deployUrl) {
               attempts++;
               const { data: rollup } = await github.rest.repos.getCombinedStatusForRef({
                 owner: context.repo.owner,
@@ -126,7 +76,7 @@ jobs:
                 console.log(`✅ Netlify deploy preview ready`);
                 console.log(`   Commit: ${commitSha}`);
                 console.log(`   URL: ${netlifyStatus.target_url}`);
-                deployReady = true;
+                deployUrl = new URL(netlifyStatus.target_url).href;
               } else if (netlifyStatus?.state === 'failure') {
                 core.setFailed(`Netlify deploy preview failed for ${commitSha}`);
                 return;
@@ -136,35 +86,46 @@ jobs:
               }
             }
 
-            if (!deployReady) {
+            if (deployUrl) {
+              core.setOutput('deploy_url', deployUrl);
+            } else {
               core.setFailed('Timeout waiting for Netlify deployment to complete');
             }
-        continue-on-error: true
-
       - name: Run performance comparison (parallel)
         id: benchmark
         if: steps.netlify-ready.outcome == 'success'
         timeout-minutes: 5
         run: |
+          set -o pipefail
           cd web
 
           # Run both audits in parallel
           npm run perf:url -- "https://weareamericaproject.com" &
           PROD_PID=$!
 
-          npm run perf:url -- "${{ steps.netlify-url.outputs.deploy_url }}" &
+          npm run perf:url -- "${{ steps.netlify-ready.outputs.deploy_url }}" &
           PREVIEW_PID=$!
 
           # Wait for both to complete
-          wait $PROD_PID $PREVIEW_PID
+          set +e
+          wait $PROD_PID
+          PROD_STATUS=$?
+          wait $PREVIEW_PID
+          PREVIEW_STATUS=$?
+          set -e
+
+          if [ "$PROD_STATUS" -ne 0 ] || [ "$PREVIEW_STATUS" -ne 0 ]; then
+            echo "Production benchmark exited with $PROD_STATUS"
+            echo "Preview benchmark exited with $PREVIEW_STATUS"
+            exit 1
+          fi
 
           # Now compare the results
           npm run perf:compare -- \
             "https://weareamericaproject.com" \
-            "${{ steps.netlify-url.outputs.deploy_url }}" \
+            "${{ steps.netlify-ready.outputs.deploy_url }}" \
             --name1 "Production" \
             --name2 "Preview" 2>&1 | tee benchmark-output.txt
-        continue-on-error: true
 
       - name: Comment on PR
         if: always() && github.event_name == 'pull_request'
