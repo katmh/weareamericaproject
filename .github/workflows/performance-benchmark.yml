@@ -10,7 +10,6 @@
 #   - Resource analysis: Image sizes, script sizes, font sizes
 #   - Smart threshold: 3% variance ignored to avoid false positives
 #   - PR comment: Results displayed inline for easy review
-#   - Artifact storage: 30-day retention for trend analysis
 #
 # Use cases:
 #   - Quantifying impact of performance optimizations
@@ -142,10 +141,3 @@ jobs:
               body: body,
             });
 
-      - name: Upload benchmark results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: performance-benchmarks
-          path: web/.benchmarks/
-          retention-days: 30
