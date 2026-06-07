@@ -12,7 +12,9 @@
     "test": "jest",
     "test:ci": "jest --ci",
     "test:update": "jest --updateSnapshot",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "perf:measure": "node ../scripts/measure-performance.js",
+    "perf:benchmark": "node ../scripts/benchmark.js"
   },
   "dependencies": {
     "@emotion/core": "^10.1.1",
