@@ -1,0 +1,231 @@
+# Web Performance Benchmark Workflow
+#
+# Automatically compares performance between production and the Netlify deploy preview.
+# Results are posted as a PR comment for visibility.
+#
+# Process:
+#   1. Waits for Netlify deploy preview to be ready (up to 10 minutes)
+#   2. Benchmarks production (https://www.weareamericaproject.com/)
+#   3. Benchmarks the deploy preview
+#   4. Compares metrics and posts results in PR comment
+#
+# Features:
+#   - Non-blocking metrics: Performance regressions are reported but do not fail the workflow
+#   - Real deployment comparison: Production vs actual deploy
+#   - Core Web Vitals tracking: FCP, LCP, CLS
+#   - Real-world metrics: Actual CDN, caching, compression
+#   - Smart threshold: 3% variance ignored to avoid false positives
+#   - PR comment: Results displayed inline for easy review
+#
+# Why compare deployments?
+#   - Production-realistic performance metrics
+#   - Shows actual user-facing impact of changes
+#   - No local system variance
+#   - Includes CDN, caching, and compression effects
+#
+# Results are informational only and do not affect PR approval.
+
+name: Performance Benchmark
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'web/src/**'
+      - 'web/gatsby-config.js'
+      - 'web/gatsby-node.js'
+      - '.github/workflows/performance-benchmark.yml'
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Wait for Netlify deploy to complete
+        id: netlify-ready
+        timeout-minutes: 10
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Wait for the weareamerica Netlify deploy preview to be ready
+            const commitSha = context.payload.pull_request.head.sha;
+            const targetSite = 'weareamerica';
+            const targetStatusContext = `netlify/${targetSite}/deploy-preview`;
+            console.log(`Checking deployment status for commit: ${commitSha}`);
+            console.log(`Target Netlify site: ${targetSite}`);
+
+            const maxAttempts = 60; // ~10 minutes with 10 second intervals
+            let attempts = 0;
+            let deployUrl = null;
+
+            async function findDeployPreviewUrl() {
+              const { data: rollup } = await github.rest.repos.getCombinedStatusForRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: commitSha,
+              });
+
+              const netlifyStatus = rollup.statuses?.find(status =>
+                status.context === targetStatusContext
+              );
+              const statusState = netlifyStatus?.state || 'missing';
+
+              if (netlifyStatus?.state === 'success') {
+                console.log(`✅ Netlify deploy preview ready`);
+                console.log(`   Commit: ${commitSha}`);
+                console.log(`   Context: ${netlifyStatus.context}`);
+                console.log(`   URL: ${netlifyStatus.target_url}`);
+                return { deployUrl: new URL(netlifyStatus.target_url).href, statusState };
+              }
+
+              if (netlifyStatus?.state === 'failure') {
+                throw new Error(`Netlify deploy preview failed for ${commitSha}`);
+              }
+
+              return { deployUrl: null, statusState };
+            }
+
+            while (attempts < maxAttempts && !deployUrl) {
+              attempts++;
+              const result = await findDeployPreviewUrl();
+              deployUrl = result.deployUrl;
+
+              if (!deployUrl) {
+                console.log(`Attempt ${attempts}/${maxAttempts}: Waiting for ${targetStatusContext} (status: ${result.statusState})...`);
+                await new Promise(resolve => setTimeout(resolve, 10000));
+              }
+            }
+
+            if (deployUrl) {
+              core.setOutput('deploy_url', deployUrl);
+            } else {
+              core.setFailed('Timeout waiting for Netlify deployment to complete');
+            }
+      - name: Run performance comparison
+        id: benchmark
+        if: steps.netlify-ready.outcome == 'success'
+        timeout-minutes: 5
+        run: |
+          set -o pipefail
+          cd web
+
+          npm run perf:compare -- \
+            "https://www.weareamericaproject.com/" \
+            "${{ steps.netlify-ready.outputs.deploy_url }}" \
+            --name1 "Production" \
+            --name2 "Preview" 2>&1 | tee benchmark-output.txt
+
+      - name: Comment on PR
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            const benchmarksDir = path.join(process.cwd(), '.benchmarks');
+            const MARKER = '<!-- perf-benchmark-comment -->';
+
+            // Find existing benchmark comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            let existingCommentId = null;
+            for (const comment of comments) {
+              if (comment.body.includes(MARKER)) {
+                existingCommentId = comment.id;
+                break;
+              }
+            }
+
+            // Build results comment
+            let body = MARKER + '\n## 📊 Performance: Production vs Preview (Beta)\n\n';
+
+            const url1Path = path.join(benchmarksDir, 'lighthouse-url1-' + new Date().toISOString().slice(0, 10) + '.json');
+            const url2Path = path.join(benchmarksDir, 'lighthouse-url2-' + new Date().toISOString().slice(0, 10) + '.json');
+
+            if (fs.existsSync(url1Path) && fs.existsSync(url2Path)) {
+              const url1Data = JSON.parse(fs.readFileSync(url1Path, 'utf8'));
+              const url2Data = JSON.parse(fs.readFileSync(url2Path, 'utf8'));
+
+              const getMetric = (obj, key) => obj.audits?.[key]?.numericValue || obj[key] || 0;
+              const getImageTransferSize = (obj) => {
+                const imageItem = obj.audits?.['resource-summary']?.details?.items?.find(
+                  (item) => item.resourceType === 'image'
+                );
+                return imageItem ? Math.round(imageItem.transferSize / 1024) : 0;
+              };
+
+              const url1 = {
+                performance: Math.round(url1Data.categories?.performance?.score * 100 || 0),
+                fcp: getMetric(url1Data, 'first-contentful-paint'),
+                lcp: getMetric(url1Data, 'largest-contentful-paint'),
+                cls: getMetric(url1Data, 'cumulative-layout-shift'),
+                imageTransferSize: getImageTransferSize(url1Data),
+              };
+
+              const url2 = {
+                performance: Math.round(url2Data.categories?.performance?.score * 100 || 0),
+                fcp: getMetric(url2Data, 'first-contentful-paint'),
+                lcp: getMetric(url2Data, 'largest-contentful-paint'),
+                cls: getMetric(url2Data, 'cumulative-layout-shift'),
+                imageTransferSize: getImageTransferSize(url2Data),
+              };
+
+              body += '| Metric | Production | Preview | Change |\n';
+              body += '|--------|------------|---------|--------|\n';
+
+              const metrics = [
+                { name: 'Performance Score', key: 'performance', unit: '/100', isBetter: 'higher' },
+                { name: 'LCP', key: 'lcp', unit: 'ms', isBetter: 'lower' },
+                { name: 'FCP', key: 'fcp', unit: 'ms', isBetter: 'lower' },
+                { name: 'CLS', key: 'cls', unit: '', isBetter: 'lower' },
+                { name: 'Image Transfer Size', key: 'imageTransferSize', unit: 'KB', isBetter: 'lower' },
+              ];
+
+              metrics.forEach(({ name, key, unit, isBetter }) => {
+                const prodVal = url1[key];
+                const previewVal = url2[key];
+                const diff = previewVal - prodVal;
+                const pctChange = prodVal !== 0 ? ((diff / prodVal) * 100).toFixed(1) : 0;
+
+                const isImprovement =
+                  (isBetter === 'higher' && diff > 0) ||
+                  (isBetter === 'lower' && diff < 0);
+
+                const arrow = diff < 0 ? '↓' : diff > 0 ? '↑' : '→';
+                const emoji = Math.abs(pctChange) < 3 ? '' : isImprovement ? ' ✨' : ' ⚠️';
+
+                const prodStr = typeof prodVal === 'number' ? prodVal.toFixed(prodVal < 10 ? 2 : 0) : prodVal;
+                const previewStr = typeof previewVal === 'number' ? previewVal.toFixed(previewVal < 10 ? 2 : 0) : previewVal;
+
+                body += `| ${name} | ${prodStr}${unit} | ${previewStr}${unit} | ${arrow} ${pctChange}%${emoji} |\n`;
+              });
+            } else {
+              body += '❌ Benchmark results not available (deploy preview may not be ready yet)\n';
+            }
+
+
+            // Update existing comment or create new one
+            if (existingCommentId) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existingCommentId,
+                body: body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: body,
+              });
+            }
