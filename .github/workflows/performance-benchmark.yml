@@ -146,7 +146,7 @@ jobs:
             }
 
             // Build results comment
-            let body = MARKER + '\n## 📊 Performance: Production vs Preview\n\n';
+            let body = MARKER + '\n## 📊 Performance: Production vs Preview (Beta)\n\n';
 
             const url1Path = path.join(benchmarksDir, 'lighthouse-url1-' + new Date().toISOString().slice(0, 10) + '.json');
             const url2Path = path.join(benchmarksDir, 'lighthouse-url2-' + new Date().toISOString().slice(0, 10) + '.json');
