@@ -97,21 +97,23 @@ jobs:
       - name: Verify deploy preview is ready
         id: netlify-ready
         if: steps.netlify-url.outputs.deploy_url
-        timeout-minutes: 5
+        timeout-minutes: 10
         run: |
           DEPLOY_URL="${{ steps.netlify-url.outputs.deploy_url }}"
           echo "Checking if $DEPLOY_URL is ready..."
 
-          for i in {1..30}; do
-            if curl -s -o /dev/null -w "%{http_code}" "$DEPLOY_URL" | grep -q "200"; then
+          # Poll up to 10 minutes (150 attempts × 4 seconds)
+          for i in {1..150}; do
+            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$DEPLOY_URL")
+            if [ "$HTTP_CODE" = "200" ]; then
               echo "✅ Deploy preview is ready!"
               exit 0
             fi
-            echo "Attempt $i/30: Still deploying, waiting..."
-            sleep 2
+            echo "Attempt $i/150: HTTP $HTTP_CODE, waiting..."
+            sleep 4
           done
 
-          echo "Timeout waiting for deployment to be accessible"
+          echo "❌ Timeout waiting for deployment to be accessible after 10 minutes"
           exit 1
         continue-on-error: true
 
