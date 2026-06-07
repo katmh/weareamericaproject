@@ -42,6 +42,7 @@ module.exports = {
     ]
   },
   plugins: [
+    `gatsby-plugin-image`,
     `gatsby-plugin-mdx`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-netlify-cms`,
@@ -73,14 +74,6 @@ module.exports = {
         path: `${__dirname}/src/pages/`
       }
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `blog`,
-        path: `${__dirname}/src/blog/`
-      }
-    },
-    `gatsby-transformer-remark`,
     {
       resolve: "gatsby-source-sanity",
       options: {
