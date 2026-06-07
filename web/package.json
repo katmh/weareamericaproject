@@ -13,10 +13,10 @@
     "test:ci": "jest --ci",
     "test:update": "jest --updateSnapshot",
     "typecheck": "tsc --noEmit",
-    "perf:measure": "node ../scripts/measure-performance.js # Quick performance measurement of current branch",
-    "perf:benchmark": "node ../scripts/benchmark.js # Compare performance: main vs current branch (local)",
-    "perf:url": "node ../scripts/benchmark-url.js # Benchmark external URL (deploy preview, production, etc)",
-    "perf:compare": "node ../scripts/benchmark-comparison.js # Compare two live deployments (production vs preview)"
+    "perf:measure": "node ../scripts/measure-performance.js",
+    "perf:benchmark": "node ../scripts/benchmark.js",
+    "perf:url": "node ../scripts/benchmark-url.js",
+    "perf:compare": "node ../scripts/benchmark-comparison.js"
   },
   "dependencies": {
     "@emotion/core": "^10.1.1",
