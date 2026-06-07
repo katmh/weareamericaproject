@@ -74,8 +74,17 @@ export default {
               "Violence",
             ],
           },
+          validation: (Rule) => Rule.required().min(1),
         },
       ],
+      validation: (Rule) =>
+        Rule.custom((tags) => {
+          if (!tags) return true;
+          if (tags.some((tag) => tag === "")) {
+            return "Tags cannot be empty strings";
+          }
+          return true;
+        }),
     },
     {
       name: "secondLanguageAudio",
