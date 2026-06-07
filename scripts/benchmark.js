@@ -83,7 +83,7 @@ function calculateImageBytes(lighthouse) {
   const imageItem = resourceSummary.details.items.find(
     (item) => item.resourceType === "image"
   );
-  return imageItem ? Math.round(imageItem.size / 1024) : 0; // KB
+  return imageItem ? Math.round(imageItem.transferSize / 1024) : 0; // KB
 }
 
 function compareResults(main, branch) {
