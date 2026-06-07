@@ -20,6 +20,7 @@ const TagPage = ({ pageContext: { nodes, tag, tagType } }) => (
           photo={node.photo}
           title={node.storyTitle}
           author={node.authorFirstName}
+          slug={node.slug}
         />
       ))}
     </Gallery>

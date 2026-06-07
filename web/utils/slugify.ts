@@ -1,4 +1,4 @@
-function slugify(string) {
+export function slugify(string) {
   const a =
     "àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;";
   const b =
@@ -17,13 +17,27 @@ function slugify(string) {
     .replace(/-+$/, ""); // Trim - from end of text
 }
 
-export function getStorySlug(storyTitle, authorFirstName) {
+export function getLegacyStorySlug(storyTitle, authorFirstName) {
   const truncatedStoryTitle = storyTitle
     .split(" ")
     .slice(0, 4)
     .join(" ");
   const firstLetterOfName = authorFirstName[0];
   return slugify(`${truncatedStoryTitle}-${firstLetterOfName}`);
+}
+
+export const getStorySlug = getLegacyStorySlug;
+
+export function normalizeStorySlug(slug) {
+  return slug.replace(/^\/+/, "").replace(/^story\//, "").replace(/\/+$/, "");
+}
+
+export function getStoryPath({ slug, storyTitle, authorFirstName }) {
+  const storySlug = slug
+    ? normalizeStorySlug(slug)
+    : getLegacyStorySlug(storyTitle, authorFirstName);
+
+  return `/story/${storySlug}`;
 }
 
 export function getTagSlug(tag) {

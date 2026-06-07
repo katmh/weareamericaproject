@@ -147,8 +147,17 @@ export default {
     {
       name: "slug",
       title: "Slug",
+      description:
+        'Canonical website path after /story/, e.g. "2024/growing-through-her".',
       type: "string",
       hidden: true, // Hide in Sanity Studio.
+      validation: (Rule) =>
+        Rule.custom((slug) => {
+          if (!slug) return true;
+          return /^\d{4}\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)
+            ? true
+            : 'Slug must look like "2024/story-title".';
+        }),
     },
   ],
 };

@@ -11,6 +11,8 @@
     "graphql-deploy": "lerna run graphql-deploy",
     "lint": "lerna run lint",
     "postinstall": "lerna bootstrap",
+    "story-slugs:audit": "node scripts/generate-story-slugs.js",
+    "story-slugs:write": "node scripts/generate-story-slugs.js --write",
     "test": "npm --prefix web test"
   },
   "devDependencies": {
