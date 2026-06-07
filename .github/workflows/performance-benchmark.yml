@@ -115,11 +115,24 @@ jobs:
           exit 1
         continue-on-error: true
 
-      - name: Run performance comparison
+      - name: Run performance comparison (parallel)
         id: benchmark
         if: steps.netlify-ready.outcome == 'success'
+        timeout-minutes: 5
         run: |
           cd web
+
+          # Run both audits in parallel
+          npm run perf:url -- "https://weareamericaproject.com" &
+          PROD_PID=$!
+
+          npm run perf:url -- "${{ steps.netlify-url.outputs.deploy_url }}" &
+          PREVIEW_PID=$!
+
+          # Wait for both to complete
+          wait $PROD_PID $PREVIEW_PID
+
+          # Now compare the results
           npm run perf:compare -- \
             "https://weareamericaproject.com" \
             "${{ steps.netlify-url.outputs.deploy_url }}" \
