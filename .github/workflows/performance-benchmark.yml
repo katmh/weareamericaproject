@@ -128,10 +128,6 @@ jobs:
               body += '❌ Benchmark results not available\n';
             }
 
-            body += '\n---\n';
-            body += '> ℹ️ **Performance benchmarks are informational** and do not block PRs.\n';
-            body += '> Changes within ±3% are typically within margin of error.\n';
-            body += '> 📖 [View benchmarking guide](../PERFORMANCE_BENCHMARKING.md)\n';
 
             // Update existing comment or create new one
             if (existingCommentId) {
