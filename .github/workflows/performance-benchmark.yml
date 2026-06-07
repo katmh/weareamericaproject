@@ -168,7 +168,7 @@ jobs:
             const fs = require('fs');
             const path = require('path');
 
-            const benchmarksDir = path.join(process.cwd(), 'web/.benchmarks');
+            const benchmarksDir = path.join(process.cwd(), '.benchmarks');
             const MARKER = '<!-- perf-benchmark-comment -->';
 
             // Find existing benchmark comment
