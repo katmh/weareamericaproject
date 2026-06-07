@@ -102,6 +102,9 @@ jobs:
         with:
           script: |
             // Wait for Netlify deploy-preview status to be SUCCESS
+            const commitSha = context.payload.pull_request.head.sha;
+            console.log(`Checking deployment status for commit: ${commitSha}`);
+
             const maxAttempts = 60; // ~10 minutes with 10 second intervals
             let attempts = 0;
             let deployReady = false;
@@ -111,7 +114,7 @@ jobs:
               const { data: rollup } = await github.rest.repos.getCombinedStatusForRef({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                ref: context.payload.pull_request.head.sha,
+                ref: commitSha,
               });
 
               // Look for any netlify/*/deploy-preview status
@@ -120,10 +123,12 @@ jobs:
               );
 
               if (netlifyStatus?.state === 'success') {
-                console.log(`✅ Netlify deploy preview ready: ${netlifyStatus.target_url}`);
+                console.log(`✅ Netlify deploy preview ready`);
+                console.log(`   Commit: ${commitSha}`);
+                console.log(`   URL: ${netlifyStatus.target_url}`);
                 deployReady = true;
               } else if (netlifyStatus?.state === 'failure') {
-                core.setFailed('Netlify deploy preview failed');
+                core.setFailed(`Netlify deploy preview failed for ${commitSha}`);
                 return;
               } else {
                 console.log(`Attempt ${attempts}/${maxAttempts}: Waiting for Netlify deployment...`);
