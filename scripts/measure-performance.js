@@ -1,9 +1,32 @@
 #!/usr/bin/env node
 
 /**
- * Simple performance measurement script
- * Measures current build without branch switching
- * Usage: node scripts/measure-performance.js
+ * Web Performance Measurement Tool
+ *
+ * Measures the performance of your current branch using Lighthouse audits.
+ * This is useful for quick performance checks without the overhead of comparing
+ * against main. Results are automatically tracked for historical comparison.
+ *
+ * Usage:
+ *   node scripts/measure-performance.js
+ *
+ * What it measures:
+ *   - Performance score and other Lighthouse scores (0-100)
+ *   - Core Web Vitals: FCP, LCP, CLS, TTI, TBT
+ *   - Speed Index (how quickly content becomes visually complete)
+ *   - Resource sizes and counts (images, fonts, scripts, etc.)
+ *
+ * Process:
+ *   1. Builds the current branch
+ *   2. Runs a Lighthouse audit on localhost
+ *   3. Displays results with human-readable formatting
+ *   4. Compares with previous measurement (if available)
+ *   5. Saves results to .benchmarks/ for historical tracking
+ *
+ * Historical tracking:
+ *   - Latest results: .benchmarks/latest-results.json
+ *   - History (last 20): .benchmarks/results-history.json
+ *   - Full Lighthouse report: .benchmarks/lighthouse-latest.json
  */
 
 const { execSync, spawn } = require("child_process");

@@ -1,9 +1,29 @@
 #!/usr/bin/env node
 
 /**
- * Performance benchmark script
- * Compares image optimization metrics between main and current branch
- * Usage: node scripts/benchmark.js
+ * Web Performance Benchmark Tool
+ *
+ * Automatically measures and compares performance metrics between the main branch
+ * and your current branch. This helps quantify the impact of performance optimizations
+ * including (but not limited to) image optimization, code splitting, bundling changes,
+ * rendering performance, etc.
+ *
+ * Usage:
+ *   node scripts/benchmark.js
+ *
+ * What it measures:
+ *   - Performance score (Lighthouse, 0-100)
+ *   - Core Web Vitals: FCP, LCP, CLS, TTI
+ *   - Additional metrics: Speed Index, Total Blocking Time
+ *   - Resource sizes: Total images, fonts, scripts
+ *
+ * Process:
+ *   1. Checks out main branch, builds, and runs Lighthouse audit
+ *   2. Checks out your current branch, builds, and runs Lighthouse audit
+ *   3. Compares metrics and highlights improvements/regressions
+ *   4. Returns to your original branch
+ *
+ * Results are saved to .benchmarks/ (excluded from git via .gitignore)
  */
 
 const { execSync } = require("child_process");
@@ -60,6 +80,43 @@ function runLighthouse(port, outputPath) {
   }
 }
 
+/**
+ * Metric definitions:
+ *
+ * Performance Score (0-100): Overall performance rating. Influenced by:
+ *   - Core Web Vitals weights (LCP 25%, CLS 5%, FID 30%, others 40%)
+ *   - Page load speed
+ *   - Interactivity metrics
+ *
+ * First Contentful Paint (FCP, ms): Time until first content appears
+ *   - Target: < 1.8s
+ *   - Affects: User perception of speed
+ *
+ * Largest Contentful Paint (LCP, ms): Time until largest element loads
+ *   - Target: < 2.5s
+ *   - Often affected by: images, CSS, JavaScript
+ *
+ * Cumulative Layout Shift (CLS, score): Visual stability (0.0-1.0)
+ *   - Target: < 0.1
+ *   - Affected by: unsized images, dynamic content, ads
+ *   - User impact: Annoying UX, accidental clicks
+ *
+ * Time to Interactive (TTI, ms): When page is fully interactive
+ *   - Target: < 3.8s
+ *   - Affected by: JavaScript execution, main thread blocking
+ *
+ * Total Blocking Time (TBT, ms): Sum of blocking time on main thread
+ *   - Target: < 200ms
+ *   - Indicates: Responsiveness to user input
+ *
+ * Speed Index (ms): Visual completeness over time
+ *   - Lower is better
+ *   - Reflects: Perceived loading performance
+ *
+ * Total Image Size (KB): Sum of all image bytes transferred
+ *   - Often the largest resource on modern pages
+ *   - Major impact on: LCP, page load time, bandwidth usage
+ */
 function parseResults(jsonPath) {
   const raw = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
   const audits = raw.audits;
@@ -86,6 +143,31 @@ function calculateImageBytes(lighthouse) {
   return imageItem ? Math.round(imageItem.transferSize / 1024) : 0; // KB
 }
 
+/**
+ * Interpret results:
+ *
+ * Improvements (↓ for most metrics):
+ *   - > 5% improvement: Significant win, worth celebrating
+ *   - 3-5% improvement: Measurable improvement, may reflect real user benefit
+ *   - < 3% improvement: Within noise margin, could be variance
+ *
+ * Regressions (↑ for most metrics):
+ *   - > 5% regression: Worth investigating, may impact users
+ *   - 3-5% regression: Monitor, could be variance or real issue
+ *   - < 3% regression: Likely noise, no action needed
+ *
+ * Notes:
+ *   - Performance Score has wider variance due to weighting algorithm
+ *   - Local benchmarks vs production: Real user conditions may vary
+ *   - Browser cache affects results: Both branches tested with fresh cache
+ *   - System load matters: Close background apps for consistent results
+ *
+ * Next steps:
+ *   1. Review significant changes (>5%)
+ *   2. Consider if change is expected (e.g., larger JS bundle)
+ *   3. Test on production with real user monitoring
+ *   4. Check with WebPageTest or GTmetrix for external validation
+ */
 function compareResults(main, branch) {
   const metrics = [
     { name: "Performance Score", key: "performance", unit: "pts", format: (v) => v },
@@ -200,6 +282,35 @@ async function benchmarkBranch(branchName, outputFile) {
   return results;
 }
 
+/**
+ * Usage guide:
+ *
+ * Before optimizing:
+ *   git checkout -b my-optimization
+ *   npm run perf:benchmark
+ *   # Note baseline metrics
+ *
+ * Make changes and optimize:
+ *   # Edit source, rebuild, etc.
+ *
+ * After optimizing:
+ *   npm run perf:benchmark
+ *   # Compare results with baseline
+ *
+ * Typical use cases:
+ *   - Measuring impact of image optimization (compression, formats, lazy loading)
+ *   - Code splitting and bundling changes
+ *   - Component rendering performance
+ *   - CSS/font loading optimization
+ *   - Resource prioritization changes
+ *   - Any change affecting page load or interactivity
+ *
+ * Tips:
+ *   - Close other apps for consistent results
+ *   - Run multiple times if concerned about variance
+ *   - Check Lighthouse's detailed report in .benchmarks/ for specific issues
+ *   - Production metrics (via Web Vitals monitoring) are ultimate truth
+ */
 async function main() {
   log.section("Performance Benchmark Tool");
 

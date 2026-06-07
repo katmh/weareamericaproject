@@ -1,3 +1,25 @@
+# Web Performance Benchmark Workflow
+#
+# Automatically measures web performance metrics on every PR that touches source files.
+# Results are posted as a PR comment for visibility and uploaded as artifacts.
+#
+# Features:
+#   - Non-blocking: Never fails the workflow (continue-on-error: true)
+#   - Automatic comparison: main branch vs PR branch
+#   - Core Web Vitals tracking: FCP, LCP, CLS, TTI, TBT
+#   - Resource analysis: Image sizes, script sizes, font sizes
+#   - Smart threshold: 3% variance ignored to avoid false positives
+#   - PR comment: Results displayed inline for easy review
+#   - Artifact storage: 30-day retention for trend analysis
+#
+# Use cases:
+#   - Quantifying impact of performance optimizations
+#   - Detecting unintended performance regressions
+#   - Tracking performance trends over time
+#   - Informing code review discussions with data
+#
+# Results are informational only and do not affect PR approval.
+
 name: Performance Benchmark
 
 on:
