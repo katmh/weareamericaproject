@@ -113,7 +113,7 @@ function runLighthouse(port, outputPath) {
  *   - Lower is better
  *   - Reflects: Perceived loading performance
  *
- * Total Image Size (KB): Sum of all image bytes transferred
+ * Total Image Transfer Size (KB): Sum of all image bytes transferred
  *   - Often the largest resource on modern pages
  *   - Major impact on: LCP, page load time, bandwidth usage
  */
@@ -177,7 +177,7 @@ function compareResults(main, branch) {
     { name: "Total Blocking Time", key: "tbt", unit: "ms", format: (v) => v.toFixed(0) },
     { name: "Time to Interactive", key: "tti", unit: "ms", format: (v) => v.toFixed(0) },
     { name: "Speed Index", key: "speedIndex", unit: "ms", format: (v) => v.toFixed(0) },
-    { name: "Total Image Size", key: "totalImageSize", unit: "KB", format: (v) => v },
+    { name: "Total Image Transfer Size", key: "totalImageSize", unit: "KB", format: (v) => v },
   ];
 
   console.log("\n" + "─".repeat(85));
@@ -361,7 +361,7 @@ async function main() {
     const imageSavings = mainResults.totalImageSize - branchResults.totalImageSize;
     const imageSavingsPercent = ((imageSavings / mainResults.totalImageSize) * 100).toFixed(1);
     console.log(
-      `\n🖼️  Image Size Reduction: ${imageSavings} KB (${imageSavingsPercent}%)`
+      `\n🖼️  Image Transfer Size Reduction: ${imageSavings} KB (${imageSavingsPercent}%)`
     );
     console.log(`   Main: ${mainResults.totalImageSize} KB → Branch: ${branchResults.totalImageSize} KB`);
   }

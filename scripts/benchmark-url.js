@@ -12,7 +12,7 @@
  *
  * Examples:
  *   node scripts/benchmark-url.js https://deploy-preview-109--weareamericaproject.netlify.app
- *   node scripts/benchmark-url.js https://weareamericaproject.com --name "Production"
+ *   node scripts/benchmark-url.js https://www.weareamericaproject.com/ --name "Production"
  *
  * What it measures:
  *   - Performance score (Lighthouse, 0-100)
@@ -33,7 +33,7 @@
  *
  * Compare results:
  *   1. Benchmark the deploy preview: npm run perf:url -- <preview-url>
- *   2. Benchmark production: npm run perf:url -- https://weareamericaproject.com
+ *   2. Benchmark production: npm run perf:url -- https://www.weareamericaproject.com/
  *   3. Review metrics side-by-side in console output
  *
  * Note: Lighthouse throttles to "4G LTE" by default for consistency.
@@ -117,7 +117,7 @@ function displayResults(url, results, label) {
   console.log(`   Speed Index:  ${results.speedIndex.toFixed(0)} ms`);
 
   console.log("\n🖼️  Resources:");
-  console.log(`   Image Size:   ${results.totalImageSize} KB`);
+  console.log(`   Image Transfer Size: ${results.totalImageSize} KB`);
 
   console.log("\n🔗 URL:");
   console.log(`   ${url}`);
@@ -132,7 +132,7 @@ async function main() {
     log.error("Usage: node scripts/benchmark-url.js <url> [--name 'label']");
     log.error("\nExamples:");
     log.error("  node scripts/benchmark-url.js https://deploy-preview-109--weareamericaproject.netlify.app");
-    log.error("  node scripts/benchmark-url.js https://weareamericaproject.com --name 'Production'");
+    log.error("  node scripts/benchmark-url.js https://www.weareamericaproject.com/ --name 'Production'");
     process.exit(1);
   }
 
@@ -175,7 +175,7 @@ async function main() {
   log.success(`Full report: ${lighthouseJson}`);
 
   console.log("\n💡 Next steps:");
-  console.log(`   1. Benchmark production: npm run perf:url -- https://weareamericaproject.com`);
+  console.log(`   1. Benchmark production: npm run perf:url -- https://www.weareamericaproject.com/`);
   console.log(`   2. Compare metrics side-by-side`);
   console.log(`   3. Check full reports in .benchmarks/ directory`);
 

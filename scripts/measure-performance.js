@@ -146,7 +146,7 @@ function displayResults(results) {
   console.log(`   Speed Index:                     ${results.speedIndex.toFixed(0)} ms`);
 
   console.log("\n🖼️  Image Metrics:");
-  console.log(`   Total Image Size:                ${results.totalImageSize} KB`);
+  console.log(`   Total Image Transfer Size:       ${results.totalImageSize} KB`);
 }
 
 function compareWithPrevious(current) {
@@ -168,7 +168,7 @@ function compareWithPrevious(current) {
       { name: "FCP", key: "fcp", suffix: "ms", isBetter: "lower" },
       { name: "LCP", key: "lcp", suffix: "ms", isBetter: "lower" },
       { name: "CLS", key: "cls", suffix: "", isBetter: "lower" },
-      { name: "Image Size", key: "totalImageSize", suffix: "KB", isBetter: "lower" },
+      { name: "Image Transfer Size", key: "totalImageSize", suffix: "KB", isBetter: "lower" },
     ];
 
     console.log("\n" + "─".repeat(80));

@@ -12,7 +12,7 @@
  *
  * Examples:
  *   node scripts/benchmark-comparison.js \
- *     https://weareamericaproject.com \
+ *     https://www.weareamericaproject.com/ \
  *     https://deploy-preview-109--weareamericaproject.netlify.app \
  *     --name1 "Production" --name2 "Preview"
  *
@@ -101,7 +101,7 @@ function compareResults(results1, results2) {
     { name: "TTI", key: "tti", unit: "ms", isBetter: "lower" },
     { name: "TBT", key: "tbt", unit: "ms", isBetter: "lower" },
     { name: "Speed Index", key: "speedIndex", unit: "ms", isBetter: "lower" },
-    { name: "Image Size", key: "totalImageSize", unit: "KB", isBetter: "lower" },
+    { name: "Image Transfer Size", key: "totalImageSize", unit: "KB", isBetter: "lower" },
   ];
 
   console.log("\n" + "─".repeat(90));
@@ -161,7 +161,7 @@ async function main() {
     log.error("Usage: node scripts/benchmark-comparison.js <url1> <url2> [--name1 'label'] [--name2 'label']");
     log.error("\nExample:");
     log.error("  node scripts/benchmark-comparison.js \\");
-    log.error("    https://weareamericaproject.com \\");
+    log.error("    https://www.weareamericaproject.com/ \\");
     log.error("    https://deploy-preview-109--weareamericaproject.netlify.app \\");
     log.error("    --name1 'Production' --name2 'Preview'");
     process.exit(1);

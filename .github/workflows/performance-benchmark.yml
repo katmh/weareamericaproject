@@ -5,7 +5,7 @@
 #
 # Process:
 #   1. Waits for Netlify deploy preview to be ready (up to 10 minutes)
-#   2. Benchmarks production (https://weareamericaproject.com)
+#   2. Benchmarks production (https://www.weareamericaproject.com/)
 #   3. Benchmarks the deploy preview
 #   4. Compares metrics and posts results in PR comment
 #
@@ -114,7 +114,7 @@ jobs:
           cd web
 
           npm run perf:compare -- \
-            "https://weareamericaproject.com" \
+            "https://www.weareamericaproject.com/" \
             "${{ steps.netlify-ready.outputs.deploy_url }}" \
             --name1 "Production" \
             --name2 "Preview" 2>&1 | tee benchmark-output.txt
@@ -156,12 +156,19 @@ jobs:
               const url2Data = JSON.parse(fs.readFileSync(url2Path, 'utf8'));
 
               const getMetric = (obj, key) => obj.audits?.[key]?.numericValue || obj[key] || 0;
+              const getImageTransferSize = (obj) => {
+                const imageItem = obj.audits?.['resource-summary']?.details?.items?.find(
+                  (item) => item.resourceType === 'image'
+                );
+                return imageItem ? Math.round(imageItem.transferSize / 1024) : 0;
+              };
 
               const url1 = {
                 performance: Math.round(url1Data.categories?.performance?.score * 100 || 0),
                 fcp: getMetric(url1Data, 'first-contentful-paint'),
                 lcp: getMetric(url1Data, 'largest-contentful-paint'),
                 cls: getMetric(url1Data, 'cumulative-layout-shift'),
+                imageTransferSize: getImageTransferSize(url1Data),
               };
 
               const url2 = {
@@ -169,6 +176,7 @@ jobs:
                 fcp: getMetric(url2Data, 'first-contentful-paint'),
                 lcp: getMetric(url2Data, 'largest-contentful-paint'),
                 cls: getMetric(url2Data, 'cumulative-layout-shift'),
+                imageTransferSize: getImageTransferSize(url2Data),
               };
 
               body += '| Metric | Production | Preview | Change |\n';
@@ -179,6 +187,7 @@ jobs:
                 { name: 'LCP', key: 'lcp', unit: 'ms', isBetter: 'lower' },
                 { name: 'FCP', key: 'fcp', unit: 'ms', isBetter: 'lower' },
                 { name: 'CLS', key: 'cls', unit: '', isBetter: 'lower' },
+                { name: 'Image Transfer Size', key: 'imageTransferSize', unit: 'KB', isBetter: 'lower' },
               ];
 
               metrics.forEach(({ name, key, unit, isBetter }) => {
