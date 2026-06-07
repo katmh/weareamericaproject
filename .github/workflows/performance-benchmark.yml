@@ -51,36 +51,69 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            // Wait for Netlify deploy-preview status to be SUCCESS
+            // Wait for the weareamerica Netlify deploy preview to be ready
             const commitSha = context.payload.pull_request.head.sha;
+            const targetSite = 'weareamerica';
+            const targetStatusContext = `netlify/${targetSite}/deploy-preview`;
             console.log(`Checking deployment status for commit: ${commitSha}`);
+            console.log(`Target Netlify site: ${targetSite}`);
 
             const maxAttempts = 60; // ~10 minutes with 10 second intervals
             let attempts = 0;
             let deployUrl = null;
 
-            while (attempts < maxAttempts && !deployUrl) {
-              attempts++;
+            async function findDeployPreviewUrl() {
               const { data: rollup } = await github.rest.repos.getCombinedStatusForRef({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 ref: commitSha,
               });
 
-              // Look for any netlify/*/deploy-preview status
               const netlifyStatus = rollup.statuses?.find(status =>
-                status.context.includes('netlify') && status.context.includes('deploy-preview')
+                status.context === targetStatusContext
               );
 
               if (netlifyStatus?.state === 'success') {
                 console.log(`✅ Netlify deploy preview ready`);
                 console.log(`   Commit: ${commitSha}`);
+                console.log(`   Context: ${netlifyStatus.context}`);
                 console.log(`   URL: ${netlifyStatus.target_url}`);
-                deployUrl = new URL(netlifyStatus.target_url).href;
-              } else if (netlifyStatus?.state === 'failure') {
-                core.setFailed(`Netlify deploy preview failed for ${commitSha}`);
-                return;
-              } else {
+                return new URL(netlifyStatus.target_url).href;
+              }
+
+              if (netlifyStatus?.state === 'failure') {
+                throw new Error(`Netlify deploy preview failed for ${commitSha}`);
+              }
+
+              const { data: comments } = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+              });
+
+              const readyComment = comments.find(comment =>
+                comment.user.login.includes('netlify') &&
+                comment.body.includes(`Deploy Preview for *${targetSite}* ready`)
+              );
+
+              const match = readyComment?.body.match(/https:\/\/deploy-preview-\d+--[^\s\)\]]+/);
+              if (match) {
+                const url = new URL(match[0]).href;
+                console.log(`✅ Netlify deploy preview ready`);
+                console.log(`   Commit: ${commitSha}`);
+                console.log(`   Source: Netlify PR comment`);
+                console.log(`   URL: ${url}`);
+                return url;
+              }
+
+              return null;
+            }
+
+            while (attempts < maxAttempts && !deployUrl) {
+              attempts++;
+              deployUrl = await findDeployPreviewUrl();
+
+              if (!deployUrl) {
                 console.log(`Attempt ${attempts}/${maxAttempts}: Waiting for Netlify deployment...`);
                 await new Promise(resolve => setTimeout(resolve, 10000));
               }
