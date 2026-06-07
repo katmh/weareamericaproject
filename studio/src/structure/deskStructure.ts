@@ -1,6 +1,6 @@
 import { MdSettings } from "react-icons/md";
 import { MdDescription } from "react-icons/md";
-import IframePreview from "../previews/IframePreview.jsx";
+import IframePreview from "../previews/IframePreview";
 
 // Web preview configuration
 const remoteURL = "https://sanity-gatsby-blog-web-qq95ktt1.netlify.app"; // TODO: update remote URL
@@ -63,7 +63,7 @@ export const structure = (S) =>
             .documentId("siteSettings")
         ),
       // `S.documentTypeListItems()` returns an array of all the document types
-      // defined in schema.js. We filter out those that we have
+      // defined in schema.ts. We filter out those that we have
       // defined the structure above.
       ...S.documentTypeListItems().filter(
         (listItem) =>

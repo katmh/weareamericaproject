@@ -1,7 +1,12 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 
-const Container = ({ children, width }) => {
+type ContainerProps = {
+  children: React.ReactNode
+  width?: "thin" | "medium" | "wide"
+}
+
+const Container = ({ children, width }: ContainerProps) => {
   const WIDTHS = {
     thin: 700,
     medium: 900,

@@ -13,9 +13,9 @@ const IndexPage = () => {
         by the next generation.
       </p>
       <FeaturedStories nCols={3} nStories={6} />
-      <center>
+      <div style={{ textAlign: "center" }}>
         <ButtonLink destination="/stories">See All Stories</ButtonLink>
-      </center>
+      </div>
     </Layout>
   );
 };

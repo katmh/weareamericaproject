@@ -6,11 +6,11 @@
   "author": "Sanity <hello@sanity.io>",
   "scripts": {
     "dev": "sanity dev",
-    "format": "prettier-eslint --write \"**/*.js\" \"!node_modules/**\"",
+    "format": "prettier-eslint --write \"**/*.{js,jsx,ts,tsx}\" \"!node_modules/**\"",
     "build": "sanity build",
     "graphql-deploy": "sanity graphql deploy --playground",
     "lint": "eslint .",
-    "test": "sanity schema validate"
+    "test": "tsc --noEmit && sanity schema validate"
   },
   "dependencies": {
     "@sanity/vision": "^3.0.0",
@@ -22,5 +22,11 @@
     "sanity": "^3.0.0",
     "sanity-plugin-media": "^2.0.0",
     "styled-components": "^6.1.15"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "typescript": "^5.9.3"
   }
 }

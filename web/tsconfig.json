@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "lib": ["DOM", "ES2019"],
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "noEmit": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "strict": false,
+    "target": "ES2019"
+  },
+  "include": ["./src/**/*", "./utils/**/*", "./gatsby-node.js", "./gatsby-config.js", "./client-config.js"],
+  "exclude": ["node_modules", "public", ".cache"]
+}
