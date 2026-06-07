@@ -68,26 +68,25 @@ jobs:
             const path = require('path');
 
             const benchmarksDir = path.join(process.cwd(), 'web/.benchmarks');
+            const MARKER = '<!-- perf-benchmark-comment -->';
 
-            // Find and delete existing benchmark comment
+            // Find existing benchmark comment
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
             });
 
+            let existingCommentId = null;
             for (const comment of comments) {
-              if (comment.user.type === 'Bot' && comment.body.includes('📊 Performance Benchmark')) {
-                await github.rest.issues.deleteComment({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  comment_id: comment.id,
-                });
+              if (comment.body.includes(MARKER)) {
+                existingCommentId = comment.id;
+                break;
               }
             }
 
             // Build results comment
-            let body = '## 📊 Performance Benchmark Results\n\n';
+            let body = MARKER + '\n## 📊 Performance Benchmark Results\n\n';
 
             const mainPath = path.join(benchmarksDir, 'main-results.json');
             const branchPath = path.join(benchmarksDir, 'branch-results.json');
@@ -134,10 +133,20 @@ jobs:
             body += '> Changes within ±3% are typically within margin of error.\n';
             body += '> 📖 [View benchmarking guide](../PERFORMANCE_BENCHMARKING.md)\n';
 
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: body,
-            });
+            // Update existing comment or create new one
+            if (existingCommentId) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existingCommentId,
+                body: body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: body,
+              });
+            }
 
