@@ -67,10 +67,10 @@ jobs:
               // Look for Netlify bot comment with deploy preview URL
               for (const comment of comments) {
                 if (comment.user.login === 'netlify' || comment.user.login.includes('netlify')) {
-                  // Extract URL from comment body (Netlify comments contain deploy preview link)
-                  const match = comment.body.match(/https:\/\/deploy-preview-\d+--[^\s\)]+/);
+                  // Extract URL from comment body (Netlify comments contain deploy preview links in Markdown)
+                  const match = comment.body.match(/https:\/\/deploy-preview-\d+--[^\s\)\]]+/);
                   if (match) {
-                    deployUrl = match[0];
+                    deployUrl = new URL(match[0]).href;
                     console.log(`Found deploy preview URL: ${deployUrl}`);
                     break;
                   }
@@ -267,4 +267,3 @@ jobs:
                 body: body,
               });
             }
-
