@@ -1,10 +1,13 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
 import { Link, graphql } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import * as slugUtils from "../../utils/slugify";
 
-const StoryCard = ({ title, photoUrl, author }) => {
+const StoryCard = ({ title, photo, author }) => {
   const slug = slugUtils.getStorySlug(title, author);
+  const image = photo?.asset ? getImage(photo.asset) : null;
+
   return (
     <article
       sx={{
@@ -20,23 +23,20 @@ const StoryCard = ({ title, photoUrl, author }) => {
           textDecoration: "none"
         }}
       >
-        {photoUrl && (
+        {image && (
           <div
             className="image-wrapper"
             sx={{
               overflow: "hidden"
             }}
           >
-            <img
-              src={photoUrl}
-              alt={"Photo of " + author}
+            <GatsbyImage
+              image={image}
+              alt={`Photo of ${author}`}
               sx={{
-                maxWidth: "100%",
-                m: "0",
                 transition: ".15s",
                 position: "relative",
-                zIndex: "-1",
-                display: "block"
+                zIndex: "-1"
               }}
             />
           </div>
@@ -87,7 +87,15 @@ export const query = graphql`
     storyTitle
     photo {
       asset {
+        id
         url
+        metadata {
+          dimensions {
+            height
+            width
+          }
+        }
+        gatsbyImageData
       }
     }
   }

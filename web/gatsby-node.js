@@ -42,7 +42,15 @@ exports.createPages = async ({ graphql, actions }) => {
           storyTitle
           photo {
             asset {
+              id
               url
+              metadata {
+                dimensions {
+                  height
+                  width
+                }
+              }
+              gatsbyImageData
             }
           }
           audio {
@@ -80,7 +88,15 @@ exports.createPages = async ({ graphql, actions }) => {
             storyTitle
             photo {
               asset {
+                id
                 url
+                metadata {
+                  dimensions {
+                    height
+                    width
+                  }
+                }
+                gatsbyImageData
               }
             }
           }
@@ -98,7 +114,15 @@ exports.createPages = async ({ graphql, actions }) => {
             storyTitle
             photo {
               asset {
+                id
                 url
+                metadata {
+                  dimensions {
+                    height
+                    width
+                  }
+                }
+                gatsbyImageData
               }
             }
           }
@@ -116,7 +140,15 @@ exports.createPages = async ({ graphql, actions }) => {
             storyTitle
             photo {
               asset {
+                id
                 url
+                metadata {
+                  dimensions {
+                    height
+                    width
+                  }
+                }
+                gatsbyImageData
               }
             }
           }

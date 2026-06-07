@@ -24,7 +24,7 @@ const Teachers = ({ data }) => {
                 return (
                   <PersonCard
                     key={teacher.name}
-                    photoUrl={teacher.photo.asset.url}
+                    photo={teacher.photo}
                     name={teacher.name}
                     school={teacher.school.name}
                     location={teacher.school.location}
@@ -69,7 +69,15 @@ export const pageQuery = graphql`
           bio
           photo {
             asset {
+              id
               url
+              metadata {
+                dimensions {
+                  height
+                  width
+                }
+              }
+              gatsbyImageData
             }
           }
         }

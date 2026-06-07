@@ -4,6 +4,7 @@ import { Dialog } from "@reach/dialog";
 import "@reach/dialog/styles.css";
 import React from "react";
 import { Link } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { PortableText } from "@portabletext/react";
 import { getStorySlug } from "../../utils/slugify";
 import X from "../components/icons/X";
@@ -17,6 +18,8 @@ const PersonCard = props => {
   const storySlug = props.story
     ? getStorySlug(props.story.storyTitle, props.name)
     : undefined;
+
+  const image = props.photo?.asset ? getImage(props.photo.asset) : null;
 
   return (
     <>
@@ -44,20 +47,22 @@ const PersonCard = props => {
             overflow: "hidden"
           }}
         >
-          <img
-            src={props.photoUrl}
-            alt={"Photo of " + props.name}
-            sx={{
-              maxWidth: "100%",
-              float: ["left", "none"],
-              mr: [3, 0],
-              mb: [2, 0],
-              transition: ".15s",
-              position: "relative",
-              zIndex: "-1",
-              display: "block"
-            }}
-          />
+          {image && (
+            <GatsbyImage
+              image={image}
+              alt={`Photo of ${props.name}`}
+              sx={{
+                maxWidth: "100%",
+                float: ["left", "none"],
+                mr: [3, 0],
+                mb: [2, 0],
+                transition: ".15s",
+                position: "relative",
+                zIndex: "-1",
+                display: "block"
+              }}
+            />
+          )}
         </div>
 
         <div

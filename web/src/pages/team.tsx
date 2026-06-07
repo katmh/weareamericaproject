@@ -25,7 +25,7 @@ const TeamMembersPage = ({ data }) => {
           return (
             <PersonCard
               key={person._id}
-              photoUrl={person.photo.asset.url}
+              photo={person.photo}
               name={person.name}
               title={person.role}
               bio={person._rawBio}
@@ -42,7 +42,7 @@ const TeamMembersPage = ({ data }) => {
               return (
                 <PersonCard
                   key={person._id}
-                  photoUrl={person.photo.asset.url}
+                  photo={person.photo}
                   name={person.name}
                   title={person.role}
                   bio={person._rawBio}
@@ -68,7 +68,15 @@ export const pageQuery = graphql`
         role
         photo {
           asset {
+            id
             url
+            metadata {
+              dimensions {
+                height
+                width
+              }
+            }
+            gatsbyImageData
           }
         }
         _rawBio
