@@ -4,6 +4,7 @@ import { visionTool } from "@sanity/vision";
 import { media } from "sanity-plugin-media";
 
 import { getDefaultDocumentNode, structure } from "./src/structure/deskStructure";
+import { netlifyDeployTool } from "./src/tools/NetlifyDeployTool";
 import schemaTypes from "./schemas/schema";
 
 export default defineConfig({
@@ -22,4 +23,5 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
+  tools: (prev) => [...prev, netlifyDeployTool],
 });
