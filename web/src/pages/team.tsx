@@ -85,6 +85,7 @@ export const pageQuery = graphql`
         story {
           authorFirstName
           storyTitle
+          slug
         }
       }
     }

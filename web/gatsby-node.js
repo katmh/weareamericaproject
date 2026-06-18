@@ -17,7 +17,7 @@ function slugify(string) {
     .replace(/-+$/, "");
 }
 
-function getStorySlug(storyTitle, authorFirstName) {
+function getLegacyStorySlug(storyTitle, authorFirstName) {
   const truncatedStoryTitle = storyTitle
     .split(" ")
     .slice(0, 4)
@@ -26,12 +26,24 @@ function getStorySlug(storyTitle, authorFirstName) {
   return slugify(`${truncatedStoryTitle}-${firstLetterOfName}`);
 }
 
+function normalizeStorySlug(slug) {
+  return slug.replace(/^\/+/, "").replace(/^story\//, "").replace(/\/+$/, "");
+}
+
+function getStoryPath({ slug, storyTitle, authorFirstName }) {
+  const storySlug = slug
+    ? normalizeStorySlug(slug)
+    : getLegacyStorySlug(storyTitle, authorFirstName);
+
+  return `/story/${storySlug}/`;
+}
+
 function getTagSlug(tag) {
   return slugify(tag);
 }
 
 exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions;
+  const { createPage, createRedirect } = actions;
 
   const storiesResult = await graphql(`
     query storiesQuery {
@@ -40,6 +52,7 @@ exports.createPages = async ({ graphql, actions }) => {
           id
           authorFirstName
           storyTitle
+          slug
           photo {
             asset {
               id
@@ -86,6 +99,7 @@ exports.createPages = async ({ graphql, actions }) => {
           nodes {
             authorFirstName
             storyTitle
+            slug
             photo {
               asset {
                 id
@@ -112,6 +126,7 @@ exports.createPages = async ({ graphql, actions }) => {
           nodes {
             authorFirstName
             storyTitle
+            slug
             photo {
               asset {
                 id
@@ -138,6 +153,7 @@ exports.createPages = async ({ graphql, actions }) => {
           nodes {
             authorFirstName
             storyTitle
+            slug
             photo {
               asset {
                 id
@@ -173,15 +189,41 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   }
 
+  const storyPaths = new Map();
+
   storiesResult.data.allSanityStory.nodes.forEach(node => {
-    const slug = getStorySlug(node.storyTitle, node.authorFirstName);
+    const path = getStoryPath(node);
+    const existing = storyPaths.get(path);
+    if (existing && (existing.slug || node.slug)) {
+      throw new Error(
+        `Duplicate story path "${path}" for "${existing.storyTitle}" (${existing.id}) and "${node.storyTitle}" (${node.id}). Set unique story.slug values in Sanity.`
+      );
+    }
+    storyPaths.set(path, node);
+
     createPage({
-      path: `/story/${slug}/`,
+      path,
       component: require.resolve("./src/templates/story.tsx"),
       context: {
         data: node
       }
     });
+
+    if (node.slug) {
+      const legacyPath = getStoryPath({
+        storyTitle: node.storyTitle,
+        authorFirstName: node.authorFirstName
+      });
+
+      if (legacyPath !== path) {
+        createRedirect({
+          fromPath: legacyPath,
+          toPath: path,
+          isPermanent: true,
+          redirectInBrowser: true
+        });
+      }
+    }
   });
 
   const createTagPage = tagType => ({ fieldValue: tag, nodes }) => {

@@ -57,6 +57,7 @@ const UnfilteredStoriesPage = ({
               author={story.authorFirstName}
               title={story.storyTitle}
               photo={story.photo}
+              slug={story.slug}
             />
           );
         })}

@@ -23,6 +23,7 @@ const FeaturedStories = ({ nCols, nStories }) => {
           id
           authorFirstName
           storyTitle
+          slug
           photo {
             asset {
               id
@@ -58,6 +59,7 @@ const FeaturedStories = ({ nCols, nStories }) => {
           title={story.storyTitle}
           photo={story.photo}
           author={story.authorFirstName}
+          slug={story.slug}
         />
       ))}
     </Gallery>

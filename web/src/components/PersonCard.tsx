@@ -6,7 +6,7 @@ import React from "react";
 import { Link } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { PortableText } from "@portabletext/react";
-import { getStorySlug } from "../../utils/slugify";
+import { getStoryPath } from "../../utils/slugify";
 import X from "../components/icons/X";
 
 const PersonCard = props => {
@@ -15,8 +15,12 @@ const PersonCard = props => {
   const close = () => setShowDialog(false);
 
   // Person might not have story (e.g. person is a teacher).
-  const storySlug = props.story
-    ? getStorySlug(props.story.storyTitle, props.name)
+  const storyPath = props.story
+    ? getStoryPath({
+        slug: props.story.slug,
+        storyTitle: props.story.storyTitle,
+        authorFirstName: props.story.authorFirstName || props.name
+      })
     : undefined;
 
   const image = props.photo?.asset ? getImage(props.photo.asset) : null;
@@ -93,7 +97,7 @@ const PersonCard = props => {
           {props.story && (
             <p className="caption1">
               Story:{" "}
-              <Link to={`/story/${storySlug}`}>{props.story.storyTitle}</Link>
+              <Link to={storyPath}>{props.story.storyTitle}</Link>
             </p>
           )}
         </div>

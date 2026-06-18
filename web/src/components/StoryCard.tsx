@@ -4,8 +4,12 @@ import { Link, graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import * as slugUtils from "../../utils/slugify";
 
-const StoryCard = ({ title, photo, author }) => {
-  const slug = slugUtils.getStorySlug(title, author);
+const StoryCard = ({ title, photo, author, slug }) => {
+  const storyPath = slugUtils.getStoryPath({
+    slug,
+    storyTitle: title,
+    authorFirstName: author
+  });
   const image = photo?.asset ? getImage(photo.asset) : null;
 
   return (
@@ -18,7 +22,7 @@ const StoryCard = ({ title, photo, author }) => {
       }}
     >
       <Link
-        to={`/story/${slug}`}
+        to={storyPath}
         sx={{
           textDecoration: "none"
         }}
@@ -85,6 +89,7 @@ export const query = graphql`
     id
     authorFirstName
     storyTitle
+    slug
     photo {
       asset {
         id
